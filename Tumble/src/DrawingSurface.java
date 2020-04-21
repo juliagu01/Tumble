@@ -4,24 +4,35 @@ import java.util.ArrayList;
 import processing.core.PApplet;
 
 public class DrawingSurface extends PApplet {
+	
 
 	public static final int DRAWING_WIDTH = 800;
 	public static final int DRAWING_HEIGHT = 600;
 
 	private Player player;
 	private ArrayList<Rectangle> obstacles;
+	private Camera camera;
 
 	private ArrayList<Integer> keys;
+	
 
 	public DrawingSurface() {
 		super();
 		keys = new ArrayList<Integer>();
+		camera = new Camera(DRAWING_WIDTH/2, DRAWING_HEIGHT/2, DRAWING_WIDTH, DRAWING_HEIGHT);
 		obstacles = new ArrayList<Rectangle>();
-		obstacles.add(new Rectangle(200, 400, 400, 50));
+		obstacles.add(new Rectangle(200, 400, 10000, 50));
 		obstacles.add(new Rectangle(0,   250, 100, 50));
 		obstacles.add(new Rectangle(700, 250, 100, 50));
 		obstacles.add(new Rectangle(375, 300, 50, 100));
 		obstacles.add(new Rectangle(300, 250, 200, 50));
+		obstacles.add(new Rectangle(0, 1000, 800, 50));
+		obstacles.add(new Rectangle(0, 1500, 800, 50));
+		obstacles.add(new Rectangle(0, 2000, 800, 10));
+		obstacles.add(new Rectangle(0, 2500, 800, 50));
+		obstacles.add(new Rectangle(0, 5000, 800, 50));
+		obstacles.add(new Rectangle(0, 7500, 800, 50));
+		obstacles.add(new Rectangle(0, 10000, 800, 50));
 	}
 
 
@@ -35,27 +46,7 @@ public class DrawingSurface extends PApplet {
 		createPlayer();
 	}
 
-
 	public void draw() {
-
-		
-		// drawing
-		
-		background(150);
-		
-		pushMatrix();
-		float ratioX = (float)width/DRAWING_WIDTH;
-		float ratioY = (float)height/DRAWING_HEIGHT;
-		translate((float)width/2, (float)height/2);
-		scale(ratioX, ratioY);
-
-		fill(100);
-		for (Rectangle r : obstacles)
-			rect(r.x - (float)(player.x + Player.PLAYER_WIDTH/2), r.y - (float)(player.y + Player.PLAYER_WIDTH/2), r.width, r.height);
-
-		player.draw(this);
-
-		popMatrix();
 
 
 		// modifying
@@ -69,8 +60,31 @@ public class DrawingSurface extends PApplet {
 
 		player.update(obstacles);
 
-		if (player.y >= 800)
+		if (player.y >= 11000)
 			createPlayer();
+		
+//		if (!camera.getBox().intersects(player))
+			camera.setTargetLocation(player.x + Player.PLAYER_WIDTH/2, player.y + Player.PLAYER_WIDTH/2);  // camera one frame behind player
+		camera.slide();
+
+		
+		// drawing
+		
+		background(150);
+		
+		pushMatrix();
+		float ratioX = (float)(width/camera.width);
+		float ratioY = (float)(height/camera.height);
+		translate((float)-camera.x, (float)-camera.y);
+		scale(ratioX, ratioY);
+
+		fill(100);
+		for (Rectangle r : obstacles)
+			rect(r.x, r.y, r.width, r.height);
+
+		player.draw(this);
+
+		popMatrix();
 		
 		
 	}
@@ -78,6 +92,8 @@ public class DrawingSurface extends PApplet {
 
 	public void keyPressed() {
 		keys.add(keyCode);
+//		if (keyCode == KeyEvent.VK_A)
+//			System.out.println(camera.x + ", " + camera.y + ", " + camera.gettx() + ", " + camera.getty());
 	}
 
 	public void keyReleased() {

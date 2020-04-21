@@ -48,7 +48,7 @@ public class Player extends Sprite {
 		
 		if (platforms != null) {
 			for (Rectangle p : platforms) {
-				double[] amount = intersects(p);
+				double[] amount = intersectsBy(p);
 				moveBy(-amount[0], -amount[1]);
 				if (amount[0] != 0)
 					setVelocity(0, getVelocityY());
