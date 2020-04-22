@@ -21,18 +21,11 @@ public class DrawingSurface extends PApplet {
 		keys = new ArrayList<Integer>();
 		camera = new Camera(DRAWING_WIDTH/2, DRAWING_HEIGHT/2, DRAWING_WIDTH, DRAWING_HEIGHT);
 		obstacles = new ArrayList<Rectangle>();
-		obstacles.add(new Rectangle(200, 400, 10000, 50));
-		obstacles.add(new Rectangle(0,   250, 100, 50));
-		obstacles.add(new Rectangle(700, 250, 100, 50));
-		obstacles.add(new Rectangle(375, 300, 50, 100));
-		obstacles.add(new Rectangle(300, 250, 200, 50));
-		obstacles.add(new Rectangle(0, 1000, 800, 50));
-		obstacles.add(new Rectangle(0, 1500, 800, 50));
-		obstacles.add(new Rectangle(0, 2000, 800, 10));
-		obstacles.add(new Rectangle(0, 2500, 800, 50));
-		obstacles.add(new Rectangle(0, 5000, 800, 50));
-		obstacles.add(new Rectangle(0, 7500, 800, 50));
-		obstacles.add(new Rectangle(0, 10000, 800, 50));
+		obstacles.add(new Rectangle(300, 250, 200, 50));  // top center
+		obstacles.add(new Rectangle(375, 300, 50, 100));  // middle
+		obstacles.add(new Rectangle(200, 400, 400, 50));  // bottom
+		obstacles.add(new Rectangle(0,   250, 100, 50));  // top left
+		obstacles.add(new Rectangle(700, 250, 100, 50));  // top right
 	}
 
 
@@ -60,11 +53,10 @@ public class DrawingSurface extends PApplet {
 
 		player.update(obstacles);
 
-		if (player.y >= 11000)
+		if (player.y >= 800)
 			createPlayer();
 		
-//		if (!camera.getBox().intersects(player))
-			camera.setTargetLocation(player.x + Player.PLAYER_WIDTH/2, player.y + Player.PLAYER_WIDTH/2);  // camera one frame behind player
+		camera.setTargetLocation(player.x + Player.PLAYER_WIDTH/2, player.y + Player.PLAYER_WIDTH/2);
 		camera.slide();
 
 		
@@ -73,11 +65,9 @@ public class DrawingSurface extends PApplet {
 		background(150);
 		
 		pushMatrix();
-		float ratioX = (float)(width/camera.width);
-		float ratioY = (float)(height/camera.height);
+		scale((float)(width/camera.width), (float)(height/camera.height));
 		translate((float)-camera.x, (float)-camera.y);
-		scale(ratioX, ratioY);
-
+		
 		fill(100);
 		for (Rectangle r : obstacles)
 			rect(r.x, r.y, r.width, r.height);
@@ -92,8 +82,9 @@ public class DrawingSurface extends PApplet {
 
 	public void keyPressed() {
 		keys.add(keyCode);
-//		if (keyCode == KeyEvent.VK_A)
-//			System.out.println(camera.x + ", " + camera.y + ", " + camera.gettx() + ", " + camera.getty());
+		if (keyCode == KeyEvent.VK_A)
+			System.out.println(player.x + ", " + player.y);
+			
 	}
 
 	public void keyReleased() {

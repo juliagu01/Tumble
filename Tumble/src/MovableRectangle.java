@@ -8,8 +8,8 @@ import java.awt.geom.Rectangle2D;
  */
 public class MovableRectangle extends Rectangle2D.Double {
 	
+	public static final double EPSILON = 1e-9;
 	private double vx, vy;
-	private static final double EPSILON = 1e-9;
 	
 	/**
 	 * Creates an rectangle with given location and velocity.
@@ -77,7 +77,7 @@ public class MovableRectangle extends Rectangle2D.Double {
 	
 	/**
 	 * Returns this rectangle's horizontal velocity.
-	 * @return  x-component of rectangle's current velocity
+	 * @return x-component of rectangle's current velocity
 	 */
 	public double getVelocityX() {
 		return vx;
@@ -85,7 +85,7 @@ public class MovableRectangle extends Rectangle2D.Double {
 	
 	/**
 	 * Returns this rectangle's vertical velocity.
-	 * @return  y-component of rectangle's current velocity
+	 * @return y-component of rectangle's current velocity
 	 */
 	public double getVelocityY() {
 		return vy;
@@ -104,7 +104,7 @@ public class MovableRectangle extends Rectangle2D.Double {
 	/**
 	 * Checks for collision between this rectangle and given rectangle.
 	 * @param r - rectangle to check for collision against
-	 * @return whether rectangles intersect
+	 * @return whether rectangles overlap
 	 */
 	public boolean intersects(Rectangle r) {
 		return x + width > r.x + EPSILON && x < r.x + r.width - EPSILON && y + height > r.y + EPSILON && y < r.y + r.height - EPSILON;
@@ -115,7 +115,7 @@ public class MovableRectangle extends Rectangle2D.Double {
 	 * @param r - rectangle to check for collision against
 	 * @return array storing the amount of collision
 	 */
-	public double[] intersectsBy(Rectangle r) {
+	public double[] collidesBy(Rectangle r) {
 		
 		double[] amount = new double[] {0, 0};
 		
@@ -137,7 +137,7 @@ public class MovableRectangle extends Rectangle2D.Double {
 	/**
 	 * Checks for collision between this rectangle and given rectangle.
 	 * @param r - rectangle to check for collision against
-	 * @return whether rectangles intersect
+	 * @return whether rectangles overlap
 	 */
 	public boolean intersects(Rectangle2D.Double r) {
 		return x + width > r.x + EPSILON && x < r.x + r.width - EPSILON && y + height > r.y + EPSILON && y < r.y + r.height - EPSILON;
@@ -148,7 +148,7 @@ public class MovableRectangle extends Rectangle2D.Double {
 	 * @param r - rectangle to check for collision against
 	 * @return array storing the amount of collision
 	 */
-	public double[] intersectsBy(Rectangle2D.Double r) {
+	public double[] collidesBy(Rectangle2D.Double r) {
 		
 		double[] amount = new double[] {0, 0};
 		
