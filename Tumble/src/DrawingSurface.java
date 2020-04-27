@@ -1,99 +1,80 @@
-import java.awt.Rectangle;
-import java.awt.event.KeyEvent;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import processing.core.PApplet;
 
+/**
+ * Represents a canvas onto which a game is drawn. 
+ * @author Julia Gu 
+ * @version Apr. 27, 2020
+ * Credit to Mr. Shelby for basic class structure! 
+ */
 public class DrawingSurface extends PApplet {
 	
+	/**
+	 * DrawingSurfaces' shared dimensions. 
+	 */
+	public static final int DRAWING_WIDTH = 800, DRAWING_HEIGHT = 600;
 
-	public static final int DRAWING_WIDTH = 800;
-	public static final int DRAWING_HEIGHT = 600;
-
-	private Player player;
-	private ArrayList<Rectangle> obstacles;
+	private Game game;
 	private Camera camera;
-
 	private ArrayList<Integer> keys;
 	
-
+	/**
+	 * Creates a canvas that displays a game. 
+	 */
 	public DrawingSurface() {
 		super();
+		game = new Game();
 		keys = new ArrayList<Integer>();
 		camera = new Camera(DRAWING_WIDTH/2, DRAWING_HEIGHT/2, DRAWING_WIDTH, DRAWING_HEIGHT);
-		obstacles = new ArrayList<Rectangle>();
-		obstacles.add(new Rectangle(300, 250, 200, 50));  // top center
-		obstacles.add(new Rectangle(375, 300, 50, 100));  // middle
-		obstacles.add(new Rectangle(200, 400, 400, 50));  // bottom
-		obstacles.add(new Rectangle(0,   250, 100, 50));  // top left
-		obstacles.add(new Rectangle(700, 250, 100, 50));  // top right
 	}
 
-
-	private void createPlayer() {
-		player = new Player(DRAWING_WIDTH/2 - Player.PLAYER_WIDTH/2, DRAWING_HEIGHT/4 - Player.PLAYER_WIDTH/2, color(255, 240, 0));
-	}
-	
-
+	/**
+	 * Sets up the drawing surface.
+	 */
 	public void setup() {
 		noStroke();
-		createPlayer();
 	}
 
+	/**
+	 * Draws the game.
+	 */
 	public void draw() {
 
-
-		// modifying
-
-		if (isPressed(KeyEvent.VK_LEFT))
-			player.roll(-1);
-		if (isPressed(KeyEvent.VK_RIGHT))
-			player.roll(1);
-		if (isPressed(KeyEvent.VK_UP))
-			player.jump();
-
-		player.update(obstacles);
-
-		if (player.y >= 800)
-			createPlayer();
+		game.update(keys);
 		
-		camera.setTargetLocation(player.x + Player.PLAYER_WIDTH/2, player.y + Player.PLAYER_WIDTH/2);
+		camera.setTargetLocation(game.getPlayer().x + Player.WIDTH/2, game.getPlayer().y + Player.WIDTH/2);
 		camera.slide();
-
-		
-		// drawing
 		
 		background(150);
 		
 		pushMatrix();
-		scale((float)(width/camera.width), (float)(height/camera.height));
-		translate((float)-camera.x, (float)-camera.y);
+		scale(width/camera.width, height/camera.height);
+		translate(-camera.x, -camera.y);
 		
 		fill(100);
-		for (Rectangle r : obstacles)
+		for (Rectangle2D.Float r : game.getPlatforms())
 			rect(r.x, r.y, r.width, r.height);
 
-		player.draw(this);
+		game.getPlayer().draw(this);
 
 		popMatrix();
 		
-		
 	}
 
-
+	/**
+	 * Stores this key press.
+	 */
 	public void keyPressed() {
 		keys.add(keyCode);
-		if (keyCode == KeyEvent.VK_A)
-			System.out.println(player.x + ", " + player.y);
-			
 	}
 
+	/**
+	 * Stores this key release.
+	 */
 	public void keyReleased() {
-		while(keys.contains(keyCode))
+		while (keys.contains(keyCode))
 			keys.remove((Integer)keyCode);
 	}
-
-	public boolean isPressed(Integer code) {
-		return keys.contains(code);
-	}
-
+	
 }

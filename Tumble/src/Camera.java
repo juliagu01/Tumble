@@ -1,11 +1,11 @@
 /**
  * Represents the area of the map shown to players at a given moment.
  * @author Julia Gu
- * @version Apr. 21, 2020
+ * @version Apr. 27, 2020
  */
 public class Camera extends MovableRectangle {
 	
-	private double tx, ty;
+	private float tx, ty;
 
 	/**
 	 * Creates a rectangle that represents the area of the map shown to players. 
@@ -14,7 +14,7 @@ public class Camera extends MovableRectangle {
 	 * @param w - camera's width
 	 * @param h - camera's height
 	 */
-	public Camera(double x, double y, double w, double h) {
+	public Camera(float x, float y, float w, float h) {
 		super(x - w/2, y - h/2, w, h);
 		tx = this.x;
 		ty = this.y;
@@ -25,7 +25,7 @@ public class Camera extends MovableRectangle {
 	 * @param x - x-coordinate of camera's center after sliding
 	 * @param y - y-coordinate of camera's center after sliding
 	 */
-	public void setTargetLocation(double x, double y) {
+	public void setTargetLocation(float x, float y) {
 		tx = x - width/2;
 		ty = y - height/2;
 	}
