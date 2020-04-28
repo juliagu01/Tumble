@@ -52,9 +52,14 @@ public class DrawingSurface extends PApplet {
 		scale(width/camera.width, height/camera.height);
 		translate(-camera.x, -camera.y);
 		
-		fill(100);
-		for (Rectangle2D.Float r : game.getPlatforms())
-			rect(r.x, r.y, r.width, r.height);
+		for (Platform r : game.getPlatforms())
+			r.draw(this);
+		
+		for (Item i : game.getItems()) {
+			ArrayList<Item> playerItems = game.getPlayer().getItems();
+			if (playerItems == null || !playerItems.contains(i))
+				i.draw(this);
+		}
 
 		game.getPlayer().draw(this);
 
