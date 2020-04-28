@@ -1,4 +1,3 @@
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import processing.core.PApplet;
 
@@ -14,6 +13,7 @@ public class Player extends MovableRectangle {
 	 */
 	public static final int WIDTH = 40, HEIGHT = 40;
 	private static final int COLOR = -4096;
+	private ArrayList<Item> items;
 	private boolean canJump;
 
 	/**
@@ -23,6 +23,7 @@ public class Player extends MovableRectangle {
 	 */
 	public Player(int x, int y) {
 		super(x, y, WIDTH, HEIGHT);
+		items = new ArrayList<Item>();
 	}
 
 	/**
@@ -47,7 +48,7 @@ public class Player extends MovableRectangle {
 	 * Updates this player's location according to its velocity.
 	 * @param platforms - list containing rectangles to check for collision against
 	 */
-	public void update(ArrayList<Rectangle2D.Float> platforms) {
+	public void update(ArrayList<Platform> platforms, ArrayList<Item> items) {
 		
 		canJump = false;
 		accelerate(-getVelocityX()/8, 0.8f);
@@ -55,18 +56,31 @@ public class Player extends MovableRectangle {
 		moveByVelocity();
 		
 		if (platforms != null) {
-			for (Rectangle2D.Float p : platforms) {
+			for (Platform p : platforms) {
 				float[] amount = collidesBy(p);
 				moveBy(-amount[0], -amount[1]);
 				if (amount[0] != 0)
 					setVelocity(0, getVelocityY());
-				if (amount[1] != 0)
+				else if (amount[1] != 0)
 					setVelocity(getVelocityX(), 0);
 				if (amount[1] > 0)
 					canJump = true;
 			}
 		}
 		
+		if (items != null)
+			for (Item i : items)
+				if (this.intersects(i))
+					this.items.add(i);
+		
+	}
+	
+	/**
+	 * Returns this player's collected items.
+	 * @return array containing this player's collected items
+	 */
+	public ArrayList<Item> getItems() {
+		return items;
 	}
 	
 	/**

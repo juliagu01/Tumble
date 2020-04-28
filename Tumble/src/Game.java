@@ -11,19 +11,30 @@ import java.util.ArrayList;
 public class Game {
 	
 	private Player player;
-	private ArrayList<Rectangle2D.Float> platforms;
+	private ArrayList<Platform> platforms;
+	private ArrayList<Item> items;
 
 	/**
 	 * Creates a game with a player and platforms. 
 	 */
 	public Game() {
+		
 		createPlayer();
-		platforms = new ArrayList<Rectangle2D.Float>();
-		platforms.add(new Rectangle2D.Float(300, 250, 200, 50));  // top center
-		platforms.add(new Rectangle2D.Float(375, 300, 50, 100));  // middle
-		platforms.add(new Rectangle2D.Float(200, 400, 400, 50));  // bottom
-		platforms.add(new Rectangle2D.Float(0,   250, 100, 50));  // top left
-		platforms.add(new Rectangle2D.Float(700, 250, 100, 50));  // top right
+		
+		platforms = new ArrayList<Platform>();
+		platforms.add(new Platform(300, 250, 200, 50));  // top center
+		platforms.add(new Platform(375, 300, 50, 100));  // middle
+		platforms.add(new Platform(200, 400, 400, 50));  // bottom
+		platforms.add(new Platform(0,   250, 100, 50));  // top left
+		platforms.add(new Platform(700, 250, 100, 50));  // top right
+		
+		items = new ArrayList<Item>();
+		items.add(new Leaf(200, 350));
+		items.add(new Feather(300, 350));
+		items.add(new Stick(450, 350));
+		items.add(new Straw(500, 350));
+		items.add(new Kite(600, 350));
+		
 	}
 	
 	/**
@@ -39,7 +50,7 @@ public class Game {
 		if (keys.contains(KeyEvent.VK_UP))
 			player.jump();
 
-		player.update(platforms);
+		player.update(platforms, items);
 
 		if (player.y >= 800)
 			createPlayer();
@@ -58,8 +69,16 @@ public class Game {
 	 * Returns this game's platforms.
 	 * @return the array representing this game's platforms
 	 */
-	public ArrayList<Rectangle2D.Float> getPlatforms() {
+	public ArrayList<Platform> getPlatforms() {
 		return platforms;
+	}
+	
+	/**
+	 * Returns this game's items.
+	 * @return the array representing this game's power-ups
+	 */
+	public ArrayList<Item> getItems() {
+		return items;
 	}
 
 	private void createPlayer() {
