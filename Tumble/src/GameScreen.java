@@ -9,7 +9,6 @@ import processing.core.PApplet;
 public class GameScreen extends Screen {
 	
 	private Game game;
-	private Camera camera;
 	
 	/**
 	 * Creates a screen with a game.
@@ -17,7 +16,6 @@ public class GameScreen extends Screen {
 	public GameScreen() {
 		super();
 		game = new Game();
-		camera = new Camera(Screen.WIDTH/2, Screen.HEIGHT/2, Screen.WIDTH, Screen.HEIGHT);
 		super.addButton(new Button(Screen.WIDTH - 50, 60, 50, DrawingSurface.PAUSE_SCREEN));
 	}
 	
@@ -27,15 +25,9 @@ public class GameScreen extends Screen {
 	 */
 	public void draw(PApplet g) {
 		
-		camera.setTargetLocation(game.getPlayer().x + Player.WIDTH/2, game.getPlayer().y + Player.WIDTH/2);
-		camera.slide();
-		
-		g.pushMatrix();
-		g.scale(g.width/camera.width, g.height/camera.height);
-		g.translate(-camera.x, -camera.y);
 		game.draw(g);
-		g.popMatrix();
 		
+		// pause button
 		g.pushMatrix();
 		g.scale(g.width/Screen.WIDTH, g.height/Screen.HEIGHT);
 		g.fill(180);

@@ -14,6 +14,7 @@ public class Game {
 	private Player player;
 	private ArrayList<Platform> platforms;
 	private ArrayList<Item> items;
+	private Camera camera;
 
 	/**
 	 * Creates a game with a player and platforms. 
@@ -36,6 +37,8 @@ public class Game {
 		items.add(new Straw(500, 350));
 		items.add(new Kite(600, 350));
 		
+		camera = new Camera(Screen.WIDTH/2, Screen.HEIGHT/2, Screen.WIDTH, Screen.HEIGHT);
+		
 	}
 	
 	/**
@@ -56,6 +59,9 @@ public class Game {
 		if (player.y >= 800)
 			createPlayer();
 		
+		camera.setTargetLocation(player.x + Player.WIDTH/2, player.y + Player.WIDTH/2);
+		camera.slide();
+		
 	}
 
 	/**
@@ -65,6 +71,10 @@ public class Game {
 	public void draw(PApplet g) {
 		
 		g.background(150);
+		
+		g.pushMatrix();
+		g.scale(g.width/camera.width, g.height/camera.height);
+		g.translate(-camera.x, -camera.y);
 		
 		for (Platform p : platforms)
 			p.draw(g);
@@ -76,11 +86,9 @@ public class Game {
 		}
 
 		player.draw(g);
+
+		g.popMatrix();
 		
-	}
-	
-	public Player getPlayer() {
-		return player;
 	}
 
 	private void createPlayer() {
