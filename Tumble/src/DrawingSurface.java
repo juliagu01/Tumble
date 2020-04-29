@@ -34,6 +34,8 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher{
 		keys = new ArrayList<Integer>();
 		StartScreen screen1 = new StartScreen(this);
 		screens.add(screen1);
+		GameScreen screen2 = new GameScreen(this);
+		screens.add(screen2);
 		camera = new Camera(DRAWING_WIDTH/2, DRAWING_HEIGHT/2, DRAWING_WIDTH, DRAWING_HEIGHT);
 		
 		activeScreen = screens.get(0);
@@ -64,13 +66,13 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher{
 		
 		camera.setTargetLocation(game.getPlayer().x + Player.WIDTH/2, game.getPlayer().y + Player.WIDTH/2);
 		camera.slide();
-		
+//		
 		background(150);
-		
+//		
 		pushMatrix();
 		scale(width/camera.width, height/camera.height);
 		translate(-camera.x, -camera.y);
-		
+//		
 		for (Platform r : game.getPlatforms())
 			r.draw(this);
 		
