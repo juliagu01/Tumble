@@ -16,8 +16,10 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher{
 	 */
 	public static final int DRAWING_WIDTH = 800, DRAWING_HEIGHT = 600;
 	public float ratioX, ratioY;
+	
 	private Game game;
 	private Camera camera;
+	
 	private ArrayList<Integer> keys;
 	private Screen activeScreen;
 	private ArrayList<Screen> screens;
@@ -79,7 +81,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher{
 		}
 
 		game.getPlayer().draw(this);
-		activeScreen.draw();
+//		activeScreen.draw();
 		popMatrix();
 		
 	}
