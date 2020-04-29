@@ -106,7 +106,7 @@ public class MovableRectangle extends Rectangle2D.Float {
 	 * @return whether rectangles overlap
 	 */
 	public boolean intersects(Rectangle2D.Float r) {
-		return x + width > r.x + EPSILON && x < r.x + r.width - EPSILON && y + height > r.y + EPSILON && y < r.y + r.height - EPSILON;
+		return x + width > r.x && x < r.x + r.width && y + height > r.y && y < r.y + r.height;
 	}
 	
 	/**
@@ -119,13 +119,13 @@ public class MovableRectangle extends Rectangle2D.Float {
 		float[] amount = new float[] {0, 0};
 		
 		if (intersects(r)) {
-			if (y + height - vy <= r.y + EPSILON)
+			if (y + height - vy <= r.y)
 				amount[1] = y + height - r.y;
-			else if (y - vy >= r.y + r.height - EPSILON)
+			else if (y - vy >= r.y + r.height)
 				amount[1] = y - r.y - r.height;
-			if (x + width - vx <= r.x + EPSILON)
+			else if (x + width - vx <= r.x)
 				amount[0] = x + width - r.x;
-			else if (x - vx >= r.x + r.width - EPSILON)
+			else if (x - vx >= r.x + r.width)
 				amount[0] = x - r.x - r.width;
 		}
 		

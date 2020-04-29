@@ -59,10 +59,10 @@ public class Player extends MovableRectangle {
 			for (Platform p : platforms) {
 				float[] amount = collidesBy(p);
 				moveBy(-amount[0], -amount[1]);
-				if (amount[0] != 0)
-					setVelocity(0, getVelocityY());
-				else if (amount[1] != 0)
+				if (amount[1] != 0)
 					setVelocity(getVelocityX(), 0);
+				else if (amount[0] != 0)
+					setVelocity(0, getVelocityY());
 				if (amount[1] > 0)
 					canJump = true;
 			}
