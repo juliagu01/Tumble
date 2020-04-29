@@ -1,12 +1,13 @@
 import java.awt.event.KeyEvent;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+
+import processing.core.PApplet;
 
 /**
  * Represents a Tumble game.
+ * Credit to Mr. Shelby for basic class structure! 
  * @author Julia Gu
  * @version Apr. 27, 2020
- * Credit to Mr. Shelby for basic class structure! 
  */
 public class Game {
 	
@@ -42,7 +43,7 @@ public class Game {
 	 * @param keys - the current keys being pressed
 	 */
 	public void update(ArrayList<Integer> keys) {
-
+		
 		if (keys.contains(KeyEvent.VK_LEFT))
 			player.roll(-1);
 		if (keys.contains(KeyEvent.VK_RIGHT))
@@ -56,33 +57,34 @@ public class Game {
 			createPlayer();
 		
 	}
-	
+
 	/**
-	 * Returns this game's player. 
-	 * @return the object representing this game's player
+	 * Draws this game.
+	 * @param g - the surface to be drawn on
 	 */
+	public void draw(PApplet g) {
+		
+		g.background(150);
+		
+		for (Platform p : platforms)
+			p.draw(g);
+		
+		for (Item i : items) {
+			ArrayList<Item> playerItems = player.getItems();
+			if (playerItems == null || !playerItems.contains(i))
+				i.draw(g);
+		}
+
+		player.draw(g);
+		
+	}
+	
 	public Player getPlayer() {
 		return player;
 	}
-	
-	/**
-	 * Returns this game's platforms.
-	 * @return the array representing this game's platforms
-	 */
-	public ArrayList<Platform> getPlatforms() {
-		return platforms;
-	}
-	
-	/**
-	 * Returns this game's items.
-	 * @return the array representing this game's power-ups
-	 */
-	public ArrayList<Item> getItems() {
-		return items;
-	}
 
 	private void createPlayer() {
-		player = new Player(DrawingSurface.DRAWING_WIDTH/2 - Player.WIDTH/2, DrawingSurface.DRAWING_HEIGHT/4 - Player.WIDTH/2);
+		player = new Player(Screen.WIDTH/2 - Player.WIDTH/2, Screen.HEIGHT/4 - Player.WIDTH/2);
 	}
 
 }

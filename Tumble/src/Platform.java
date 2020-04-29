@@ -21,7 +21,7 @@ public class Platform extends Rectangle2D.Float {
 	
 	/**
 	 * Draws this platform.
-	 * @param g
+	 * @param g - the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
 		g.fill(100);

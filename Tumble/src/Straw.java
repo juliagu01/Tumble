@@ -1,4 +1,3 @@
-
 import processing.core.PApplet;
 
 /**
@@ -19,6 +18,7 @@ public class Straw extends Item {
 
 	/**
 	 * Draws this straw.
+	 * @param g - the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
 		g.fill(245, 98, 112);

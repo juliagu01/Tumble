@@ -21,7 +21,7 @@ public class Player extends MovableRectangle {
 	 * @param x - x-coordinate of player's upper-left corner
 	 * @param y - y-coordinate of player's upper-left corner
 	 */
-	public Player(int x, int y) {
+	public Player(float x, float y) {
 		super(x, y, WIDTH, HEIGHT);
 		items = new ArrayList<Item>();
 	}
@@ -30,7 +30,7 @@ public class Player extends MovableRectangle {
 	 * Accelerates this player horizontally.
 	 * @param a - amount to accelerate by 
 	 */
-	public void roll(int a) {
+	public void roll(float a) {
 		accelerate(a, 0);
 	}
 

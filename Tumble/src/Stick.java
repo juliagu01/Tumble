@@ -1,4 +1,3 @@
-
 import processing.core.PApplet;
 
 /**
@@ -19,6 +18,7 @@ public class Stick extends Item {
 
 	/**
 	 * Draws this stick.
+	 * @param g - the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
 		g.fill(206, 145, 255);

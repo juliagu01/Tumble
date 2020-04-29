@@ -1,42 +1,59 @@
+import java.util.ArrayList;
+import processing.core.PApplet;
+
 /**
- * Represents the super class of features all screens share
- * @author Amanda Xu
- * @version 4/24/20
+ * Represents the superclass of all screens.
+ * @author Amanda Xu, Julia Gu
+ * @version Apr. 28, 2020
  * Credit to ProcessingScreenSwitching from Demos Folder
- *
  */
 
 public abstract class Screen {
+
+	/**
+	 * Screens' shared dimensions. 
+	 */
+	public static final float WIDTH = 800, HEIGHT = 600;
+	private ArrayList<Button> buttons;
 	
-	public final int WIDTH, HEIGHT;
-	
-	public Screen(int width, int height) {
-		this.WIDTH = width;
-		this.HEIGHT = height;
+	/**
+	 * Creates a general screen.
+	 */
+	public Screen() {
+		buttons = new ArrayList<Button>();
+	}
+
+	/**
+	 * Adds a button to this screen.
+	 * @param b - button to be added
+	 */
+	public void addButton(Button b) {
+		buttons.add(b);
 	}
 	
-	public void setup() {
-		
+	/**
+	 * Determines if a button is clicked. 
+	 * @param x - mouse's x-coordinate
+	 * @param y - mouse's y-coordinate
+	 * @return next screen. Returns -1 if not applicable.
+	 */
+	public int checkClick(float x, float y) {
+		for (Button b : buttons)
+			if (b.isPressed(x, y))
+				return b.getToScreen();
+		return -1;
 	}
 	
-	public void draw() {
+	/**
+	 * Updates this screen.
+	 * @param keys - keys being pressed
+	 */
+	public void update(ArrayList<Integer> keys) {}
 	
-	}
-	
-	public void mousePressed() {
-		
-	}
-	
-	public void mouseMoved() {
-		
-	}
-	
-	public void mouseDragged() {
-		
-	}
-	
-	public void mouseReleased() {
-		
-	}
+	/**
+	 * Draws this screen.
+	 * @param g - the surface to be drawn on
+	 */
+	public abstract void draw(PApplet g);
 	
 }

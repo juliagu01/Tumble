@@ -1,4 +1,3 @@
-
 import processing.core.PApplet;
 
 /**
@@ -18,7 +17,8 @@ public abstract class Item extends MovableRectangle {
 	}
 
 	/**
-	 * Draws this item. 
+	 * Draws this item.
+	 * @param g - the surface to be drawn on 
 	 */
 	public abstract void draw(PApplet g);
 	

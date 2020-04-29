@@ -19,6 +19,7 @@ public class Kite extends Item {
 
 	/**
 	 * Draws this kite.
+	 * @param g - the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
 		g.fill(255, 159, 43);

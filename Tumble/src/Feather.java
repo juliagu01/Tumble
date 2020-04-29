@@ -19,6 +19,7 @@ public class Feather extends Item {
 
 	/**
 	 * Draws this feather.
+	 * @param g - the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
 		g.fill(76, 191, 245);

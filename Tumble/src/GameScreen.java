@@ -1,35 +1,58 @@
-import java.awt.Point;
-import java.awt.Rectangle;
+import java.util.ArrayList;
+import processing.core.PApplet;
 
-public class GameScreen extends Screen{
+/**
+ * Represents the game's main screen
+ * @author Amanda Xu, Julia Gu
+ * @version Apr. 28, 2020
+ */
+public class GameScreen extends Screen {
 	
-	private DrawingSurface surface;
-	private Rectangle button;
+	private Game game;
+	private Camera camera;
 	
-	public GameScreen(DrawingSurface surface) {
-		super(800, 600);
-		this.surface = surface;
-		button = new Rectangle(100, 500, 200, 200);
+	/**
+	 * Creates a screen with a game.
+	 */
+	public GameScreen() {
+		super();
+		game = new Game();
+		camera = new Camera(Screen.WIDTH/2, Screen.HEIGHT/2, Screen.WIDTH, Screen.HEIGHT);
+		super.addButton(new Button(Screen.WIDTH - 50, 60, 50, DrawingSurface.PAUSE_SCREEN));
+	}
+	
+	/**
+	 * Draw this game screen.
+	 * @param g - the surface to be drawn on
+	 */
+	public void draw(PApplet g) {
+		
+		camera.setTargetLocation(game.getPlayer().x + Player.WIDTH/2, game.getPlayer().y + Player.WIDTH/2);
+		camera.slide();
+		
+		g.pushMatrix();
+		g.scale(g.width/camera.width, g.height/camera.height);
+		g.translate(-camera.x, -camera.y);
+		game.draw(g);
+		g.popMatrix();
+		
+		g.pushMatrix();
+		g.scale(g.width/Screen.WIDTH, g.height/Screen.HEIGHT);
+		g.fill(180);
+		g.ellipse(750, 60, 50, 50);
+		g.fill(240);
+		g.rect(741, 48, 5, 24);
+		g.rect(754, 48, 5, 24);
+		g.popMatrix();
 		
 	}
-	public void draw() {
-		surface.pushStyle();
-
-		surface.background(255, 255, 255);
-
-		surface.rect(button.x, button.y, button.width, button.height, 10, 10, 10, 10);
-		surface.fill(0);
-		String str = "PAUSE!";
-		float w = surface.textWidth(str);
-		surface.text(str, button.x + button.width / 2 - w / 2, button.y + button.height / 2);
-
-		surface.popStyle();
-	}
 	
-	public void mousePressed() {
-		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
-		if (button.contains(p))
-			surface.switchScreen(ScreenSwitcher.PAUSE_SCREEN);
+	/**
+	 * Updates this game screen.
+	 * @param keys - keys that are currently pressed
+	 */
+	public void update(ArrayList<Integer> keys) {
+		game.update(keys);
 	}
 
 }
