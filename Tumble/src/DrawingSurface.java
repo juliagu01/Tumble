@@ -1,3 +1,4 @@
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import processing.core.PApplet;
 
@@ -27,7 +28,7 @@ public class DrawingSurface extends PApplet {
 		keys = new ArrayList<Integer>();
 		
 		screen = START_SCREEN;
-		screens = new Screen[] {new StartScreen(), new GameScreen(), new PauseScreen()};
+		screens = new Screen[] {new StartScreen(this), new GameScreen(this), new PauseScreen(this)};
 		
 	}
 
@@ -50,7 +51,43 @@ public class DrawingSurface extends PApplet {
 	 */
 	public void draw() {
 		screens[screen].update(keys);
-		screens[screen].draw(this);
+		screens[screen].draw();
+	}
+	
+	/**
+	 * Returns the actual x-coordinate that corresponds to the transformed x-coordinate.
+	 * @param assumed - x-coordinate in transformed coordinates
+	 * @return the x-coordinate in actual coordinates
+	 */
+	public float getActualCoordinateX(float assumedX) {
+		return assumedX * width/Screen.WIDTH;
+	}
+	
+	/**
+	 * Returns the actual y-coordinate that corresponds to the transformed y-coordinate.
+	 * @param assumed - y-coordinate in transformed coordinates
+	 * @return the y-coordinate in actual coordinates
+	 */
+	public float getActualCoordinateY(float assumedY) {
+		return assumedY * height/Screen.HEIGHT;
+	}
+	
+	/**
+	 * Returns the transformed x-coordinate that corresponds to the actual x-coordinate.
+	 * @param assumed - x-coordinate in actual coordinates
+	 * @return the x-coordinate in transformed coordinates
+	 */
+	public float getTransformedCoordinateX(float actualX) {
+		return actualX * Screen.WIDTH/width;
+	}
+	
+	/**
+	 * Returns the actual y-coordinate that corresponds to the transformed y-coordinate.
+	 * @param assumed - y-coordinate in transformed coordinates
+	 * @return the y-coordinate in actual coordinates
+	 */
+	public float getTransformedCoordinateY(float actualY) {
+		return actualY * Screen.HEIGHT/height;
 	}
 
 	/**

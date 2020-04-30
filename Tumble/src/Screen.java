@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import processing.core.PApplet;
 
 /**
  * Represents the superclass of all screens.
@@ -15,12 +14,15 @@ public abstract class Screen {
 	 */
 	public static final float WIDTH = 800, HEIGHT = 600;
 	private ArrayList<Button> buttons;
+	private DrawingSurface surface;
 	
 	/**
 	 * Creates a general screen.
+	 * @param surface - drawing surface onto which this screen is drawn
 	 */
-	public Screen() {
+	public Screen(DrawingSurface surface) {
 		buttons = new ArrayList<Button>();
+		this.surface = surface;
 	}
 
 	/**
@@ -29,6 +31,14 @@ public abstract class Screen {
 	 */
 	public void addButton(Button b) {
 		buttons.add(b);
+	}
+
+	/**
+	 * Returns the drawing surface onto which this screen is drawn.
+	 * @return this screen's drawing surface
+	 */
+	public DrawingSurface getSurface() {
+		return surface;
 	}
 	
 	/**
@@ -39,21 +49,20 @@ public abstract class Screen {
 	 */
 	public int checkClick(float x, float y) {
 		for (Button b : buttons)
-			if (b.isPressed(x, y))
+			if (b.isPressed(surface.getTransformedCoordinateX(surface.mouseX), surface.getTransformedCoordinateY(surface.mouseY)))
 				return b.getToScreen();
 		return -1;
 	}
 	
 	/**
 	 * Updates this screen.
-	 * @param keys - keys being pressed
+	 * @param keys - keys that are currently pressed
 	 */
 	public void update(ArrayList<Integer> keys) {}
 	
 	/**
 	 * Draws this screen.
-	 * @param g - the surface to be drawn on
 	 */
-	public abstract void draw(PApplet g);
+	public abstract void draw();
 	
 }

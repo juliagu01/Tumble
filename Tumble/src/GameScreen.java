@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import processing.core.PApplet;
 
 /**
  * Represents the game's main screen
@@ -12,19 +11,20 @@ public class GameScreen extends Screen {
 	
 	/**
 	 * Creates a screen with a game.
+	 * @param surface - drawing surface onto which this screen is drawn
 	 */
-	public GameScreen() {
-		super();
+	public GameScreen(DrawingSurface surface) {
+		super(surface);
 		game = new Game();
 		super.addButton(new Button(Screen.WIDTH - 50, 60, 50, DrawingSurface.PAUSE_SCREEN));
 	}
 	
 	/**
 	 * Draw this game screen.
-	 * @param g - the surface to be drawn on
 	 */
-	public void draw(PApplet g) {
+	public void draw() {
 		
+		DrawingSurface g = getSurface();
 		game.draw(g);
 		
 		// pause button

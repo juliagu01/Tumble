@@ -52,7 +52,7 @@ public class Game {
 		if (keys.contains(KeyEvent.VK_RIGHT))
 			player.roll(1);
 		if (keys.contains(KeyEvent.VK_UP))
-			player.jump();
+			player.jump(16);
 
 		player.update(platforms, items);
 

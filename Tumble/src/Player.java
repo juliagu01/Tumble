@@ -37,9 +37,9 @@ public class Player extends MovableRectangle {
 	/**
 	 * Accelerates this player vertically.
 	 */
-	public void jump() {
+	public void jump(float a) {
 		if (canJump) {
-			accelerate(0, -16);
+			accelerate(0, -a);
 			canJump = false;
 		}
 	}
