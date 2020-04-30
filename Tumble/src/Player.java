@@ -12,7 +12,6 @@ public class Player extends MovableRectangle {
 	 * Players' shared dimensions. 
 	 */
 	public static final int WIDTH = 40, HEIGHT = 40;
-	private static final int COLOR = -4096;
 	private ArrayList<Item> items;
 	private boolean canJump;
 
@@ -88,7 +87,7 @@ public class Player extends MovableRectangle {
 	 * @param g - the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
-		g.fill(COLOR);
+		g.fill(255, 245, 0);
 		g.ellipse(x + width/2, y + height/2, width, height);
 	}
 

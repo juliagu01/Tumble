@@ -5,7 +5,7 @@ import processing.core.PApplet;
 
 /**
  * Represents a Tumble game.
- * Credit to Mr. Shelby for basic class structure! 
+ * Credit to Mr. Shelby for basic class structure. 
  * @author Julia Gu
  * @version Apr. 27, 2020
  */
@@ -37,7 +37,7 @@ public class Game {
 		items.add(new Straw(500, 350));
 		items.add(new Kite(600, 350));
 		
-		camera = new Camera(Screen.WIDTH/2, Screen.HEIGHT/2, Screen.WIDTH, Screen.HEIGHT);
+		camera = new Camera(800f/2, 600f/2, 800f, 600f);
 		
 	}
 	
@@ -69,7 +69,7 @@ public class Game {
 	 * @param g - the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
-		
+
 		g.background(150);
 		
 		g.pushMatrix();
@@ -92,7 +92,7 @@ public class Game {
 	}
 
 	private void createPlayer() {
-		player = new Player(Screen.WIDTH/2 - Player.WIDTH/2, Screen.HEIGHT/4 - Player.WIDTH/2);
+		player = new Player(400 - Player.WIDTH/2, 150 - Player.WIDTH/2);
 	}
 
 }

@@ -1,7 +1,9 @@
 import java.awt.geom.Ellipse2D;
 
+import processing.core.PApplet;
+
 /**
- * Represents a circular button that can lead to other screens.
+ * Represents a circular solid button that can lead to other screens.
  * @author Julia Gu
  * @version Apr. 28, 2020
  */
@@ -10,7 +12,7 @@ public class Button extends Ellipse2D.Float {
 	private int toScreen;
 	
 	/**
-	 * Creates a circle that represents a button.
+	 * Creates a solid circle that represents a button.
 	 * @param x - x-coordinate of button's center
 	 * @param y - y-coordinate of button's center
 	 * @param w - button's width
@@ -21,7 +23,7 @@ public class Button extends Ellipse2D.Float {
 	}
 	
 	/**
-	 * Creates a circle that represents a button. Button can lead to other screens.
+	 * Creates a solid circle that represents a button. Button can lead to other screens.
 	 * @param x - x-coordinate of button's center
 	 * @param y - y-coordinate of button's center
 	 * @param w - button's width
@@ -40,6 +42,14 @@ public class Button extends Ellipse2D.Float {
 	 */
 	public boolean isPressed(float mouseX, float mouseY) {
 		 return Math.pow(mouseX - x - width/2, 2) + Math.pow(mouseY - y - width/2, 2) <= Math.pow(width/2, 2);  // resizing will be a problem!
+	}
+	
+	/**
+	 * Draws this button. 
+	 * @param g - surface to be drawn on
+	 */
+	public void draw(PApplet g) {
+		g.ellipse(x + width/2, y + width/2, width, width);
 	}
 	
 	/**

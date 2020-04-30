@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /**
- * Represents the game's main screen
+ * Represents the game's main screen.
  * @author Amanda Xu, Julia Gu
  * @version Apr. 28, 2020
  */
@@ -10,13 +10,13 @@ public class GameScreen extends Screen {
 	private Game game;
 	
 	/**
-	 * Creates a screen with a game.
+	 * Creates a screen with a game. Has a pause button.
 	 * @param surface - drawing surface onto which this screen is drawn
 	 */
 	public GameScreen(DrawingSurface surface) {
 		super(surface);
 		game = new Game();
-		super.addButton(new Button(Screen.WIDTH - 50, 60, 50, DrawingSurface.PAUSE_SCREEN));
+		super.addButton(new Button(Screen.WIDTH - Screen.HEIGHT * 50/600, Screen.HEIGHT * 60/600, Screen.HEIGHT * 50/600, DrawingSurface.PAUSE_SCREEN));
 	}
 	
 	/**
@@ -25,11 +25,13 @@ public class GameScreen extends Screen {
 	public void draw() {
 		
 		DrawingSurface g = getSurface();
+		
+		// game
 		game.draw(g);
 		
 		// pause button
 		g.pushMatrix();
-		g.scale(g.width/Screen.WIDTH, g.height/Screen.HEIGHT);
+		g.scale(g.width/800f, g.height/600f);
 		g.fill(180);
 		g.ellipse(750, 60, 50, 50);
 		g.fill(240);

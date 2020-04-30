@@ -1,22 +1,16 @@
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import processing.core.PApplet;
 
 /**
  * Represents a canvas onto which a game is drawn. 
- * Credit to Mr. Shelby for basic class structure! 
+ * Credit to Mr. Shelby for basic class structure. 
  * @author Amanda Xu, Julia Gu
  * @version Apr. 28, 2020
  */
-public class DrawingSurface extends PApplet {
-	
-	/**
-	 * DrawingSurface's screen constants.
-	 */
-	public static final int START_SCREEN = 0, GAME_SCREEN = 1, PAUSE_SCREEN = 2;
+public class DrawingSurface extends PApplet implements ScreenSwitcher {
 
-	private int screen;
 	private Screen[] screens;
+	private Screen activeScreen;
 	private ArrayList<Integer> keys;
 	
 	/**
@@ -27,8 +21,8 @@ public class DrawingSurface extends PApplet {
 		super();
 		keys = new ArrayList<Integer>();
 		
-		screen = START_SCREEN;
 		screens = new Screen[] {new StartScreen(this), new GameScreen(this), new PauseScreen(this)};
+		activeScreen = screens[0];
 		
 	}
 
@@ -44,14 +38,15 @@ public class DrawingSurface extends PApplet {
 	 */
 	public void setup() {
 		noStroke();
+		surface.setResizable(true);
 	}
 
 	/**
 	 * Draws the game.
 	 */
 	public void draw() {
-		screens[screen].update(keys);
-		screens[screen].draw();
+		activeScreen.update(keys);
+		activeScreen.draw();
 	}
 	
 	/**
@@ -91,6 +86,14 @@ public class DrawingSurface extends PApplet {
 	}
 
 	/**
+	 * Switches the screen that this drawing surface displays.
+	 * @param newScreen - screen to be switched to
+	 */
+	public void switchScreen(int screen) {
+		activeScreen = screens[screen];
+	}
+
+	/**
 	 * Stores this key press.
 	 */
 	public void keyPressed() {
@@ -109,9 +112,7 @@ public class DrawingSurface extends PApplet {
 	 * Responds to mouse release.
 	 */
 	public void mouseReleased() {
-		int newScreen = screens[screen].checkClick(mouseX, mouseY);
-		if (newScreen != -1)
-			screen = newScreen;
+		activeScreen.mouseReleased();
 	}
 	
 }

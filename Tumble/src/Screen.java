@@ -2,9 +2,9 @@ import java.util.ArrayList;
 
 /**
  * Represents the superclass of all screens.
+ * Credit to ProcessingScreenSwitching from Demos Folder
  * @author Amanda Xu, Julia Gu
  * @version Apr. 28, 2020
- * Credit to ProcessingScreenSwitching from Demos Folder
  */
 
 public abstract class Screen {
@@ -42,16 +42,13 @@ public abstract class Screen {
 	}
 	
 	/**
-	 * Determines if a button is clicked. 
-	 * @param x - mouse's x-coordinate
-	 * @param y - mouse's y-coordinate
-	 * @return next screen. Returns -1 if not applicable.
+	 * Responds to mouse release. 
+	 * @post Will change screen accordingly.
 	 */
-	public int checkClick(float x, float y) {
+	public void mouseReleased() {
 		for (Button b : buttons)
-			if (b.isPressed(surface.getTransformedCoordinateX(surface.mouseX), surface.getTransformedCoordinateY(surface.mouseY)))
-				return b.getToScreen();
-		return -1;
+			if (b.isPressed(surface.getTransformedCoordinateX(surface.mouseX), surface.getTransformedCoordinateY(surface.mouseY)) && b.getToScreen() != -1)
+				surface.switchScreen(b.getToScreen());
 	}
 	
 	/**
