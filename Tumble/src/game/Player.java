@@ -1,6 +1,8 @@
 package game;
+
 import java.util.ArrayList;
 import processing.core.PApplet;
+import items.*;
 
 /**
  * Represents a movable ellipse with basic physics and rectangular collision detection.
@@ -27,20 +29,44 @@ public class Player extends MovableRectangle {
 	}
 
 	/**
-	 * Accelerates this player horizontally.
-	 * @param a - amount to accelerate by 
+	 * Accelerates this player to the left.
 	 */
-	public void roll(float a) {
-		accelerate(a, 0);
+	public void rollLeft() {
+		for (Item i : items) {
+			if (i instanceof Leaf) {
+				accelerate(-1.2f, 0);
+				return;
+			}
+		}
+		accelerate(-1, 0);
+	}
+
+	/**
+	 * Accelerates this player to the right.
+	 */
+	public void rollRight() {
+		for (Item i : items) {
+			if (i instanceof Leaf) {
+				accelerate(1.2f, 0);
+				return;
+			}
+		}
+		accelerate(1, 0);
 	}
 
 	/**
 	 * Accelerates this player vertically.
 	 */
-	public void jump(float a) {
+	public void jump() {
 		if (canJump) {
-			accelerate(0, -a);
 			canJump = false;
+			for (Item i : items) {
+				if (i instanceof Feather) {
+					accelerate(0, -18);
+					return;
+				}
+			}
+			accelerate(0, -16);
 		}
 	}
 

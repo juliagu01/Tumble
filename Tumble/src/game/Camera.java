@@ -1,4 +1,5 @@
 package game;
+
 /**
  * Represents the area of the map shown to players at a given moment.
  * @author Julia Gu

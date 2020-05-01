@@ -36,7 +36,7 @@ public class Game {
 		items.add(new Leaf(200, 350));
 		items.add(new Feather(300, 350));
 		items.add(new Stick(450, 350));
-		items.add(new Straw(500, 350));
+		items.add(new Straw(500, 370));
 		items.add(new Kite(600, 350));
 		
 		camera = new Camera(800f/2, 600f/2, 800f, 600f);
@@ -50,11 +50,11 @@ public class Game {
 	public void update(ArrayList<Integer> keys) {
 		
 		if (keys.contains(KeyEvent.VK_LEFT))
-			player.roll(-1);
+			player.rollLeft();
 		if (keys.contains(KeyEvent.VK_RIGHT))
-			player.roll(1);
+			player.rollRight();
 		if (keys.contains(KeyEvent.VK_UP))
-			player.jump(16);
+			player.jump();
 
 		player.update(platforms, items);
 
