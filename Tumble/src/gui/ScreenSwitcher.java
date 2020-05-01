@@ -1,3 +1,4 @@
+package gui;
 /**
  * Represents the mechanism for switching screens
  * Credit to ProcessingScreenSwitching from Demos Folder

@@ -1,4 +1,8 @@
+package screens;
+
 import java.util.ArrayList;
+import game.Game;
+import gui.*;
 
 /**
  * Represents the game's main screen.
@@ -25,6 +29,7 @@ public class GameScreen extends Screen {
 	public void draw() {
 		
 		DrawingSurface g = getSurface();
+		g.background(212);
 		
 		// game
 		game.draw(g);
@@ -32,7 +37,7 @@ public class GameScreen extends Screen {
 		// pause button
 		g.pushMatrix();
 		g.scale(g.width/800f, g.height/600f);
-		g.fill(180);
+		g.fill(190);
 		g.ellipse(750, 60, 50, 50);
 		g.fill(240);
 		g.rect(741, 48, 5, 24);

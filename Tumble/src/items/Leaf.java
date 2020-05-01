@@ -1,5 +1,7 @@
+package items;
 
 import processing.core.PApplet;
+import game.Item;
 
 /**
  * Represents a collectible leaf item with a rectangular hitbox.

@@ -1,5 +1,7 @@
+package items;
 
 import processing.core.PApplet;
+import game.Item;
 
 /**
  * Represents a collectible kite item with a rectangular hitbox.
@@ -14,7 +16,7 @@ public class Kite extends Item {
 	 * @param y - y-coordinate of kite's upper-left corner
 	 */
 	public Kite(float x, float y) {
-		super(x, y, 30, 40);
+		super(x, y, 40, 50);
 	}
 
 	/**
@@ -22,7 +24,7 @@ public class Kite extends Item {
 	 * @param g - the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
-		g.fill(255, 159, 43);
+		g.fill(250, 174, 42);
 		g.quad(x, y + height/2, x + width/2, y, x + width, y + height/2, x + width/2, y + height);
 	}
 	

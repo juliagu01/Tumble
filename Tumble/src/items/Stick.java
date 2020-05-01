@@ -1,4 +1,7 @@
+package items;
+
 import processing.core.PApplet;
+import game.Item;
 
 /**
  * Represents a collectible stick item with a rectangular hitbox.
@@ -21,7 +24,7 @@ public class Stick extends Item {
 	 * @param g - the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
-		g.fill(206, 145, 255);
+		g.fill(178, 104, 215);
 		g.rect(x, y, width, height);
 	}
 	

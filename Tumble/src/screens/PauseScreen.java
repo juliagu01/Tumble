@@ -1,3 +1,7 @@
+package screens;
+
+import gui.*;
+
 /**
  * Represents the game's pause screen. Has a continue button.
  * @author Julia Gu
@@ -11,7 +15,7 @@ public class PauseScreen extends Screen {
 	 */
 	public PauseScreen(DrawingSurface surface) {
 		super(surface);
-		super.addButton(new Button(Screen.WIDTH/2, Screen.HEIGHT * 380/600, Screen.HEIGHT/6, DrawingSurface.GAME_SCREEN));
+		super.addButton(new Button(Screen.WIDTH/2, Screen.HEIGHT * 380/600, Screen.HEIGHT/5, DrawingSurface.GAME_SCREEN));
 	}
 
 	/**
@@ -21,13 +25,13 @@ public class PauseScreen extends Screen {
 	public void draw() {
 		
 		DrawingSurface g = getSurface();
-		g.background(150);
+		g.background(212);
 		
 		g.pushMatrix();
 		g.scale(g.width/800f, g.height/600f);
 		
 		// platform
-		g.fill(100);
+		g.fill(140);
 		g.rect(0, 550, 800, 50);
 		
 		// player
@@ -42,10 +46,10 @@ public class PauseScreen extends Screen {
 		g.text("PAUSED", 400 - textW/2, 270);
 		
 		// play button
-		g.fill(180);
-		g.ellipse(400, 380, 100, 100);
+		g.fill(190);
+		g.ellipse(400, 380, 120, 120);
 		g.fill(240);
-		g.triangle(385, 355, 385, 405, 425, 380);
+		g.triangle(383, 350, 383, 410, 430, 380);
 		
 		g.popMatrix();
 		

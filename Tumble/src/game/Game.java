@@ -1,7 +1,9 @@
+package game;
+
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-
 import processing.core.PApplet;
+import items.*;
 
 /**
  * Represents a Tumble game.
@@ -69,8 +71,6 @@ public class Game {
 	 * @param g - the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
-
-		g.background(150);
 		
 		g.pushMatrix();
 		g.scale(g.width/camera.width, g.height/camera.height);

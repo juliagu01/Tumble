@@ -1,5 +1,7 @@
+package items;
 
 import processing.core.PApplet;
+import game.Item;
 
 /**
  * Represents a collectible feather item with a rectangular hitbox.
@@ -22,7 +24,7 @@ public class Feather extends Item {
 	 * @param g - the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
-		g.fill(76, 191, 245);
+		g.fill(76, 195, 250);
 		g.ellipse(x + width/2, y + width/2, width, width);
 		g.rect(x, y, width/2, width/2);
 		g.rect(x + width/2, y + width/2, width/2, width/2);

@@ -1,4 +1,7 @@
+package items;
+
 import processing.core.PApplet;
+import game.Item;
 
 /**
  * Represents a collectible straw item with a rectangular hitbox.
@@ -21,7 +24,7 @@ public class Straw extends Item {
 	 * @param g - the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
-		g.fill(245, 98, 112);
+		g.fill(255, 90, 110);
 		g.rect(x, y, width, height);
 	}
 	

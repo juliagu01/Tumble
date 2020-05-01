@@ -1,3 +1,7 @@
+package screens;
+
+import gui.*;
+
 /**
  * Represents the game's start screen. Has a play button.
  * @author Amanda Xu, Julia Gu
@@ -10,7 +14,7 @@ public class StartScreen extends Screen {
 	 */
 	public StartScreen(DrawingSurface surface) {
 		super(surface);
-		super.addButton(new Button(Screen.WIDTH/2, Screen.HEIGHT * 2/3, Screen.HEIGHT/6, DrawingSurface.GAME_SCREEN));
+		super.addButton(new Button(Screen.WIDTH/2, Screen.HEIGHT * 2/3, Screen.HEIGHT/5, DrawingSurface.GAME_SCREEN));
 	}
 
 	/**
@@ -20,17 +24,17 @@ public class StartScreen extends Screen {
 	public void draw() {
 		
 		DrawingSurface g = getSurface();
-		g.background(150);
+		g.background(212);
 		
 		g.pushMatrix();
 		g.scale(g.width/800f, g.height/600f);
 		
 		// platform
-		g.fill(100);
+		g.fill(140);
 		g.rect(0, 550, 800, 50);
 		
 		// player
-		g.fill(250, 230, 50);
+		g.fill(253, 225, 0);
 		g.ellipse(100, 300, 500, 500);
 		
 		// title
@@ -47,10 +51,10 @@ public class StartScreen extends Screen {
 		g.text("game by VanillaChip", 400 - subtitleW/2, 300);
 		
 		// play button
-		g.fill(180);
-		g.ellipse(400, 400, 100, 100);
+		g.fill(190);
+		g.ellipse(400, 400, 120, 120);
 		g.fill(240);
-		g.triangle(385, 375, 385, 425, 425, 400);
+		g.triangle(383, 370, 383, 430, 430, 400);
 		
 		g.popMatrix();
 		

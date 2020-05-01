@@ -1,3 +1,4 @@
+package game;
 import java.awt.geom.Rectangle2D;
 import processing.core.PApplet;
 
@@ -24,7 +25,7 @@ public class Platform extends Rectangle2D.Float {
 	 * @param g - the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
-		g.fill(100);
+		g.fill(140);
 		g.rect(x, y, width, height);
 	}
 

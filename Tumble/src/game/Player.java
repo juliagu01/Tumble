@@ -1,3 +1,4 @@
+package game;
 import java.util.ArrayList;
 import processing.core.PApplet;
 
@@ -87,7 +88,7 @@ public class Player extends MovableRectangle {
 	 * @param g - the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
-		g.fill(255, 245, 0);
+		g.fill(253, 235, 0);
 		g.ellipse(x + width/2, y + height/2, width, height);
 	}
 

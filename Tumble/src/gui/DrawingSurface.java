@@ -1,5 +1,8 @@
+package gui;
+
 import java.util.ArrayList;
 import processing.core.PApplet;
+import screens.*;
 
 /**
  * Represents a canvas onto which a game is drawn. 
