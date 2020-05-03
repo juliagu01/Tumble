@@ -12,8 +12,8 @@ public class Kite extends Item {
 	
 	/**
 	 * Creates a kite item. Has a rectangular hitbox.
-	 * @param x - x-coordinate of kite's upper-left corner
-	 * @param y - y-coordinate of kite's upper-left corner
+	 * @param x  x-coordinate of kite's upper-left corner
+	 * @param y  y-coordinate of kite's upper-left corner
 	 */
 	public Kite(float x, float y) {
 		super(x, y, 40, 50);
@@ -21,7 +21,7 @@ public class Kite extends Item {
 
 	/**
 	 * Draws this kite.
-	 * @param g - the surface to be drawn on
+	 * @param g  the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
 		g.fill(250, 174, 42);

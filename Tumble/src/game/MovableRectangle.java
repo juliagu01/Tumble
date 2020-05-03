@@ -14,12 +14,12 @@ public class MovableRectangle extends Rectangle2D.Float {
 	
 	/**
 	 * Creates a rectangle with given location and velocity.
-	 * @param x - x-coordinate of rectangle's upper-left corner
-	 * @param y - y-coordinate of rectangle's upper-left corner
-	 * @param w - rectangle's width
-	 * @param h - rectangle's height
-	 * @param vx - x-component of rectangle's velocity
-	 * @param vy - y-component of rectangle's velocity
+	 * @param x  x-coordinate of rectangle's upper-left corner
+	 * @param y  y-coordinate of rectangle's upper-left corner
+	 * @param w  rectangle's width
+	 * @param h  rectangle's height
+	 * @param vx  x-component of rectangle's velocity
+	 * @param vy  y-component of rectangle's velocity
 	 */
 	public MovableRectangle(float x, float y, float w, float h, float vx, float vy) {
 		super(x, y, w, h);
@@ -29,10 +29,10 @@ public class MovableRectangle extends Rectangle2D.Float {
 	
 	/**
 	 * Creates a rectangle with given location and default velocity.
-	 * @param x - x-coordinate of rectangle's upper-left corner
-	 * @param y - y-coordinate of rectangle's upper-left corner
-	 * @param w - rectangle's width
-	 * @param h - rectangle's height
+	 * @param x  x-coordinate of rectangle's upper-left corner
+	 * @param y  y-coordinate of rectangle's upper-left corner
+	 * @param w  rectangle's width
+	 * @param h  rectangle's height
 	 */
 	public MovableRectangle(float x, float y, float w, float h) {
 		this(x, y, w, h, 0, 0);
@@ -40,8 +40,8 @@ public class MovableRectangle extends Rectangle2D.Float {
 
 	/**
 	 * Moves this rectangle to given location.
-	 * @param x - x-coordinate of rectangle's upper-left corner after translation
-	 * @param y - y-coordinate of rectangle's upper-left corner after translation
+	 * @param x  x-coordinate of rectangle's upper-left corner after translation
+	 * @param y  y-coordinate of rectangle's upper-left corner after translation
 	 */
 	public void moveTo(float x, float y) {
 		this.x = x;
@@ -50,8 +50,8 @@ public class MovableRectangle extends Rectangle2D.Float {
 	
 	/**
 	 * Moves this rectangle by given amount.
-	 * @param x - x-component of rectangle's shift
-	 * @param y - y-component of rectangle's shift
+	 * @param x  x-component of rectangle's shift
+	 * @param y  y-component of rectangle's shift
 	 */
 	public void moveBy(float x, float y) {
 		this.x += x;
@@ -68,8 +68,8 @@ public class MovableRectangle extends Rectangle2D.Float {
 	
 	/**
 	 * Assigns this rectangle the given velocity.
-	 * @param vx - new x-component of rectangle's velocity
-	 * @param vy - new y-component of rectangle's velocity
+	 * @param vx  new x-component of rectangle's velocity
+	 * @param vy  new y-component of rectangle's velocity
 	 */
 	public void setVelocity(float vx, float vy) {
 		this.vx = vx;
@@ -94,8 +94,8 @@ public class MovableRectangle extends Rectangle2D.Float {
 	
 	/**
 	 * Changes this rectangle's velocity by given amount.
-	 * @param ax - x-component of rectangle's acceleration
-	 * @param ay - y-component of rectangle's acceleration
+	 * @param ax  x-component of rectangle's acceleration
+	 * @param ay  y-component of rectangle's acceleration
 	 */
 	public void accelerate(float ax, float ay) {
 		vx += ax;
@@ -104,7 +104,7 @@ public class MovableRectangle extends Rectangle2D.Float {
 
 	/**
 	 * Checks for collision between this rectangle and given rectangle.
-	 * @param r - rectangle to check for collision against
+	 * @param r  rectangle to check for collision against
 	 * @return whether rectangles overlap
 	 */
 	public boolean intersects(Rectangle2D.Float r) {
@@ -113,7 +113,7 @@ public class MovableRectangle extends Rectangle2D.Float {
 	
 	/**
 	 * Calculates amount of collision between this rectangle and given rectangle.
-	 * @param r - rectangle to check for collision against
+	 * @param r  rectangle to check for collision against
 	 * @return array storing the amount of collision
 	 */
 	public float[] collidesBy(Rectangle2D.Float r) {

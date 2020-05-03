@@ -12,8 +12,8 @@ public class Leaf extends Item {
 
 	/**
 	 * Creates a leaf item. Has a rectangular hitbox.
-	 * @param x - x-coordinate of leaf's upper-left corner
-	 * @param y - y-coordinate of leaf's upper-left corner
+	 * @param x  x-coordinate of leaf's upper-left corner
+	 * @param y  y-coordinate of leaf's upper-left corner
 	 */
 	public Leaf(float x, float y) {
 		super(x, y, 30, 30);
@@ -21,7 +21,7 @@ public class Leaf extends Item {
 
 	/**
 	 * Draws this leaf.
-	 * @param g - the surface to be drawn on
+	 * @param g  the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
 		g.fill(117, 224, 105);

@@ -11,10 +11,10 @@ public class Camera extends MovableRectangle {
 
 	/**
 	 * Creates a rectangle that represents the area of the map shown to players. 
-	 * @param x - x-coordinate of camera's center
-	 * @param y - y-coordinate of camera's center
-	 * @param w - camera's width
-	 * @param h - camera's height
+	 * @param x  x-coordinate of camera's center
+	 * @param y  y-coordinate of camera's center
+	 * @param w  camera's width
+	 * @param h  camera's height
 	 */
 	public Camera(float x, float y, float w, float h) {
 		super(x - w/2, y - h/2, w, h);
@@ -24,8 +24,8 @@ public class Camera extends MovableRectangle {
 	
 	/**
 	 * Sets location that camera moves towards.
-	 * @param x - x-coordinate of camera's center after sliding
-	 * @param y - y-coordinate of camera's center after sliding
+	 * @param x  x-coordinate of camera's center after sliding
+	 * @param y  y-coordinate of camera's center after sliding
 	 */
 	public void setTargetLocation(float x, float y) {
 		tx = x - width/2;
@@ -34,8 +34,6 @@ public class Camera extends MovableRectangle {
 	
 	/**
 	 * Moves this camera smoothly to target location.
-	 * @param x - x-coordinate of camera's center after sliding
-	 * @param y - y-coordinate of camera's center after sliding
 	 */
 	public void slide() {
 		setVelocity((tx - x) / 20, (ty - y) / 20);

@@ -11,7 +11,7 @@ public class PauseScreen extends Screen {
 	
 	/**
 	 * Creates a screen with a continue button.
-	 * @param surface - drawing surface onto which this screen is drawn
+	 * @param surface  drawing surface onto which this screen is drawn
 	 */
 	public PauseScreen(DrawingSurface surface) {
 		super(surface);
@@ -20,7 +20,6 @@ public class PauseScreen extends Screen {
 
 	/**
 	 * Draws this pause screen.
-	 * @param g - the surface to be drawn on
 	 */
 	public void draw() {
 		

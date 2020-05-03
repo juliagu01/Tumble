@@ -15,9 +15,9 @@ public class Button extends Ellipse2D.Float {
 	
 	/**
 	 * Creates a solid circle that represents a button.
-	 * @param x - x-coordinate of button's center
-	 * @param y - y-coordinate of button's center
-	 * @param w - button's width
+	 * @param x  x-coordinate of button's center
+	 * @param y  y-coordinate of button's center
+	 * @param w  button's width
 	 */
 	public Button(float x, float y, float w) {
 		super(x - w/2, y - w/2, w, w);
@@ -26,10 +26,10 @@ public class Button extends Ellipse2D.Float {
 	
 	/**
 	 * Creates a solid circle that represents a button. Button can lead to other screens.
-	 * @param x - x-coordinate of button's center
-	 * @param y - y-coordinate of button's center
-	 * @param w - button's width
-	 * @param screen - screen that button leads to
+	 * @param x  x-coordinate of button's center
+	 * @param y  y-coordinate of button's center
+	 * @param w  button's width
+	 * @param toScreen  screen that button leads to
 	 */
 	public Button(float x, float y, float w, int toScreen) {
 		super(x - w/2, y - w/2, w, w);
@@ -37,9 +37,9 @@ public class Button extends Ellipse2D.Float {
 	}
 	
 	/**
-	 * Determines if mouse's intersects with this button.
-	 * @param mouseX - mouse's x-coordinate
-	 * @param mouseY - mouse's y-coordinate
+	 * Determines if mouse intersects with this button.
+	 * @param mouseX  mouse's x-coordinate
+	 * @param mouseY  mouse's y-coordinate
 	 * @return whether this button is pressed
 	 */
 	public boolean isPressed(float mouseX, float mouseY) {
@@ -48,7 +48,7 @@ public class Button extends Ellipse2D.Float {
 	
 	/**
 	 * Draws this button. 
-	 * @param g - surface to be drawn on
+	 * @param g  surface to be drawn on
 	 */
 	public void draw(PApplet g) {
 		g.ellipse(x + width/2, y + width/2, width, width);

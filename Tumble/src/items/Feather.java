@@ -12,8 +12,8 @@ public class Feather extends Item {
 	
 	/**
 	 * Creates a feather item. Has a rectangular hitbox.
-	 * @param x - x-coordinate of feather's upper-left corner
-	 * @param y - y-coordinate of feather's upper-left corner
+	 * @param x  x-coordinate of feather's upper-left corner
+	 * @param y  y-coordinate of feather's upper-left corner
 	 */
 	public Feather(float x, float y) {
 		super(x, y, 30, 30);
@@ -21,7 +21,7 @@ public class Feather extends Item {
 
 	/**
 	 * Draws this feather.
-	 * @param g - the surface to be drawn on
+	 * @param g  the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
 		g.fill(76, 195, 250);

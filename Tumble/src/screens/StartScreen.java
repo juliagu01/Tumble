@@ -11,6 +11,7 @@ public class StartScreen extends Screen {
 	
 	/**
 	 * Creates a screen with the game's title and a play button.
+	 * @param surface  drawing surface onto which this screen is drawn
 	 */
 	public StartScreen(DrawingSurface surface) {
 		super(surface);
@@ -19,7 +20,6 @@ public class StartScreen extends Screen {
 
 	/**
 	 * Draws this start screen.
-	 * @param g - the surface to be drawn on
 	 */
 	public void draw() {
 		

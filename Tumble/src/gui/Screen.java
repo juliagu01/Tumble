@@ -20,7 +20,7 @@ public abstract class Screen {
 	
 	/**
 	 * Creates a general screen.
-	 * @param surface - drawing surface onto which this screen is drawn
+	 * @param surface  drawing surface onto which this screen is drawn
 	 */
 	public Screen(DrawingSurface surface) {
 		buttons = new ArrayList<Button>();
@@ -29,7 +29,7 @@ public abstract class Screen {
 
 	/**
 	 * Adds a button to this screen.
-	 * @param b - button to be added
+	 * @param b  button to be added
 	 */
 	public void addButton(Button b) {
 		buttons.add(b);
@@ -44,8 +44,7 @@ public abstract class Screen {
 	}
 	
 	/**
-	 * Responds to mouse release. 
-	 * @post Will change screen accordingly.
+	 * Responds to mouse release. Will change screen accordingly.
 	 */
 	public void mouseReleased() {
 		for (Button b : buttons)
@@ -55,7 +54,7 @@ public abstract class Screen {
 	
 	/**
 	 * Updates this screen.
-	 * @param keys - keys that are currently pressed
+	 * @param keys  keys that are currently pressed
 	 */
 	public void update(ArrayList<Integer> keys) {}
 	

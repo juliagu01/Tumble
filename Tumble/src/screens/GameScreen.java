@@ -15,7 +15,7 @@ public class GameScreen extends Screen {
 	
 	/**
 	 * Creates a screen with a game. Has a pause button.
-	 * @param surface - drawing surface onto which this screen is drawn
+	 * @param surface  drawing surface onto which this screen is drawn
 	 */
 	public GameScreen(DrawingSurface surface) {
 		super(surface);
@@ -48,7 +48,7 @@ public class GameScreen extends Screen {
 	
 	/**
 	 * Updates this game screen.
-	 * @param keys - keys that are currently pressed
+	 * @param keys  keys that are currently pressed
 	 */
 	public void update(ArrayList<Integer> keys) {
 		game.update(keys);

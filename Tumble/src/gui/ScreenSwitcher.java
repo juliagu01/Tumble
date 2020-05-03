@@ -15,7 +15,7 @@ public interface ScreenSwitcher {
 	
 	/**
 	 * Changes active screen to given screen. 
-	 * @param s - screen to be switched to
+	 * @param s  screen to be switched to
 	 */
 	public void switchScreen(int s);
 	

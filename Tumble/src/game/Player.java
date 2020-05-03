@@ -20,8 +20,8 @@ public class Player extends MovableRectangle {
 
 	/**
 	 * Creates an ellipse that represents a player. Player has a rectangular hit-box.
-	 * @param x - x-coordinate of player's upper-left corner
-	 * @param y - y-coordinate of player's upper-left corner
+	 * @param x  x-coordinate of player's upper-left corner
+	 * @param y  y-coordinate of player's upper-left corner
 	 */
 	public Player(float x, float y) {
 		super(x, y, WIDTH, HEIGHT);
@@ -55,7 +55,7 @@ public class Player extends MovableRectangle {
 	}
 
 	/**
-	 * Accelerates this player vertically.
+	 * Accelerates this player upwards.
 	 */
 	public void jump() {
 		if (canJump) {
@@ -72,7 +72,8 @@ public class Player extends MovableRectangle {
 
 	/**
 	 * Updates this player's location according to its velocity.
-	 * @param platforms - list containing rectangles to check for collision against
+	 * @param platforms  list containing rectangles to check for collision against
+	 * @param items  list containing items to check for collision against
 	 */
 	public void update(ArrayList<Platform> platforms, ArrayList<Item> items) {
 		
@@ -111,7 +112,7 @@ public class Player extends MovableRectangle {
 	
 	/**
 	 * Draws this player.
-	 * @param g - the surface to be drawn on
+	 * @param g  the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
 		g.fill(253, 235, 0);

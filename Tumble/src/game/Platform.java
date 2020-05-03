@@ -12,10 +12,10 @@ public class Platform extends Rectangle2D.Float {
 	
 	/**
 	 * Creates a rectangle that represents a platform. 
-	 * @param x - x-coordinate of platform's upper-left corner
-	 * @param y - y-coordinate of platform's upper-left corner
-	 * @param w - platform's width
-	 * @param h - platform's height
+	 * @param x  x-coordinate of platform's upper-left corner
+	 * @param y  y-coordinate of platform's upper-left corner
+	 * @param w  platform's width
+	 * @param h  platform's height
 	 */
 	public Platform(float x, float y, float w, float h) {
 		super(x, y, w, h);
@@ -23,7 +23,7 @@ public class Platform extends Rectangle2D.Float {
 	
 	/**
 	 * Draws this platform.
-	 * @param g - the surface to be drawn on
+	 * @param g  the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
 		g.fill(140);

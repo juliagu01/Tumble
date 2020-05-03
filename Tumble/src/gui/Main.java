@@ -5,8 +5,16 @@ import javax.swing.JFrame;
 import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 
+/**
+ * Creates a window containing an instance of a Tumble game.
+ * @author John Shelby
+ */
 public class Main {
 
+	/**
+	 * Creates a window containing an instance of the game.
+	 * @param args  command-line arguments
+	 */
 	public static void main(String args[]) {
 
 		DrawingSurface drawing = new DrawingSurface();

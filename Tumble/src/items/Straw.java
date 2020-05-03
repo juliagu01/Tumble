@@ -12,8 +12,8 @@ public class Straw extends Item {
 	
 	/**
 	 * Creates a straw item. Has a rectangular hitbox.
-	 * @param x - x-coordinate of straw's upper-left corner
-	 * @param y - y-coordinate of straw's upper-left corner
+	 * @param x  x-coordinate of straw's upper-left corner
+	 * @param y  y-coordinate of straw's upper-left corner
 	 */
 	public Straw(float x, float y) {
 		super(x, y, 40, 5);
@@ -21,7 +21,7 @@ public class Straw extends Item {
 
 	/**
 	 * Draws this straw.
-	 * @param g - the surface to be drawn on
+	 * @param g  the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
 		g.fill(255, 90, 110);

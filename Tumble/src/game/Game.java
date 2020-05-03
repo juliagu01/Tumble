@@ -19,7 +19,7 @@ public class Game {
 	private Camera camera;
 
 	/**
-	 * Creates a game with a player and platforms. 
+	 * Creates a game with a player, platforms, and items. 
 	 */
 	public Game() {
 		
@@ -45,7 +45,7 @@ public class Game {
 	
 	/**
 	 * Updates the player's velocity.
-	 * @param keys - the current keys being pressed
+	 * @param keys  the current keys being pressed
 	 */
 	public void update(ArrayList<Integer> keys) {
 		
@@ -68,7 +68,7 @@ public class Game {
 
 	/**
 	 * Draws this game.
-	 * @param g - the surface to be drawn on
+	 * @param g  the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
 		

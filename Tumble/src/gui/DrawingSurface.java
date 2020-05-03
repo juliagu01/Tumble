@@ -54,7 +54,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	
 	/**
 	 * Returns the actual x-coordinate that corresponds to the transformed x-coordinate.
-	 * @param assumed - x-coordinate in transformed coordinates
+	 * @param assumedX  x-coordinate in transformed coordinates
 	 * @return the x-coordinate in actual coordinates
 	 */
 	public float getActualCoordinateX(float assumedX) {
@@ -63,7 +63,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	
 	/**
 	 * Returns the actual y-coordinate that corresponds to the transformed y-coordinate.
-	 * @param assumed - y-coordinate in transformed coordinates
+	 * @param assumedY  y-coordinate in transformed coordinates
 	 * @return the y-coordinate in actual coordinates
 	 */
 	public float getActualCoordinateY(float assumedY) {
@@ -72,7 +72,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	
 	/**
 	 * Returns the transformed x-coordinate that corresponds to the actual x-coordinate.
-	 * @param assumed - x-coordinate in actual coordinates
+	 * @param actualX  x-coordinate in actual coordinates
 	 * @return the x-coordinate in transformed coordinates
 	 */
 	public float getTransformedCoordinateX(float actualX) {
@@ -81,7 +81,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	
 	/**
 	 * Returns the actual y-coordinate that corresponds to the transformed y-coordinate.
-	 * @param assumed - y-coordinate in transformed coordinates
+	 * @param actualY  y-coordinate in transformed coordinates
 	 * @return the y-coordinate in actual coordinates
 	 */
 	public float getTransformedCoordinateY(float actualY) {
@@ -90,7 +90,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 
 	/**
 	 * Switches the screen that this drawing surface displays.
-	 * @param newScreen - screen to be switched to
+	 * @param screen  screen to be switched to
 	 */
 	public void switchScreen(int screen) {
 		activeScreen = screens[screen];
