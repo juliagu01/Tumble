@@ -1,6 +1,6 @@
-package screens;
+package tumble.screens;
 
-import gui.*;
+import tumble.gui.*;
 
 /**
  * Represents the game's start screen. Has a play button.

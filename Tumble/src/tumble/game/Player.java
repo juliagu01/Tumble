@@ -1,8 +1,8 @@
-package game;
+package tumble.game;
 
 import java.util.ArrayList;
 import processing.core.PApplet;
-import items.*;
+import tumble.items.*;
 
 /**
  * Represents a movable ellipse with basic physics and rectangular collision detection.

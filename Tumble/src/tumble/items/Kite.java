@@ -1,7 +1,7 @@
-package items;
+package tumble.items;
 
 import processing.core.PApplet;
-import game.Item;
+import tumble.game.Item;
 
 /**
  * Represents a collectible kite item with a rectangular hitbox.

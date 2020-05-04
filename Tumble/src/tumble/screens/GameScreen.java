@@ -1,8 +1,7 @@
-package screens;
+package tumble.screens;
 
-import java.util.ArrayList;
-import game.Game;
-import gui.*;
+import tumble.game.Game;
+import tumble.gui.*;
 
 /**
  * Represents the game's main screen.
@@ -50,7 +49,7 @@ public class GameScreen extends Screen {
 	 * Updates this game screen.
 	 * @param keys  keys that are currently pressed
 	 */
-	public void update(ArrayList<Integer> keys) {
+	public void update(boolean[] keys) {
 		game.update(keys);
 	}
 

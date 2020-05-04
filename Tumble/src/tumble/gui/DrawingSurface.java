@@ -1,8 +1,8 @@
-package gui;
+package tumble.gui;
 
-import java.util.ArrayList;
+import java.awt.event.KeyEvent;
 import processing.core.PApplet;
-import screens.*;
+import tumble.screens.*;
 
 /**
  * Represents a canvas onto which a game is drawn. 
@@ -12,9 +12,14 @@ import screens.*;
  */
 public class DrawingSurface extends PApplet implements ScreenSwitcher {
 
+	/**
+	 * Key constants.
+	 */
+	public static final int UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3;
+	
 	private Screen[] screens;
 	private Screen activeScreen;
-	private ArrayList<Integer> keys;
+	private boolean[] keys;
 	
 	/**
 	 * Creates a canvas that displays a game. 
@@ -22,7 +27,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	public DrawingSurface() {
 		
 		super();
-		keys = new ArrayList<Integer>();
+		keys = new boolean[4];
 		
 		screens = new Screen[] {new StartScreen(this), new GameScreen(this), new PauseScreen(this)};
 		activeScreen = screens[0];
@@ -100,15 +105,40 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	 * Stores this key press.
 	 */
 	public void keyPressed() {
-		keys.add(keyCode);
+		switch (keyCode) {
+			case KeyEvent.VK_UP:
+				keys[UP] = true;
+				break;
+			case KeyEvent.VK_DOWN:
+				keys[DOWN] = true;
+				break;
+			case KeyEvent.VK_LEFT:
+				keys[LEFT] = true;
+				break;
+			case KeyEvent.VK_RIGHT:
+				keys[RIGHT] = true;
+				break;
+		}
 	}
 
 	/**
 	 * Stores this key release.
 	 */
 	public void keyReleased() {
-		while (keys.contains(keyCode))
-			keys.remove((Integer)keyCode);
+		switch (keyCode) {
+		case KeyEvent.VK_UP:
+			keys[UP] = false;
+			break;
+		case KeyEvent.VK_DOWN:
+			keys[DOWN] = false;
+			break;
+		case KeyEvent.VK_LEFT:
+			keys[LEFT] = false;
+			break;
+		case KeyEvent.VK_RIGHT:
+			keys[RIGHT] = false;
+			break;
+	}
 	}
 	
 	/**

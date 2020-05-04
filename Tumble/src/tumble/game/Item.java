@@ -1,4 +1,4 @@
-package game;
+package tumble.game;
 
 import processing.core.PApplet;
 

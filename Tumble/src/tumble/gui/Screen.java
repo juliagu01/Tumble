@@ -1,4 +1,4 @@
-package gui;
+package tumble.gui;
 
 import java.util.ArrayList;
 
@@ -56,7 +56,7 @@ public abstract class Screen {
 	 * Updates this screen.
 	 * @param keys  keys that are currently pressed
 	 */
-	public void update(ArrayList<Integer> keys) {}
+	public void update(boolean[] keys) {}
 	
 	/**
 	 * Draws this screen.

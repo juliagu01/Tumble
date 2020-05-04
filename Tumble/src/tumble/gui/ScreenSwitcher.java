@@ -1,4 +1,4 @@
-package gui;
+package tumble.gui;
 
 /**
  * Represents the mechanism for switching screens.

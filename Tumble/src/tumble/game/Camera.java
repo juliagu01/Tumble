@@ -1,4 +1,4 @@
-package game;
+package tumble.game;
 
 /**
  * Represents the area of the map shown to players at a given moment.

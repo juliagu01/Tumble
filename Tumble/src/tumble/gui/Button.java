@@ -1,4 +1,4 @@
-package gui;
+package tumble.gui;
 
 import java.awt.geom.Ellipse2D;
 

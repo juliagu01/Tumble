@@ -1,9 +1,9 @@
-package game;
+package tumble.game;
 
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import processing.core.PApplet;
-import items.*;
+import tumble.gui.DrawingSurface;
+import tumble.items.*;
 
 /**
  * Represents a Tumble game.
@@ -45,13 +45,13 @@ public class Game {
 	 * Updates the player's velocity.
 	 * @param keys  the current keys being pressed
 	 */
-	public void update(ArrayList<Integer> keys) {
+	public void update(boolean[] keys) {
 		
-		if (keys.contains(KeyEvent.VK_LEFT))
+		if (keys[DrawingSurface.LEFT])
 			player.rollLeft();
-		if (keys.contains(KeyEvent.VK_RIGHT))
+		if (keys[DrawingSurface.RIGHT])
 			player.rollRight();
-		if (keys.contains(KeyEvent.VK_UP))
+		if (keys[DrawingSurface.UP])
 			player.jump();
 
 		player.update(platforms, items);
