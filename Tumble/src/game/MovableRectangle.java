@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
 /**
@@ -9,7 +10,7 @@ import java.awt.geom.Rectangle2D;
  */
 public class MovableRectangle extends Rectangle2D.Float {
 	
-	public static final float EPSILON = 1e-9f;
+	public static final float EPSILON = 1e-3f;
 	private float vx, vy;
 	
 	/**
@@ -101,15 +102,6 @@ public class MovableRectangle extends Rectangle2D.Float {
 		vx += ax;
 		vy += ay;
 	}
-
-	/**
-	 * Checks for collision between this rectangle and given rectangle.
-	 * @param r  rectangle to check for collision against
-	 * @return whether rectangles overlap
-	 */
-	public boolean intersects(Rectangle2D.Float r) {
-		return x + width > r.x && x < r.x + r.width && y + height > r.y && y < r.y + r.height;
-	}
 	
 	/**
 	 * Calculates amount of collision between this rectangle and given rectangle.
@@ -120,18 +112,44 @@ public class MovableRectangle extends Rectangle2D.Float {
 		
 		float[] amount = new float[] {0, 0};
 		
-		if (intersects(r)) {
-			if (y + height - vy <= r.y)
+		if (intersects(r) || collidesWith(r)) {
+			if (y + height - vy <= r.y + EPSILON)
 				amount[1] = y + height - r.y;
-			else if (y - vy >= r.y + r.height)
+			else if (y - vy >= r.y + r.height - EPSILON)
 				amount[1] = y - r.y - r.height;
-			else if (x + width - vx <= r.x)
+			else if (x + width - vx <= r.x + EPSILON)
 				amount[0] = x + width - r.x;
-			else if (x - vx >= r.x + r.width)
+			else if (x - vx >= r.x + r.width - EPSILON)
 				amount[0] = x - r.x - r.width;
 		}
 		
 		return amount;
+		
+	}
+
+	/**
+	 * Checks for overlap between this rectangle and given rectangle.
+	 * @param r  rectangle to check for overlap against
+	 * @return whether rectangles overlap
+	 */
+	public boolean intersects(Rectangle2D.Float r) {
+		return x + width > r.x && x < r.x + r.width && y + height > r.y && y < r.y + r.height;
+	}
+	
+	/**
+	 * Checks for collision between this rectangle and given rectangle.
+	 * @param r  rectangle to check for collision against
+	 * @return whether rectangles collide
+	 */
+	public boolean collidesWith(Rectangle2D.Float r) {
+		
+		Line2D.Float topLeft = new Line2D.Float(x - vx, y - vy, x, y);
+		Line2D.Float topRight = new Line2D.Float(x + width - vx, y - vy, x + width, y);
+		Line2D.Float bottomLeft = new Line2D.Float(x - vx, y + height - vy, x, y + height);
+		Line2D.Float bottomRight = new Line2D.Float(x + width - vx, y + height - vy, x + width, y + height);
+		Rectangle2D.Float hitBox = new Rectangle2D.Float(r.x + EPSILON, r.y + EPSILON, r.width - 2*EPSILON, r.height - 2*EPSILON);
+		
+		return topLeft.intersects(hitBox) || topRight.intersects(hitBox) || bottomLeft.intersects(hitBox) || bottomRight.intersects(hitBox);
 		
 	}
 	

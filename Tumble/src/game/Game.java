@@ -26,18 +26,16 @@ public class Game {
 		createPlayer();
 		
 		platforms = new ArrayList<Platform>();
-		platforms.add(new Platform(300, 250, 200, 50));  // top center
-		platforms.add(new Platform(375, 300, 50, 100));  // middle
-		platforms.add(new Platform(200, 400, 400, 50));  // bottom
-		platforms.add(new Platform(0,   250, 100, 50));  // top left
-		platforms.add(new Platform(700, 250, 100, 50));  // top right
+		platforms.add(new Platform(-200, 150, 400, 40));  // top
+		platforms.add(new Platform( 500, 275, 100, 40));   // middle
+		platforms.add(new Platform(-200, 400, 1500, 40));  // bottom
 		
 		items = new ArrayList<Item>();
 		items.add(new Leaf(200, 350));
 		items.add(new Feather(300, 350));
-		items.add(new Stick(450, 350));
-		items.add(new Straw(500, 370));
-		items.add(new Kite(600, 350));
+		items.add(new Stick(0, 100));
+		items.add(new Straw(50, 100));
+		items.add(new Kite(125, 100));
 		
 		camera = new Camera(800f/2, 600f/2, 800f, 600f);
 		
