@@ -51,8 +51,10 @@ public class Game {
 			player.rollLeft();
 		if (keys[DrawingSurface.RIGHT])
 			player.rollRight();
-		if (keys[DrawingSurface.UP])
+		if (keys[DrawingSurface.UP]) {
+			player.glide();
 			player.jump();
+		}
 
 		player.update(platforms, items);
 

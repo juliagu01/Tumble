@@ -1,5 +1,6 @@
 package tumble.game;
 
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import processing.core.PApplet;
 import tumble.items.*;
@@ -17,6 +18,8 @@ public class Player extends MovableRectangle {
 	public static final int WIDTH = 40, HEIGHT = 40;
 	private ArrayList<Item> items;
 	private boolean canJump;
+	private boolean powerUp;
+	private boolean canGlide;
 
 	/**
 	 * Creates an ellipse that represents a player. Player has a rectangular hit-box.
@@ -36,6 +39,14 @@ public class Player extends MovableRectangle {
 			if (i instanceof Leaf) {
 				accelerate(-1.2f, 0);
 				return;
+			} else if(i instanceof Kite) {
+				canGlide = true;
+			} else if(i instanceof Stick) {
+
+			} else if(i instanceof Straw) {
+				
+			} else {
+				
 			}
 		}
 		accelerate(-1, 0);
@@ -49,6 +60,14 @@ public class Player extends MovableRectangle {
 			if (i instanceof Leaf) {
 				accelerate(1.2f, 0);
 				return;
+			} else if(i instanceof Kite) {
+				canGlide = true;
+			} else if(i instanceof Stick) {
+
+			} else if(i instanceof Straw) {
+				
+			} else {
+				
 			}
 		}
 		accelerate(1, 0);
@@ -69,6 +88,25 @@ public class Player extends MovableRectangle {
 			accelerate(0, -16);
 		}
 	}
+	
+	/**
+	 * Player glides
+	 */
+	public void glide() {
+		
+		if(canGlide) {	
+				
+			for (Item i : items) {
+				if (i instanceof Feather) {
+					accelerate(0, -18);
+					return;
+				}
+			}
+			
+			moveBy(0, -18);
+			setVelocity(getVelocityX(), 0);
+		}
+	}
 
 	/**
 	 * Updates this player's location according to its velocity.
@@ -76,7 +114,7 @@ public class Player extends MovableRectangle {
 	 * @param items  list containing items to check for collision against
 	 */
 	public void update(ArrayList<Platform> platforms, ArrayList<Item> items) {
-		
+
 		canJump = false;
 		accelerate(-getVelocityX()/8, 0.8f);
 		
@@ -95,10 +133,15 @@ public class Player extends MovableRectangle {
 			}
 		}
 		
-		if (items != null)
-			for (Item i : items)
-				if (this.intersects(i))
+		if (items != null) {
+			for (Item i : items) {
+				if (this.intersects(i)) {
 					this.items.add(i);
+					powerUp = true;
+				}	
+			}
+			powerUp = false;
+		}
 		
 	}
 	
@@ -116,7 +159,11 @@ public class Player extends MovableRectangle {
 	 */
 	public void draw(PApplet g) {
 		g.fill(253, 235, 0);
-		g.ellipse(x + width/2, y + height/2, width, height);
+		if(powerUp) {
+			// power up animation
+		} else {
+			g.ellipse(x + width/2, y + height/2, width, height);
+		}
 	}
 
 }
