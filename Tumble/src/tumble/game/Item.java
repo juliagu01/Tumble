@@ -25,5 +25,10 @@ public abstract class Item extends MovableRectangle {
 	 * @param g  the surface to be drawn on 
 	 */
 	public abstract void draw(PApplet g);
+
+	/**
+	 * Gives a pop up message after the item is collected 
+	 */
+	public abstract void displayMessage();
 	
 }
