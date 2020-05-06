@@ -3,19 +3,21 @@ package tumble.game;
 import java.util.ArrayList;
 import processing.core.PApplet;
 import tumble.gui.DrawingSurface;
+import tumble.gui.Message;
 import tumble.items.*;
 
 /**
  * Represents a Tumble game.
  * Credit to Mr. Shelby for basic class structure. 
  * @author Julia Gu
- * @version Apr. 27, 2020
+ * @version May 5, 2020
  */
 public class Game {
 	
 	private Player player;
 	private ArrayList<Platform> platforms;
 	private ArrayList<Item> items;
+	private Message message;
 	private Camera camera;
 
 	/**
@@ -31,11 +33,11 @@ public class Game {
 		platforms.add(new Platform(-200, 400, 1500, 40));  // bottom
 		
 		items = new ArrayList<Item>();
-		items.add(new Leaf(200, 350));
-		items.add(new Feather(300, 350));
-		items.add(new Stick(0, 100));
-		items.add(new Straw(50, 100));
-		items.add(new Kite(125, 100));
+		items.add(new Leaf(300, 350));
+		items.add(new Feather(200, 350));
+		items.add(new Stick(125, 100));
+		items.add(new Straw(0, 100));
+		items.add(new Kite(-100, 100));
 		
 		camera = new Camera(800f/2, 600f/2, 800f, 600f);
 		
@@ -47,13 +49,19 @@ public class Game {
 	 */
 	public void update(boolean[] keys) {
 		
-		if (keys[DrawingSurface.LEFT])
-			player.rollLeft();
-		if (keys[DrawingSurface.RIGHT])
-			player.rollRight();
-		if (keys[DrawingSurface.UP]) {
-			player.glide();
-			player.jump();
+		if (message == null) {
+			if (keys[DrawingSurface.LEFT])
+				player.rollLeft();
+			if (keys[DrawingSurface.RIGHT])
+				player.rollRight();
+			if (keys[DrawingSurface.UP]) {
+				player.jump();
+				player.glide();
+			}
+		} else if (keys[DrawingSurface.RIGHT]) {
+			message = null;
+			for (int i = 0; i < keys.length; i++)
+				keys[i] = false;
 		}
 
 		player.update(platforms, items);
@@ -64,6 +72,22 @@ public class Game {
 		camera.setTargetLocation(player.x + Player.WIDTH/2, player.y + Player.WIDTH/2);
 		camera.slide();
 		
+	}
+	
+	/**
+	 * Switches this game's message. 
+	 * @param message  message to be switched to
+	 */
+	public void setMessage(Message message) {
+		this.message = message;
+	}
+	
+	/**
+	 * Returns this game's current message. 
+	 * @return this game's message
+	 */
+	public Message getMessage() {
+		return message;
 	}
 
 	/**
@@ -92,7 +116,7 @@ public class Game {
 	}
 
 	private void createPlayer() {
-		player = new Player(400 - Player.WIDTH/2, 150 - Player.WIDTH/2);
+		player = new Player(this, 400 - Player.WIDTH/2, 150 - Player.WIDTH/2);
 	}
 
 }

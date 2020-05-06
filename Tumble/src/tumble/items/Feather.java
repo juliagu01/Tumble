@@ -2,11 +2,12 @@ package tumble.items;
 
 import processing.core.PApplet;
 import tumble.game.Item;
+import tumble.gui.Message;
 
 /**
  * Represents a collectible feather item with a rectangular hitbox.
  * @author Julia Gu
- * @version Apr. 28, 2020
+ * @version May 5, 2020
  */
 public class Feather extends Item {
 	
@@ -17,6 +18,8 @@ public class Feather extends Item {
 	 */
 	public Feather(float x, float y) {
 		super(x, y, 30, 30);
+		setMessage(new Message("You notice a feather lying on the ground. It looks lonely. You add it to your pocket. "
+				+ "You have gained the ability to reach greater heights.", -16744003));
 	}
 
 	/**

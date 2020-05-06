@@ -5,7 +5,7 @@ import tumble.gui.*;
 /**
  * Represents the game's pause screen. Has a continue button.
  * @author Julia Gu
- * @version Apr. 28, 2020
+ * @version May 5, 2020
  */
 public class PauseScreen extends Screen {
 	
@@ -42,7 +42,7 @@ public class PauseScreen extends Screen {
 		g.textSize(72);
 		String text = "PAUSED";
 		float textW = g.textWidth(text);
-		g.text("PAUSED", 400 - textW/2, 270);
+		g.text(text, 400 - textW/2, 270);
 		
 		// play button
 		g.fill(190);

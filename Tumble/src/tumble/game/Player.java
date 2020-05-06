@@ -1,6 +1,5 @@
 package tumble.game;
 
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import processing.core.PApplet;
 import tumble.items.*;
@@ -8,7 +7,7 @@ import tumble.items.*;
 /**
  * Represents a movable ellipse with basic physics and rectangular collision detection.
  * @author Amanda Xu, Andra Liu, Julia Gu
- * @version Apr. 27, 2020
+ * @version May 5, 2020
  */
 public class Player extends MovableRectangle {
 
@@ -18,16 +17,18 @@ public class Player extends MovableRectangle {
 	public static final int WIDTH = 40, HEIGHT = 40;
 	private ArrayList<Item> items;
 	private boolean canJump;
-	private boolean powerUp;
 	private boolean canGlide;
+	private boolean powerUp;
+	private Game game;
 
 	/**
 	 * Creates an ellipse that represents a player. Player has a rectangular hit-box.
 	 * @param x  x-coordinate of player's upper-left corner
 	 * @param y  y-coordinate of player's upper-left corner
 	 */
-	public Player(float x, float y) {
+	public Player(Game game, float x, float y) {
 		super(x, y, WIDTH, HEIGHT);
+		this.game = game;
 		items = new ArrayList<Item>();
 	}
 
@@ -39,11 +40,11 @@ public class Player extends MovableRectangle {
 			if (i instanceof Leaf) {
 				accelerate(-1.2f, 0);
 				return;
-			} else if(i instanceof Kite) {
+			} else if (i instanceof Kite) {
 				canGlide = true;
-			} else if(i instanceof Stick) {
+			} else if (i instanceof Stick) {
 
-			} else if(i instanceof Straw) {
+			} else if (i instanceof Straw) {
 				
 			} else {
 				
@@ -60,11 +61,11 @@ public class Player extends MovableRectangle {
 			if (i instanceof Leaf) {
 				accelerate(1.2f, 0);
 				return;
-			} else if(i instanceof Kite) {
+			} else if (i instanceof Kite) {
 				canGlide = true;
-			} else if(i instanceof Stick) {
+			} else if (i instanceof Stick) {
 
-			} else if(i instanceof Straw) {
+			} else if (i instanceof Straw) {
 				
 			} else {
 				
@@ -90,11 +91,11 @@ public class Player extends MovableRectangle {
 	}
 	
 	/**
-	 * Player glides
+	 * Player glides.
 	 */
 	public void glide() {
 		
-		if(canGlide) {	
+		if (canGlide) {	
 				
 			for (Item i : items) {
 				if (i instanceof Feather) {
@@ -134,13 +135,14 @@ public class Player extends MovableRectangle {
 		}
 		
 		if (items != null) {
-			for (Item i : items) {
-				if (this.intersects(i)) {
-					this.items.add(i);
-					powerUp = true;
-				}	
-			}
 			powerUp = false;
+			for (Item i : items) {
+				if (this.intersects(i) && !this.items.contains(i)) {
+					this.items.add(i);
+					game.setMessage(i.getMessage());
+					powerUp = true;
+				}
+			}
 		}
 		
 	}
@@ -159,7 +161,7 @@ public class Player extends MovableRectangle {
 	 */
 	public void draw(PApplet g) {
 		g.fill(253, 235, 0);
-		if(powerUp) {
+		if (powerUp) {
 			// power up animation
 		} else {
 			g.ellipse(x + width/2, y + height/2, width, height);

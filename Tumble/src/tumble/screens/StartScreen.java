@@ -5,7 +5,7 @@ import tumble.gui.*;
 /**
  * Represents the game's start screen. Has a play button.
  * @author Amanda Xu, Julia Gu
- * @version Apr. 28, 2020
+ * @version May 5, 2020
  */
 public class StartScreen extends Screen {
 	
@@ -42,7 +42,7 @@ public class StartScreen extends Screen {
 		g.textSize(90);
 		String title = "TUMBLE";
 		float titleW = g.textWidth(title);
-		g.text("TUMBLE", 400 - titleW/2, 250);
+		g.text(title, 400 - titleW/2, 250);
 		
 		// subtitle
 		g.textSize(24);

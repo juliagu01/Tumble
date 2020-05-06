@@ -8,7 +8,7 @@ import tumble.screens.*;
  * Represents a canvas onto which a game is drawn. 
  * Credit to Mr. Shelby for basic class structure. 
  * @author Amanda Xu, Julia Gu
- * @version Apr. 28, 2020
+ * @version May 5, 2020
  */
 public class DrawingSurface extends PApplet implements ScreenSwitcher {
 
@@ -57,23 +57,23 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		activeScreen.draw();
 	}
 	
-	/**
-	 * Returns the actual x-coordinate that corresponds to the transformed x-coordinate.
-	 * @param assumedX  x-coordinate in transformed coordinates
-	 * @return the x-coordinate in actual coordinates
-	 */
-	public float getActualCoordinateX(float assumedX) {
-		return assumedX * width/Screen.WIDTH;
-	}
-	
-	/**
-	 * Returns the actual y-coordinate that corresponds to the transformed y-coordinate.
-	 * @param assumedY  y-coordinate in transformed coordinates
-	 * @return the y-coordinate in actual coordinates
-	 */
-	public float getActualCoordinateY(float assumedY) {
-		return assumedY * height/Screen.HEIGHT;
-	}
+//	/**
+//	 * Returns the actual x-coordinate that corresponds to the transformed x-coordinate.
+//	 * @param assumedX  x-coordinate in transformed coordinates
+//	 * @return the x-coordinate in actual coordinates
+//	 */
+//	public float getActualCoordinateX(float assumedX) {
+//		return assumedX * width/Screen.WIDTH;
+//	}
+//	
+//	/**
+//	 * Returns the actual y-coordinate that corresponds to the transformed y-coordinate.
+//	 * @param assumedY  y-coordinate in transformed coordinates
+//	 * @return the y-coordinate in actual coordinates
+//	 */
+//	public float getActualCoordinateY(float assumedY) {
+//		return assumedY * height/Screen.HEIGHT;
+//	}
 	
 	/**
 	 * Returns the transformed x-coordinate that corresponds to the actual x-coordinate.
@@ -126,19 +126,19 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	 */
 	public void keyReleased() {
 		switch (keyCode) {
-		case KeyEvent.VK_UP:
-			keys[UP] = false;
-			break;
-		case KeyEvent.VK_DOWN:
-			keys[DOWN] = false;
-			break;
-		case KeyEvent.VK_LEFT:
-			keys[LEFT] = false;
-			break;
-		case KeyEvent.VK_RIGHT:
-			keys[RIGHT] = false;
-			break;
-	}
+			case KeyEvent.VK_UP:
+				keys[UP] = false;
+				break;
+			case KeyEvent.VK_DOWN:
+				keys[DOWN] = false;
+				break;
+			case KeyEvent.VK_LEFT:
+				keys[LEFT] = false;
+				break;
+			case KeyEvent.VK_RIGHT:
+				keys[RIGHT] = false;
+				break;
+		}
 	}
 	
 	/**

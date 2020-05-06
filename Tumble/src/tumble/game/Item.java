@@ -1,13 +1,16 @@
 package tumble.game;
 
 import processing.core.PApplet;
+import tumble.gui.Message;
 
 /**
  * Represents a collectible item with a rectangular hitbox.
  * @author Julia Gu
- * @version Apr. 28, 2020
+ * @version May 5, 2020
  */
 public abstract class Item extends MovableRectangle {
+	
+	private Message message;
 	
 	/**
 	 * Creates an item. Has a rectangular hitbox.
@@ -21,14 +24,25 @@ public abstract class Item extends MovableRectangle {
 	}
 
 	/**
+	 * Defines the message displayed after this item is collected. 
+	 * @param message  message to be displayed
+	 */
+	protected void setMessage(Message message) {
+		this.message = message;
+	}
+
+	/**
+	 * Returns this item's message. 
+	 * @return this item's message 
+	 */
+	public Message getMessage() {
+		return message;
+	}
+
+	/**
 	 * Draws this item.
 	 * @param g  the surface to be drawn on 
 	 */
 	public abstract void draw(PApplet g);
-
-	/**
-	 * Gives a pop up message after the item is collected 
-	 */
-	public abstract void displayMessage();
 	
 }
