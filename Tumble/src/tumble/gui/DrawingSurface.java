@@ -7,18 +7,8 @@ import tumble.screens.*;
 /**
  * Represents a canvas onto which a game is drawn. 
  * Credit to Mr. Shelby for basic class structure. 
-<<<<<<< HEAD
-<<<<<<< HEAD
  * @author Amanda Xu, Julia Gu, Andra Liu
- * @version Apr. 28, 2020
-=======
- * @author Amanda Xu, Julia Gu
  * @version May 5, 2020
->>>>>>> f43d5f58f882144c735efef4990a95d7e4c74947
-=======
- * @author Amanda Xu, Julia Gu
- * @version May 5, 2020
->>>>>>> f43d5f58f882144c735efef4990a95d7e4c74947
  */
 public class DrawingSurface extends PApplet implements ScreenSwitcher {
 
@@ -139,8 +129,6 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	 */
 	public void keyReleased() {
 		switch (keyCode) {
-<<<<<<< HEAD
-<<<<<<< HEAD
 		case KeyEvent.VK_UP:
 			keys[UP] = false;
 			break;
@@ -156,27 +144,8 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		case KeyEvent.VK_A:
 			keys[A] = false;
 			break;
-	}
-=======
-=======
->>>>>>> f43d5f58f882144c735efef4990a95d7e4c74947
-			case KeyEvent.VK_UP:
-				keys[UP] = false;
-				break;
-			case KeyEvent.VK_DOWN:
-				keys[DOWN] = false;
-				break;
-			case KeyEvent.VK_LEFT:
-				keys[LEFT] = false;
-				break;
-			case KeyEvent.VK_RIGHT:
-				keys[RIGHT] = false;
-				break;
 		}
-<<<<<<< HEAD
->>>>>>> f43d5f58f882144c735efef4990a95d7e4c74947
-=======
->>>>>>> f43d5f58f882144c735efef4990a95d7e4c74947
+
 	}
 	
 	/**

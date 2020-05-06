@@ -18,20 +18,11 @@ public class Player extends MovableRectangle {
 	 */
 	public static final int WIDTH = 40, HEIGHT = 40;
 	private ArrayList<Item> items;
-<<<<<<< HEAD
 	
 	private boolean canJump, powerUp, canGlide, hasFeather, hasLeaf, currGlide;
 	private static final int LEFT = 0, RIGHT = 1;
 	private int direction;
-=======
-	private boolean canJump;
-	private boolean canGlide;
-	private boolean powerUp;
 	private Game game;
-<<<<<<< HEAD
->>>>>>> f43d5f58f882144c735efef4990a95d7e4c74947
-=======
->>>>>>> f43d5f58f882144c735efef4990a95d7e4c74947
 
 	/**
 	 * Creates an ellipse that represents a player. Player has a rectangular
@@ -53,7 +44,6 @@ public class Player extends MovableRectangle {
 		direction = LEFT;
 		
 		for (Item i : items) {
-<<<<<<< HEAD
 			if (i instanceof Feather) {
 				hasFeather = true;
 			} else if (i instanceof Leaf) {
@@ -64,17 +54,6 @@ public class Player extends MovableRectangle {
 
 			} else if (i instanceof Straw) {
 
-=======
-			if (i instanceof Leaf) {
-				accelerate(-1.2f, 0);
-				return;
-			} else if (i instanceof Kite) {
-				canGlide = true;
-			} else if (i instanceof Stick) {
-
-			} else if (i instanceof Straw) {
-				
->>>>>>> f43d5f58f882144c735efef4990a95d7e4c74947
 			} else {
 				
 			}
@@ -94,7 +73,6 @@ public class Player extends MovableRectangle {
 		direction = RIGHT;
 
 		for (Item i : items) {
-<<<<<<< HEAD
 
 			if (i instanceof Feather) {
 				hasFeather = true;
@@ -106,17 +84,6 @@ public class Player extends MovableRectangle {
 
 			} else if (i instanceof Straw) {
 
-=======
-			if (i instanceof Leaf) {
-				accelerate(1.2f, 0);
-				return;
-			} else if (i instanceof Kite) {
-				canGlide = true;
-			} else if (i instanceof Stick) {
-
-			} else if (i instanceof Straw) {
-				
->>>>>>> f43d5f58f882144c735efef4990a95d7e4c74947
 			} else {
 				
 			}
@@ -144,28 +111,8 @@ public class Player extends MovableRectangle {
 		
 	}
 	
-<<<<<<< HEAD
 	public void setCurrGlide(boolean glide) {
 		this.currGlide = glide;
-=======
-	/**
-	 * Player glides.
-	 */
-	public void glide() {
-		
-		if (canGlide) {	
-				
-			for (Item i : items) {
-				if (i instanceof Feather) {
-					accelerate(0, -18);
-					return;
-				}
-			}
-			
-			moveBy(0, -18);
-			setVelocity(getVelocityX(), 0);
-		}
->>>>>>> f43d5f58f882144c735efef4990a95d7e4c74947
 	}
 	
 

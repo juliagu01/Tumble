@@ -9,18 +9,8 @@ import tumble.items.*;
 /**
  * Represents a Tumble game.
  * Credit to Mr. Shelby for basic class structure. 
-<<<<<<< HEAD
-<<<<<<< HEAD
  * @author Julia Gu, Andra Liu
- * @version Apr. 27, 2020
-=======
- * @author Julia Gu
  * @version May 5, 2020
->>>>>>> f43d5f58f882144c735efef4990a95d7e4c74947
-=======
- * @author Julia Gu
- * @version May 5, 2020
->>>>>>> f43d5f58f882144c735efef4990a95d7e4c74947
  */
 public class Game {
 	
@@ -59,37 +49,23 @@ public class Game {
 	 */
 	public void update(boolean[] keys) {
 		
-<<<<<<< HEAD
-<<<<<<< HEAD
-		if (keys[DrawingSurface.LEFT])
-			player.rollLeft();
-		if (keys[DrawingSurface.RIGHT])
-			player.rollRight();
-		if (keys[DrawingSurface.UP]) 
-			player.jump();
-		
-		if (keys[DrawingSurface.A])
-			player.setCurrGlide(true);
-		else
-			player.setCurrGlide(false);
-=======
-=======
->>>>>>> f43d5f58f882144c735efef4990a95d7e4c74947
 		if (message == null) {
 			if (keys[DrawingSurface.LEFT])
 				player.rollLeft();
 			if (keys[DrawingSurface.RIGHT])
 				player.rollRight();
-			if (keys[DrawingSurface.UP]) {
+			if (keys[DrawingSurface.UP]) 
 				player.jump();
-				player.glide();
-			}
+			
+			if (keys[DrawingSurface.A])
+				player.setCurrGlide(true);
+			else
+				player.setCurrGlide(false);
 		} else if (keys[DrawingSurface.RIGHT]) {
 			message = null;
 			for (int i = 0; i < keys.length; i++)
 				keys[i] = false;
 		}
->>>>>>> f43d5f58f882144c735efef4990a95d7e4c74947
 
 		player.update(platforms, items);
 
