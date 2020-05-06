@@ -6,7 +6,7 @@ import tumble.gui.*;
 /**
  * Represents the game's main screen.
  * @author Amanda Xu, Julia Gu
- * @version Apr. 28, 2020
+ * @version May 5, 2020
  */
 public class GameScreen extends Screen {
 	
@@ -33,14 +33,20 @@ public class GameScreen extends Screen {
 		// game
 		game.draw(g);
 		
-		// pause button
 		g.pushMatrix();
 		g.scale(g.width/800f, g.height/600f);
+		
+		// message
+		if (game.getMessage() != null)
+			game.getMessage().draw(g);
+		
+		// pause button
 		g.fill(190);
 		g.ellipse(750, 60, 50, 50);
 		g.fill(240);
 		g.rect(741, 48, 5, 24);
 		g.rect(754, 48, 5, 24);
+		
 		g.popMatrix();
 		
 	}

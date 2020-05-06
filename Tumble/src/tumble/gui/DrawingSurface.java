@@ -7,15 +7,25 @@ import tumble.screens.*;
 /**
  * Represents a canvas onto which a game is drawn. 
  * Credit to Mr. Shelby for basic class structure. 
- * @author Amanda Xu, Julia Gu
+<<<<<<< HEAD
+<<<<<<< HEAD
+ * @author Amanda Xu, Julia Gu, Andra Liu
  * @version Apr. 28, 2020
+=======
+ * @author Amanda Xu, Julia Gu
+ * @version May 5, 2020
+>>>>>>> f43d5f58f882144c735efef4990a95d7e4c74947
+=======
+ * @author Amanda Xu, Julia Gu
+ * @version May 5, 2020
+>>>>>>> f43d5f58f882144c735efef4990a95d7e4c74947
  */
 public class DrawingSurface extends PApplet implements ScreenSwitcher {
 
 	/**
 	 * Key constants.
 	 */
-	public static final int UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3;
+	public static final int UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3, A = 4;
 	
 	private Screen[] screens;
 	private Screen activeScreen;
@@ -27,7 +37,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	public DrawingSurface() {
 		
 		super();
-		keys = new boolean[4];
+		keys = new boolean[5];
 		
 		screens = new Screen[] {new StartScreen(this), new GameScreen(this), new PauseScreen(this)};
 		activeScreen = screens[0];
@@ -57,23 +67,23 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		activeScreen.draw();
 	}
 	
-	/**
-	 * Returns the actual x-coordinate that corresponds to the transformed x-coordinate.
-	 * @param assumedX  x-coordinate in transformed coordinates
-	 * @return the x-coordinate in actual coordinates
-	 */
-	public float getActualCoordinateX(float assumedX) {
-		return assumedX * width/Screen.WIDTH;
-	}
-	
-	/**
-	 * Returns the actual y-coordinate that corresponds to the transformed y-coordinate.
-	 * @param assumedY  y-coordinate in transformed coordinates
-	 * @return the y-coordinate in actual coordinates
-	 */
-	public float getActualCoordinateY(float assumedY) {
-		return assumedY * height/Screen.HEIGHT;
-	}
+//	/**
+//	 * Returns the actual x-coordinate that corresponds to the transformed x-coordinate.
+//	 * @param assumedX  x-coordinate in transformed coordinates
+//	 * @return the x-coordinate in actual coordinates
+//	 */
+//	public float getActualCoordinateX(float assumedX) {
+//		return assumedX * width/Screen.WIDTH;
+//	}
+//	
+//	/**
+//	 * Returns the actual y-coordinate that corresponds to the transformed y-coordinate.
+//	 * @param assumedY  y-coordinate in transformed coordinates
+//	 * @return the y-coordinate in actual coordinates
+//	 */
+//	public float getActualCoordinateY(float assumedY) {
+//		return assumedY * height/Screen.HEIGHT;
+//	}
 	
 	/**
 	 * Returns the transformed x-coordinate that corresponds to the actual x-coordinate.
@@ -118,6 +128,9 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 			case KeyEvent.VK_RIGHT:
 				keys[RIGHT] = true;
 				break;
+			case KeyEvent.VK_A:
+				keys[A] = true;
+				break;
 		}
 	}
 
@@ -126,6 +139,8 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	 */
 	public void keyReleased() {
 		switch (keyCode) {
+<<<<<<< HEAD
+<<<<<<< HEAD
 		case KeyEvent.VK_UP:
 			keys[UP] = false;
 			break;
@@ -138,7 +153,30 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		case KeyEvent.VK_RIGHT:
 			keys[RIGHT] = false;
 			break;
+		case KeyEvent.VK_A:
+			keys[A] = false;
+			break;
 	}
+=======
+=======
+>>>>>>> f43d5f58f882144c735efef4990a95d7e4c74947
+			case KeyEvent.VK_UP:
+				keys[UP] = false;
+				break;
+			case KeyEvent.VK_DOWN:
+				keys[DOWN] = false;
+				break;
+			case KeyEvent.VK_LEFT:
+				keys[LEFT] = false;
+				break;
+			case KeyEvent.VK_RIGHT:
+				keys[RIGHT] = false;
+				break;
+		}
+<<<<<<< HEAD
+>>>>>>> f43d5f58f882144c735efef4990a95d7e4c74947
+=======
+>>>>>>> f43d5f58f882144c735efef4990a95d7e4c74947
 	}
 	
 	/**

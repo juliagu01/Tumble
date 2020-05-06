@@ -2,11 +2,12 @@ package tumble.items;
 
 import processing.core.PApplet;
 import tumble.game.Item;
+import tumble.gui.Message;
 
 /**
  * Represents a collectible leaf item with a rectangular hitbox.
  * @author Julia Gu
- * @version Apr. 28, 2020
+ * @version May 5, 2020
  */
 public class Leaf extends Item {
 
@@ -17,6 +18,8 @@ public class Leaf extends Item {
 	 */
 	public Leaf(float x, float y) {
 		super(x, y, 30, 30);
+		setMessage(new Message("You found a fallen leaf. It’s asking you if it could stay in your pocket to avoid the cold. "
+				+ "As thanks, it has given you the ability to roll.", -15755776));
 	}
 
 	/**

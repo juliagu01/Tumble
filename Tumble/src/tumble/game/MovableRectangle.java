@@ -5,7 +5,7 @@ import java.awt.geom.Rectangle2D;
 
 /**
  * Represents a movable rectangle. 
- * @author Julia Gu
+ * @author Julia Gu, Andra Liu
  * @version Apr. 27, 2020
  */
 public class MovableRectangle extends Rectangle2D.Float {
@@ -65,6 +65,22 @@ public class MovableRectangle extends Rectangle2D.Float {
 	public void moveByVelocity() {
 		this.x += vx;
 		this.y += vy;
+	}
+	
+	/**
+	 * Sets the x value of the rectangle with the given value.
+	 * @param x  x-coordinate to set to
+	 */
+	public void setX(float x) {
+		this.x = x;
+	}
+	
+	/**
+	 * Sets the y value of the rectangle with the given value.
+	 * @param y  y-coordinate to set to
+	 */
+	public void setY(float y) {
+		this.y = y;
 	}
 	
 	/**
