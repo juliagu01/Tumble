@@ -11,7 +11,7 @@ import tumble.items.*;
  * Represents a Tumble game.
  * Credit to Mr. Shelby for basic class structure. 
  * @author Andra Liu, Julia Gu, Amanda Xu
- * @version May 5, 2020
+ * @version May 7, 2020
  */
 public class Game {
 	
@@ -30,14 +30,13 @@ public class Game {
 		
 		map = new Map(3200, 1200);
 		
-		
 		items = new ArrayList<Item>();
 		items.add(new Leaf(300, 350));
 		items.add(new Feather(200, 350));
 		items.add(new Stick(125, 100));
 		items.add(new Straw(0, 100));
 		items.add(new Kite(-100, 100));
-		items.add(new Orb(-150, 100));
+		items.add(new Orb(-200, 100));
 		
 		camera = new Camera(800f/2, 600f/2, 800f, 600f);
 		

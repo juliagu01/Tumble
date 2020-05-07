@@ -9,7 +9,7 @@ import tumble.items.*;
  * detection.
  * 
  * @author Amanda Xu, Andra Liu, Julia Gu
- * @version May 5, 2020
+ * @version May 7, 2020
  */
 public class Player extends MovableRectangle {
 
@@ -19,7 +19,8 @@ public class Player extends MovableRectangle {
 	public static final int WIDTH = 40, HEIGHT = 40;
 	private ArrayList<Item> items;
 	
-	private boolean canJump, powerUp, canGlide, hasFeather, hasLeaf, currGlide;
+	private boolean canJump, powerUp, canGlide, currGlide, 
+					hasFeather, hasLeaf, hasStick;
 	private static final int LEFT = 0, RIGHT = 1;
 	private int direction;
 	private Game game;
@@ -139,14 +140,16 @@ public class Player extends MovableRectangle {
 
 		if (platforms != null) {
 			for (Platform p : platforms) {
-				float[] amount = collidesBy(p);
-				moveBy(-amount[0], -amount[1]);
-				if (amount[1] != 0)
-					setVelocity(getVelocityX(), 0);
-				else if (amount[0] != 0)
-					setVelocity(0, getVelocityY());
-				if (amount[1] > 0) {
-					canJump = true;  // canGlide always equals !canJump
+				if (!(p instanceof Vine && hasStick)) {  // && canPass (key)?
+					float[] amount = collidesBy(p);
+					moveBy(-amount[0], -amount[1]);
+					if (amount[1] != 0)
+						setVelocity(getVelocityX(), 0);
+					else if (amount[0] != 0)
+						setVelocity(0, getVelocityY());
+					if (amount[1] > 0) {
+						canJump = true;  // canGlide always equals !canJump
+					}
 				}
 			}
 		}
@@ -155,7 +158,7 @@ public class Player extends MovableRectangle {
 			powerUp = false;
 			for (Item i : items) {
 				if (this.intersects(i) && !this.items.contains(i)) {
-					this.items.add(i);
+					this.items.add(i);  // booleans set here instead?
 					game.setMessage(i.getMessage());
 					powerUp = true;
 				}

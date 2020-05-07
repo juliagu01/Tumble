@@ -26,7 +26,11 @@ public class Orb extends Item {
 	 * @param g  the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
-		g.fill(255, 255, 245);
+		g.fill(255, 255, 245, 50);
+		g.ellipse(x + width/2, y + width/2, width+70, width+70);
+		g.fill(255, 255, 245, 150);
+		g.ellipse(x + width/2, y + width/2, width+30, width+30);
+		g.fill(255, 255, 245, 250);
 		g.ellipse(x + width/2, y + width/2, width, width);
 	}
 	
