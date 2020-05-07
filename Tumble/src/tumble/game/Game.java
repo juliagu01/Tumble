@@ -9,13 +9,13 @@ import tumble.items.*;
 /**
  * Represents a Tumble game.
  * Credit to Mr. Shelby for basic class structure. 
- * @author Andra Liu, Julia Gu
+ * @author Andra Liu, Julia Gu, Amanda Xu
  * @version May 5, 2020
  */
 public class Game {
 	
 	private Player player;
-	private ArrayList<Platform> platforms;
+	private Map map;
 	private ArrayList<Item> items;
 	private Message message;
 	private Camera camera;
@@ -27,10 +27,8 @@ public class Game {
 		
 		createPlayer();
 		
-		platforms = new ArrayList<Platform>();
-		platforms.add(new Platform(-200, 150, 400, 40));   // top
-		platforms.add(new Platform( 500, 275, 100, 40));   // middle
-		platforms.add(new Platform(-200, 400, 1500, 40));  // bottom
+		map = new Map(3200, 1200);
+		
 		
 		items = new ArrayList<Item>();
 		items.add(new Leaf(300, 350));
@@ -64,7 +62,7 @@ public class Game {
 		} else if (keys[DrawingSurface.ENTER])
 			message = null;
 
-		player.update(platforms, items);
+		player.update(map.getPlatforms(), items);
 
 		if (player.y >= 800)
 			createPlayer();
@@ -100,8 +98,7 @@ public class Game {
 		g.scale(g.width/camera.width, g.height/camera.height);
 		g.translate(-camera.x, -camera.y);
 		
-		for (Platform p : platforms)
-			p.draw(g);
+		map.draw(g);
 		
 		for (Item i : items) {
 			ArrayList<Item> playerItems = player.getItems();
