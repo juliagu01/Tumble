@@ -10,12 +10,7 @@ import tumble.screens.*;
  * @author Amanda Xu, Andra Liu, Julia Gu
  * @version May 5, 2020
  */
-public class DrawingSurface extends PApplet implements ScreenSwitcher {
-
-	/**
-	 * Key constants.
-	 */
-	public static final int UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3, A = 4, SPACE = 5, ENTER = 6;
+public class DrawingSurface extends PApplet implements ScreenSwitcher, KeyHandler {
 	
 	private Screen[] screens;
 	private Screen activeScreen;
@@ -107,22 +102,22 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	public void keyPressed() {
 		switch (keyCode) {
 			case KeyEvent.VK_UP:
-				keys[UP] = true;
+				keys[KeyHandler.UP] = true;
 				break;
 			case KeyEvent.VK_DOWN:
-				keys[DOWN] = true;
+				keys[KeyHandler.DOWN] = true;
 				break;
 			case KeyEvent.VK_LEFT:
-				keys[LEFT] = true;
+				keys[KeyHandler.LEFT] = true;
 				break;
 			case KeyEvent.VK_RIGHT:
-				keys[RIGHT] = true;
+				keys[KeyHandler.RIGHT] = true;
 				break;
 			case KeyEvent.VK_A:
-				keys[A] = true;
+				keys[KeyHandler.A] = true;
 				break;
 			case KeyEvent.VK_ENTER:
-				keys[ENTER] = true;
+				keys[KeyHandler.ENTER] = true;
 				break;
 		}
 	}
@@ -133,22 +128,22 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	public void keyReleased() {
 		switch (keyCode) {
 			case KeyEvent.VK_UP:
-				keys[UP] = false;
+				keys[KeyHandler.UP] = false;
 				break;
 			case KeyEvent.VK_DOWN:
-				keys[DOWN] = false;
+				keys[KeyHandler.DOWN] = false;
 				break;
 			case KeyEvent.VK_LEFT:
-				keys[LEFT] = false;
+				keys[KeyHandler.LEFT] = false;
 				break;
 			case KeyEvent.VK_RIGHT:
-				keys[RIGHT] = false;
+				keys[KeyHandler.RIGHT] = false;
 				break;
 			case KeyEvent.VK_A:
-				keys[A] = false;
+				keys[KeyHandler.A] = false;
 				break;
 			case KeyEvent.VK_ENTER:
-				keys[ENTER] = false;
+				keys[KeyHandler.ENTER] = false;
 				break;
 		}
 

@@ -3,6 +3,7 @@ package tumble.game;
 import java.util.ArrayList;
 import processing.core.PApplet;
 import tumble.gui.DrawingSurface;
+import tumble.gui.KeyHandler;
 import tumble.gui.Message;
 import tumble.items.*;
 
@@ -36,6 +37,7 @@ public class Game {
 		items.add(new Stick(125, 100));
 		items.add(new Straw(0, 100));
 		items.add(new Kite(-100, 100));
+		items.add(new Orb(-150, 100));
 		
 		camera = new Camera(800f/2, 600f/2, 800f, 600f);
 		
@@ -48,18 +50,18 @@ public class Game {
 	public void update(boolean[] keys) {
 		
 		if (message == null) {
-			if (keys[DrawingSurface.LEFT])
+			if (keys[KeyHandler.LEFT])
 				player.rollLeft();
-			if (keys[DrawingSurface.RIGHT])
+			if (keys[KeyHandler.RIGHT])
 				player.rollRight();
-			if (keys[DrawingSurface.UP]) 
+			if (keys[KeyHandler.UP]) 
 				player.jump();
 			
-			if (keys[DrawingSurface.A])
+			if (keys[KeyHandler.A])
 				player.setCurrGlide(true);
 			else
 				player.setCurrGlide(false);
-		} else if (keys[DrawingSurface.ENTER])
+		} else if (keys[KeyHandler.ENTER])
 			message = null;
 
 		player.update(map.getPlatforms(), items);
