@@ -43,6 +43,7 @@ public class Player extends MovableRectangle {
 	public void rollLeft() {
 		direction = LEFT;
 		
+		// booleans can be set after "this.item.add(i)" in update() instead?
 		for (Item i : items) {
 			if (i instanceof Feather) {
 				hasFeather = true;
@@ -50,11 +51,11 @@ public class Player extends MovableRectangle {
 				hasLeaf = true;
 			} else if (i instanceof Kite) {
 				canGlide = true;
-			} else if (i instanceof Stick) {
+			} else if (i instanceof Stick) {  // Vine class yet to come!
 
 			} else if (i instanceof Straw) {
 
-			} else {
+			} else {  // Orb class yet to come!
 				
 			}
 		}
@@ -111,6 +112,8 @@ public class Player extends MovableRectangle {
 		
 	}
 	
+	// boost() can multiply velocity by 3 (or some #) during a single frame
+	
 	public void setCurrGlide(boolean glide) {
 		this.currGlide = glide;
 	}
@@ -124,8 +127,9 @@ public class Player extends MovableRectangle {
 	 */
 	public void update(ArrayList<Platform> platforms, ArrayList<Item> items) {
 		
+		// can be moved to glide()?
 		if(canGlide && currGlide) {
-			// code to glide
+			// code to glide (small acceleration upward)
 		}
 		
 		canJump = false;
@@ -142,7 +146,7 @@ public class Player extends MovableRectangle {
 				else if (amount[0] != 0)
 					setVelocity(0, getVelocityY());
 				if (amount[1] > 0) {
-					canJump = true;
+					canJump = true;  // canGlide always equals !canJump
 				}
 			}
 		}
@@ -177,7 +181,7 @@ public class Player extends MovableRectangle {
 	public void draw(PApplet g) {
 		g.fill(253, 235, 0);
 		if (powerUp) {
-			// power up animation
+			// power up animation (https://processing.org/examples/animatedsprite.html)
 		} else {
 			g.ellipse(x + width / 2, y + height / 2, width, height);
 		}
