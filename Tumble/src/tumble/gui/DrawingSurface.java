@@ -7,7 +7,7 @@ import tumble.screens.*;
 /**
  * Represents a canvas onto which a game is drawn. 
  * Credit to Mr. Shelby for basic class structure. 
- * @author Amanda Xu, Julia Gu, Andra Liu
+ * @author Amanda Xu, Andra Liu, Julia Gu
  * @version May 5, 2020
  */
 public class DrawingSurface extends PApplet implements ScreenSwitcher {
@@ -15,7 +15,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	/**
 	 * Key constants.
 	 */
-	public static final int UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3, A = 4;
+	public static final int UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3, A = 4, SPACE = 5, ENTER = 6;
 	
 	private Screen[] screens;
 	private Screen activeScreen;
@@ -27,7 +27,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	public DrawingSurface() {
 		
 		super();
-		keys = new boolean[5];
+		keys = new boolean[7];  //
 		
 		screens = new Screen[] {new StartScreen(this), new GameScreen(this), new PauseScreen(this)};
 		activeScreen = screens[0];
@@ -121,6 +121,9 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 			case KeyEvent.VK_A:
 				keys[A] = true;
 				break;
+			case KeyEvent.VK_ENTER:
+				keys[ENTER] = true;
+				break;
 		}
 	}
 
@@ -129,21 +132,24 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	 */
 	public void keyReleased() {
 		switch (keyCode) {
-		case KeyEvent.VK_UP:
-			keys[UP] = false;
-			break;
-		case KeyEvent.VK_DOWN:
-			keys[DOWN] = false;
-			break;
-		case KeyEvent.VK_LEFT:
-			keys[LEFT] = false;
-			break;
-		case KeyEvent.VK_RIGHT:
-			keys[RIGHT] = false;
-			break;
-		case KeyEvent.VK_A:
-			keys[A] = false;
-			break;
+			case KeyEvent.VK_UP:
+				keys[UP] = false;
+				break;
+			case KeyEvent.VK_DOWN:
+				keys[DOWN] = false;
+				break;
+			case KeyEvent.VK_LEFT:
+				keys[LEFT] = false;
+				break;
+			case KeyEvent.VK_RIGHT:
+				keys[RIGHT] = false;
+				break;
+			case KeyEvent.VK_A:
+				keys[A] = false;
+				break;
+			case KeyEvent.VK_ENTER:
+				keys[ENTER] = false;
+				break;
 		}
 
 	}

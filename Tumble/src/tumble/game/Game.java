@@ -9,7 +9,7 @@ import tumble.items.*;
 /**
  * Represents a Tumble game.
  * Credit to Mr. Shelby for basic class structure. 
- * @author Julia Gu, Andra Liu
+ * @author Andra Liu, Julia Gu
  * @version May 5, 2020
  */
 public class Game {
@@ -28,7 +28,7 @@ public class Game {
 		createPlayer();
 		
 		platforms = new ArrayList<Platform>();
-		platforms.add(new Platform(-200, 150, 400, 40));  // top
+		platforms.add(new Platform(-200, 150, 400, 40));   // top
 		platforms.add(new Platform( 500, 275, 100, 40));   // middle
 		platforms.add(new Platform(-200, 400, 1500, 40));  // bottom
 		
@@ -61,11 +61,8 @@ public class Game {
 				player.setCurrGlide(true);
 			else
 				player.setCurrGlide(false);
-		} else if (keys[DrawingSurface.RIGHT]) {
+		} else if (keys[DrawingSurface.ENTER])
 			message = null;
-			for (int i = 0; i < keys.length; i++)
-				keys[i] = false;
-		}
 
 		player.update(platforms, items);
 
@@ -108,7 +105,7 @@ public class Game {
 		
 		for (Item i : items) {
 			ArrayList<Item> playerItems = player.getItems();
-			if (playerItems == null || !playerItems.contains(i))
+			if (!playerItems.contains(i))
 				i.draw(g);
 		}
 
