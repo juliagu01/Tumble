@@ -27,7 +27,10 @@ public class Platform extends Rectangle2D.Float {
 	 */
 	public void draw(PApplet g) {
 		g.fill(140);
+		g.stroke(140);
+		g.strokeWeight(1);
 		g.rect(x, y, width, height);
+		g.noStroke();
 	}
 
 }

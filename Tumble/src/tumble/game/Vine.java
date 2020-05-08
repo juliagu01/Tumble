@@ -3,14 +3,14 @@ package tumble.game;
 import processing.core.PApplet;
 
 /**
- * Represents a vine block.
+ * Represents a patch of vine.
  * @author Julia Gu
  * @version Apr. 28, 2020
  */
 public class Vine extends Platform {
 	
 	/**
-	 * Creates a rectangle that represents a vine block. 
+	 * Creates a rectangle that represents a patch of vine. 
 	 * @param x  x-coordinate of vine's upper-left corner
 	 * @param y  y-coordinate of vine's upper-left corner
 	 * @param w  vine's width
@@ -21,12 +21,15 @@ public class Vine extends Platform {
 	}
 	
 	/**
-	 * Draws this vine block.
+	 * Draws this patch of vine.
 	 * @param g  the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
-		g.fill(139, 107, 156);
+		g.fill(120, 110, 130);
+		g.stroke(120, 110, 130);
+		g.strokeWeight(1);
 		g.rect(x, y, width, height);
+		g.noStroke();
 	}
 
 }
