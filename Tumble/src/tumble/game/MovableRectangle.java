@@ -38,16 +38,6 @@ public class MovableRectangle extends Rectangle2D.Float {
 	public MovableRectangle(float x, float y, float w, float h) {
 		this(x, y, w, h, 0, 0);
 	}
-
-	/**
-	 * Moves this rectangle to given location.
-	 * @param x  x-coordinate of rectangle's upper-left corner after translation
-	 * @param y  y-coordinate of rectangle's upper-left corner after translation
-	 */
-	public void moveTo(float x, float y) {
-		this.x = x;
-		this.y = y;
-	}
 	
 	/**
 	 * Moves this rectangle by given amount.
@@ -129,14 +119,14 @@ public class MovableRectangle extends Rectangle2D.Float {
 		float[] amount = new float[] {0, 0};
 		
 		if (intersects(r) || collidesWith(r)) {
-			if (y + height - vy <= r.y + EPSILON)
+			if (y + height - vy <= r.y + EPSILON)  // top of platform
 				amount[1] = y + height - r.y;
-			else if (y - vy >= r.y + r.height - EPSILON)
-				amount[1] = y - r.y - r.height;
-			else if (x + width - vx <= r.x + EPSILON)
+			else if (x + width - vx <= r.x + EPSILON)  // left of platform
 				amount[0] = x + width - r.x;
-			else if (x - vx >= r.x + r.width - EPSILON)
+			else if (x - vx >= r.x + r.width - EPSILON)  // right of platform
 				amount[0] = x - r.x - r.width;
+			else if (y - vy >= r.y + r.height - EPSILON)  // bottom of platform
+				amount[1] = y - r.y - r.height;
 		}
 		
 		return amount;
