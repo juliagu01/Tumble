@@ -57,13 +57,13 @@ public class Game {
 				player.rollLeft();
 			if (keys[KeyHandler.RIGHT])
 				player.rollRight();
-			if (keys[KeyHandler.UP]) 
+			if (keys[KeyHandler.UP]) {
+				player.glide();
 				player.jump();
-			
-			if (keys[KeyHandler.A])
-				player.setCurrGlide(true);
-			else
-				player.setCurrGlide(false);
+			}
+			if (keys[KeyHandler.SPACE]) {
+				player.boost();
+			}
 		} else if (keys[KeyHandler.ENTER])
 			message = null;
 

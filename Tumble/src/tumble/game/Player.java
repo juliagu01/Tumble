@@ -19,8 +19,8 @@ public class Player extends MovableRectangle {
 	public static final int WIDTH = 40, HEIGHT = 40;
 	private ArrayList<Item> items;
 	
-	private boolean canJump, powerUp, canGlide, currGlide, 
-					hasFeather, hasLeaf, hasStick;
+	private boolean canJump, powerUp, canGlide, canPass, 
+					hasFeather, hasLeaf, hasStick, hasStraw;
 	private static final int LEFT = 0, RIGHT = 1;
 	private int direction;
 	private Game game;
@@ -43,23 +43,6 @@ public class Player extends MovableRectangle {
 	 */
 	public void rollLeft() {
 		direction = LEFT;
-		
-		// booleans can be set after "this.item.add(i)" in update() instead?
-		for (Item i : items) {
-			if (i instanceof Feather) {
-				hasFeather = true;
-			} else if (i instanceof Leaf) {
-				hasLeaf = true;
-			} else if (i instanceof Kite) {
-				canGlide = true;
-			} else if (i instanceof Stick) {  // Vine class yet to come!
-
-			} else if (i instanceof Straw) {
-
-			} else {  // Orb class yet to come!
-				
-			}
-		}
 
 		if(hasLeaf)
 			accelerate(-1.2f, 0);
@@ -74,23 +57,6 @@ public class Player extends MovableRectangle {
 	public void rollRight() {
 		direction = RIGHT;
 
-		for (Item i : items) {
-
-			if (i instanceof Feather) {
-				hasFeather = true;
-			} else if (i instanceof Leaf) {
-				hasLeaf = true;
-			} else if (i instanceof Kite) {
-				canGlide = true;
-			} else if (i instanceof Stick) {
-
-			} else if (i instanceof Straw) {
-
-			} else {
-				
-			}
-		}
-		
 		if(hasLeaf)
 			accelerate(1.2f, 0);
 		else
@@ -113,10 +79,24 @@ public class Player extends MovableRectangle {
 		
 	}
 	
-	// boost() can multiply velocity by 3 (or some #) during a single frame
+	/**
+	 * Gives this player a horizontal boost 3 times the current velocity.
+	 */
+	public void boost() {
+		if(hasStraw) {
+			accelerate(getVelocityX() * 2, 0);
+		}
+	}
 	
-	public void setCurrGlide(boolean glide) {
-		this.currGlide = glide;
+	/**
+	 * Accelerates this player upwards when jumping.
+	 */
+	public void glide() {
+		if(canGlide && !canJump) {
+			canGlide = false;
+			accelerate(0, -10);
+			
+		}
 	}
 	
 
@@ -128,11 +108,6 @@ public class Player extends MovableRectangle {
 	 */
 	public void update(ArrayList<Platform> platforms, ArrayList<Item> items) {
 		
-		// can be moved to glide()?
-		if(canGlide && currGlide) {
-			// code to glide (small acceleration upward)
-		}
-		
 		canJump = false;
 		accelerate(-getVelocityX() / 8, 0.8f);
 
@@ -140,7 +115,7 @@ public class Player extends MovableRectangle {
 
 		if (platforms != null) {
 			for (Platform p : platforms) {
-				if (!(p instanceof Vine && hasStick)) {  // && canPass (key)?
+				if (!(p instanceof Vine && hasStick && canPass)) {
 					float[] amount = collidesBy(p);
 					moveBy(-amount[0], -amount[1]);
 					if (amount[1] != 0)
@@ -158,7 +133,24 @@ public class Player extends MovableRectangle {
 			powerUp = false;
 			for (Item i : items) {
 				if (this.intersects(i) && !this.items.contains(i)) {
-					this.items.add(i);  // booleans set here instead?
+					this.items.add(i);
+					
+					for (Item it : items) {
+
+						if (it instanceof Feather)
+							hasFeather = true;
+						else if (it instanceof Leaf)
+							hasLeaf = true;
+						else if (it instanceof Kite)
+							canGlide = true;
+						else if (it instanceof Stick)
+							canPass = true;
+						else if (it instanceof Straw)
+							hasStraw = true;
+						
+					}
+					
+					
 					game.setMessage(i.getMessage());
 					powerUp = true;
 				}
