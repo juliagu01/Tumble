@@ -1,11 +1,10 @@
 package tumble.game;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import processing.core.PApplet;
-import tumble.gui.DrawingSurface;
 import tumble.gui.KeyHandler;
 import tumble.gui.Message;
-import tumble.items.*;
 
 /**
  * Represents a Tumble game.
@@ -16,33 +15,25 @@ import tumble.items.*;
 public class Game {
 	
 	private Player player;
-	private Map map;
-	private ArrayList<Item> items;
-	private Message message;
-	private Camera camera;
 	private ArrayList<Platform> platforms;
+	private ArrayList<Item> items;
+	private Camera camera;
+	private Message message;
+	
 	/**
 	 * Creates a game with a player, platforms, and items. 
 	 */
 	public Game() {
 		
-		createPlayer();
+		Map map = new Map();
 		
-		map = new Map(3200, 1200);
-		platforms = new ArrayList<Platform>();
+		Point2D.Float playerLoc = map.getPlayerLocation();
+		player = new Player(this, playerLoc.x, playerLoc.y);
 		
-		platforms.add(new Platform(-200, 150, 400, 40));   // top
-		platforms.add(new Platform( 500, 275, 100, 40));   // middle
-		platforms.add(new Platform(-200, 400, 1500, 40));  // bottom
-		items = new ArrayList<Item>();
-		items.add(new Leaf(300, 350));
-		items.add(new Feather(200, 350));
-		items.add(new Stick(125, 100));
-		items.add(new Straw(0, 100));
-		items.add(new Kite(-100, 100));
-		items.add(new Orb(-200, 100));
+		platforms = map.getPlatforms();
+		items = map.getItems();
 		
-		camera = new Camera(800f/2, 600f/2, 800f, 600f);
+		camera = new Camera(playerLoc.x, playerLoc.y, 800f, 600f);
 		
 	}
 	
@@ -68,9 +59,6 @@ public class Game {
 			message = null;
 
 		player.update(platforms, items);
-
-		if (player.y >= 800)
-			createPlayer();
 		
 		camera.setTargetLocation(player.x + Player.WIDTH/2, player.y + Player.WIDTH/2);
 		camera.slide();
@@ -103,7 +91,8 @@ public class Game {
 		g.scale(g.width/camera.width, g.height/camera.height);
 		g.translate(-camera.x, -camera.y);
 		
-		map.draw(g);
+		for (Platform p : platforms)
+			p.draw(g);
 		
 		for (Item i : items) {
 			ArrayList<Item> playerItems = player.getItems();
@@ -115,10 +104,6 @@ public class Game {
 
 		g.popMatrix();
 		
-	}
-
-	private void createPlayer() {
-		player = new Player(this, 400 - Player.WIDTH/2, 150 - Player.WIDTH/2);
 	}
 
 }
