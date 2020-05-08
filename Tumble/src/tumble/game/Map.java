@@ -37,6 +37,9 @@ public class Map {
 		for (int i = 0; i < tileState.length; i++) {
 			for (int j = 0; j < tileState[0].length; j++) {
 				if (itemC < 5 && tileState[i][j] != PLAYER) {
+					if(tileState[i][j] == ITEM) {
+						itemC++;
+					}
 					tileState[i][j] = (int) (Math.random() * 4);
 				} else {
 					tileState[i][j] = (int) (Math.random() * 3);

@@ -21,7 +21,6 @@ public class Game {
 	private Message message;
 	private Camera camera;
 	private ArrayList<Platform> platforms;
-	
 	/**
 	 * Creates a game with a player, platforms, and items. 
 	 */
@@ -30,13 +29,11 @@ public class Game {
 		createPlayer();
 		
 		map = new Map(3200, 1200);
-		
 		platforms = new ArrayList<Platform>();
 		
 		platforms.add(new Platform(-200, 150, 400, 40));   // top
 		platforms.add(new Platform( 500, 275, 100, 40));   // middle
 		platforms.add(new Platform(-200, 400, 1500, 40));  // bottom
-		
 		items = new ArrayList<Item>();
 		items.add(new Leaf(300, 350));
 		items.add(new Feather(200, 350));
@@ -106,8 +103,7 @@ public class Game {
 		g.scale(g.width/camera.width, g.height/camera.height);
 		g.translate(-camera.x, -camera.y);
 		
-		for (Platform p : platforms)
-			p.draw(g);
+		map.draw(g);
 		
 		for (Item i : items) {
 			ArrayList<Item> playerItems = player.getItems();
