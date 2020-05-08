@@ -135,21 +135,16 @@ public class Player extends MovableRectangle {
 				if (this.intersects(i) && !this.items.contains(i)) {
 					this.items.add(i);
 					
-					for (Item it : items) {
-
-						if (it instanceof Feather)
-							hasFeather = true;
-						else if (it instanceof Leaf)
-							hasLeaf = true;
-						else if (it instanceof Kite)
-							canGlide = true;
-						else if (it instanceof Stick)
-							canPass = true;
-						else if (it instanceof Straw)
-							hasStraw = true;
-						
-					}
-					
+					if (i instanceof Feather)
+						hasFeather = true;
+					else if (i instanceof Leaf)
+						hasLeaf = true;
+					else if (i instanceof Kite)
+						canGlide = true;
+					else if (i instanceof Stick)
+						canPass = true;
+					else if (i instanceof Straw)
+						hasStraw = true;
 					
 					game.setMessage(i.getMessage());
 					powerUp = true;
