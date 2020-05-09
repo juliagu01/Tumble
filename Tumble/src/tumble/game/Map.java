@@ -1,98 +1,148 @@
 package tumble.game;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
-
-import processing.core.PApplet;
+import tumble.items.*;
 
 /**
- * Represents the map that the player can explore
- * 
- * @author Amanda Xu
- * @version 5/6/20
+ * Represents the map that the player can explore. 
+ * @author Amanda Xu, Julia Gu
+ * @version May 7, 2020
  */
 public class Map {
 	
-	private int tileState[][];
-	private int height, width;
-	private static final int MIN_DIM = 40;
-	/**
-	 * possible states in a tile
-	 */
-	private static final int EMPTY = 0, PLAT = 1, VINE = 2, ITEM = 3, PLAYER = 4;
+	private static final char VERTICAL_PLATFORM = 'v', HORIZONTAL_PLATFORM = 'h', VERTICAL_VINE = '|', HORIZONTAL_VINE = '-', 
+			PLAYER = '$', LEAF = '1', FEATHER = '2', STICK = '3', STRAW = '4', KITE = '5', ORB = '*';
+	private static final int TILE_WIDTH = 40;
+	private char[][] map;
 
 	/**
-	 * Constructs a map object of the area that the player can explore with
-	 * platforms
+	 * Constructs a map of the area that the player can explore. Has platforms and items. 
 	 * 
-	 * @param height the height of the full map
-	 * @param width  the width of the full map
+	 * @param width  map's width in pixels
+	 * @param height  map's height in pixels
 	 */
-	public Map(int height, int width) {
-		this.height = height;
-		this.width = width;
-		tileState = new int[height / MIN_DIM][width / MIN_DIM];
-		tileState[tileState.length / 2][tileState[0].length / 2] = PLAYER;
-
-		int itemC = 0;
-		for (int i = 0; i < tileState.length; i++) {
-			for (int j = 0; j < tileState[0].length; j++) {
-				if (itemC < 5 && tileState[i][j] != PLAYER) {
-					if(tileState[i][j] == ITEM) {
-						itemC++;
-					}
-					tileState[i][j] = (int) (Math.random() * 4);
-				} else {
-					tileState[i][j] = (int) (Math.random() * 3);
-				}
-			}
-		}
+	public Map() {
+		
+		// does it make more sense for this array be instantiated in Game or in here?
+		map = new char[][] {{'h','h','h',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','*',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
+							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','h','h','h','h','h',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
+							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
+							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
+							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
+							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
+							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
+							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
+							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
+							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
+							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
+							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
+							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
+							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
+							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
+							{'v','6',' ',' ','5',' ',' ','4',' ',' ','3',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
+							{'v','h','h','h','h','h','h','h','h','h','h','h',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
+							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v',' ',' ',' ',' ',' ',' ',' ',' ','v'},
+							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v',' ',' ',' ',' ',' ',' ',' ',' ','v'},
+							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v',' ',' ',' ',' ',' ',' ',' ',' ','v'},
+							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v',' ',' ',' ',' ','h','h',' ',' ','v'},
+							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v',' ',' ',' ',' ',' ',' ',' ',' ','|'},
+							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ','2',' ',' ','1',' ',' ',' ',' ',' ',' ','v',' ',' ',' ',' ',' ','$',' ',' ','|'},
+							{'h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h'}};
 
 	}
 
 	/**
-	 * Draws the map
-	 * 
-	 * @param g the surface to be drawn on
+	 * Returns an array of this map's platforms.
+	 * @return array containing map's platforms
 	 */
-	public void draw(PApplet g) {
-
+	public ArrayList<Platform> getPlatforms() {
+		
+		ArrayList<Platform> platforms = new ArrayList<Platform>();
+		
+		for (int row = 0; row < map.length; row++) {
+			for (int col = 0; col < map[row].length; col++) {
+				
+				int len = 1;
+				
+				// joining process (to reduce # of platform objects)
+				if (map[row][col] == HORIZONTAL_PLATFORM) {
+					while (col+len < map[row].length && map[row][col+len] == HORIZONTAL_PLATFORM)
+						len++;
+					platforms.add(new Platform(col * TILE_WIDTH, row * TILE_WIDTH, len * TILE_WIDTH, TILE_WIDTH));
+					col += len-1;  // to prevent overcounting
+				} 
+				else if (map[row][col] == VERTICAL_PLATFORM) {
+					while (row+len < map.length && map[row+len][col] == VERTICAL_PLATFORM) {
+						map[row+len][col] = 'p';  // to prevent overcounting
+						len++;
+					}
+					platforms.add(new Platform(col * TILE_WIDTH, row * TILE_WIDTH, TILE_WIDTH, len * TILE_WIDTH));
+				}
+				else if (map[row][col] == HORIZONTAL_VINE) {
+					while (col+len < map[row].length && map[row][col+len] == HORIZONTAL_VINE)
+						len++;
+					platforms.add(new Vine(col * TILE_WIDTH, row * TILE_WIDTH, len * TILE_WIDTH, TILE_WIDTH));
+					col += len-1;
+				} 
+				else if (map[row][col] == VERTICAL_VINE) {
+					while (row+len < map.length && map[row+len][col] == VERTICAL_VINE) {
+						map[row+len][col] = 'p';
+						len++;
+					}
+					platforms.add(new Vine(col * TILE_WIDTH, row * TILE_WIDTH, TILE_WIDTH, len * TILE_WIDTH));
+				}
+				
+			}
+		}
+		
+		return platforms;
 		
 	}
 
 	/**
-	 * Sets the state of all the specific layed out tiles on the screen
-	 * 
-	 * @param tileState the state of all the tiles on the map
+	 * Returns an array of the map's items.
+	 * @return array containing map's items
 	 */
-	public void setTileState(int[][] tileState) {
-		this.tileState = tileState;
+	public ArrayList<Item> getItems() {
+		ArrayList<Item> items = new ArrayList<Item>();
+		for (int row = 0; row < map.length; row++) {
+			for (int col = 0; col < map[row].length; col++) {
+				switch (map[row][col]) {
+					case LEAF:
+						items.add(new Leaf(col * TILE_WIDTH, row * TILE_WIDTH));
+						break;
+					case FEATHER:
+						items.add(new Feather(col * TILE_WIDTH, row * TILE_WIDTH));
+						break;
+					case STICK:
+						items.add(new Stick(col * TILE_WIDTH, row * TILE_WIDTH));
+						break;
+					case STRAW:
+						items.add(new Straw(col * TILE_WIDTH, row * TILE_WIDTH));
+						break;
+					case KITE:
+						items.add(new Kite(col * TILE_WIDTH, row * TILE_WIDTH));
+						break;
+					case ORB:
+						items.add(new Orb(col * TILE_WIDTH, row * TILE_WIDTH));
+						break;
+				}
+			}
+		}
+		return items;		
 	}
 
-//	/**
-//	 * Returns all the platforms on the map
-//	 * 
-//	 * @return all the platforms on the map
-//	 */
-//	public ArrayList<Platform> getPlatforms() {
-//		return platforms;
-//	}
-
 	/**
-	 * Returns the height of the map
-	 * 
-	 * @return height of the map
+	 * Returns the player's starting location.
+	 * @return point storing the location of player's center
 	 */
-	public int getHeight() {
-		return height;
-	}
-
-	/**
-	 * Returns the width of the map
-	 * 
-	 * @return width of the map
-	 */
-	public int getWidth() {
-		return width;
+	public Point2D.Float getPlayerLocation() {
+		for (int row = 0; row < map.length; row++)
+			for (int col = 0; col < map[row].length; col++)
+				if (map[row][col] == PLAYER)
+					return new Point2D.Float(col * TILE_WIDTH, row * TILE_WIDTH);
+		return null;		
 	}
 
 }
