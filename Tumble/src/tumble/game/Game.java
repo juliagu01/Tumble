@@ -25,7 +25,7 @@ public class Game {
 	 */
 	public Game() {
 		
-		Map map = new Map();
+		Map map = new Map("data/map.txt");
 		
 		Point2D.Float playerLoc = map.getPlayerLocation();
 		player = new Player(this, playerLoc.x, playerLoc.y);

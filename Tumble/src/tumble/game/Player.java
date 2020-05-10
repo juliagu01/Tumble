@@ -10,7 +10,7 @@ import tumble.items.*;
  * detection.
  * 
  * @author Amanda Xu, Andra Liu, Julia Gu
- * @version May 7, 2020
+ * @version May 10, 2020
  */
 public class Player extends MovableRectangle {
 
@@ -30,8 +30,9 @@ public class Player extends MovableRectangle {
 	 * Creates an ellipse that represents a player. Player has a rectangular
 	 * hit-box.
 	 * 
-	 * @param x x-coordinate of player's upper-left corner
-	 * @param y y-coordinate of player's upper-left corner
+	 * @param game	game that player belongs to
+	 * @param x		x-coordinate of player's upper-left corner
+	 * @param y		y-coordinate of player's upper-left corner
 	 */
 	public Player(Game game, float x, float y) {
 		super(x, y, WIDTH, HEIGHT);
@@ -159,7 +160,7 @@ public class Player extends MovableRectangle {
 	/**
 	 * Draws this player.
 	 * 
-	 * @param g the surface to be drawn on
+	 * @param g		surface to be drawn on
 	 */
 	public void draw(PApplet g) {
 		g.fill(253, 235, 0);

@@ -1,4 +1,4 @@
-game
-gui
-items
-screens
+tumble.game
+tumble.gui
+tumble.items
+tumble.screens
