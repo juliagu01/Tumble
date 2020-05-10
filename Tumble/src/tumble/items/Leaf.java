@@ -15,10 +15,11 @@ public class Leaf extends Item {
 	 * Creates a leaf item. Has a rectangular hitbox.
 	 * @param x  x-coordinate of leaf's upper-left corner
 	 * @param y  y-coordinate of leaf's upper-left corner
+	 * @param w  leaf's width
 	 */
-	public Leaf(float x, float y) {
-		super(x, y, 30, 30);
-		setMessage(new Message("You found a fallen leaf. It’s asking you if it could stay in your pocket to avoid the cold. "
+	public Leaf(float x, float y, float w) {
+		super(x + w/8, y + w/8, w * 3/4, w * 3/4);
+		setMessage(new Message("You found a fallen leaf. It's asking you if it could stay in your pocket to avoid the cold. "
 				+ "As thanks, it has given you the ability to roll.", -15755776));
 	}
 

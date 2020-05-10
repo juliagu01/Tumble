@@ -15,9 +15,10 @@ public class Orb extends Item {
 	 * Creates an orb item. Has a rectangular hitbox.
 	 * @param x  x-coordinate of orb's upper-left corner
 	 * @param y  y-coordinate of orb's upper-left corner
+	 * @param w  orb's width
 	 */
-	public Orb(float x, float y) {
-		super(x, y, 30, 30);
+	public Orb(float x, float y, float w) {
+		super(x + w/8, y + w/8, w * 3/4, w * 3/4);
 		setMessage(new Message("You approach an orb. It glows brighter and brighter...", -6250336));
 	}
 

@@ -15,10 +15,11 @@ public class Straw extends Item {
 	 * Creates a straw item. Has a rectangular hitbox.
 	 * @param x  x-coordinate of straw's upper-left corner
 	 * @param y  y-coordinate of straw's upper-left corner
+	 * @param w  straw's width
 	 */
-	public Straw(float x, float y) {
-		super(x, y, 40, 5);
-		setMessage(new Message("There’s an abandoned straw stuck in the bush. You feel bad for it, and you add it to your pocket. "
+	public Straw(float x, float y, float w) {
+		super(x, y + w * 7/16, w, w/8);
+		setMessage(new Message("There's an abandoned straw stuck in the bush. You feel bad for it, and you add it to your pocket. "
 				+ "The straw thanks you. You have earned the ability to gain boosts.  [To use, press space.]", -4718570));
 	}
 

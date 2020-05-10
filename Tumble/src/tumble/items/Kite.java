@@ -15,10 +15,11 @@ public class Kite extends Item {
 	 * Creates a kite item. Has a rectangular hitbox.
 	 * @param x  x-coordinate of kite's upper-left corner
 	 * @param y  y-coordinate of kite's upper-left corner
+	 * @param w  kite's width
 	 */
-	public Kite(float x, float y) {
-		super(x, y, 40, 50);
-		setMessage(new Message("You notice something sitting alone on the bench. It’s a kite. You sit next to it. It tells you that it misses seeing color in the world. You do too. "
+	public Kite(float x, float y, float w) {
+		super(x, y - w/8, w, w * 5/4);
+		setMessage(new Message("You notice something sitting alone on the bench. It's a kite. You sit next to it. It tells you that it misses seeing color in the world. You do too. "
 				+ "The kite tells you that it wants to help you finish your quest. It offers to help you glide in air. You accept.  [To use, press up arrow in air.]", -2060800));
 	}
 
