@@ -1,13 +1,16 @@
 package tumble.game;
 
 import java.awt.geom.Point2D;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import tumble.items.*;
 
 /**
  * Represents the map that the player can explore. 
  * @author Amanda Xu, Julia Gu
- * @version May 7, 2020
+ * @version May 10, 2020
  */
 public class Map {
 	
@@ -17,39 +20,12 @@ public class Map {
 	private char[][] map;
 
 	/**
-	 * Constructs a map of the area that the player can explore. Has platforms and items. 
-	 * 
-	 * @param width  map's width in pixels
-	 * @param height  map's height in pixels
+	 * Constructs a map of the area that the player can explore from a file. Has platforms and items. 
+	 * @param fileName  name of text file from which map is read
 	 */
-	public Map() {
-		
-		// does it make more sense for this array be instantiated in Game or in here?
-		map = new char[][] {{'h','h','h',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','*',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
-							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','h','h','h','h','h',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
-							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
-							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
-							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
-							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
-							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
-							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
-							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
-							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
-							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
-							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
-							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
-							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
-							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
-							{'v','6',' ',' ','5',' ',' ','4',' ',' ','3',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
-							{'v','h','h','h','h','h','h','h','h','h','h','h',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v'},
-							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v',' ',' ',' ',' ',' ',' ',' ',' ','v'},
-							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v',' ',' ',' ',' ',' ',' ',' ',' ','v'},
-							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v',' ',' ',' ',' ',' ',' ',' ',' ','v'},
-							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v',' ',' ',' ',' ','h','h',' ',' ','v'},
-							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','v',' ',' ',' ',' ',' ',' ',' ',' ','|'},
-							{'v',' ',' ',' ',' ',' ',' ',' ',' ',' ','2',' ',' ','1',' ',' ',' ',' ',' ',' ','v',' ',' ',' ',' ',' ','$',' ',' ','|'},
-							{'h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h','h'}};
-
+	public Map(String fileName) {
+		map = new char[36][60];  // dimensions should automatically adjust to text file instead!
+		readFile(fileName);
 	}
 
 	/**
@@ -61,7 +37,7 @@ public class Map {
 		ArrayList<Platform> platforms = new ArrayList<Platform>();
 		
 		for (int row = 0; row < map.length; row++) {
-			for (int col = 0; col < map[row].length; col++) {
+			for (int col = 0; col < map[0].length; col++) {
 				
 				int len = 1;
 				
@@ -107,25 +83,25 @@ public class Map {
 	public ArrayList<Item> getItems() {
 		ArrayList<Item> items = new ArrayList<Item>();
 		for (int row = 0; row < map.length; row++) {
-			for (int col = 0; col < map[row].length; col++) {
+			for (int col = 0; col < map[0].length; col++) {
 				switch (map[row][col]) {
 					case LEAF:
-						items.add(new Leaf(col * TILE_WIDTH, row * TILE_WIDTH));
+						items.add(new Leaf(col * TILE_WIDTH, row * TILE_WIDTH, TILE_WIDTH));
 						break;
 					case FEATHER:
-						items.add(new Feather(col * TILE_WIDTH, row * TILE_WIDTH));
+						items.add(new Feather(col * TILE_WIDTH, row * TILE_WIDTH, TILE_WIDTH));
 						break;
 					case STICK:
-						items.add(new Stick(col * TILE_WIDTH, row * TILE_WIDTH));
+						items.add(new Stick(col * TILE_WIDTH, row * TILE_WIDTH, TILE_WIDTH));
 						break;
 					case STRAW:
-						items.add(new Straw(col * TILE_WIDTH, row * TILE_WIDTH));
+						items.add(new Straw(col * TILE_WIDTH, row * TILE_WIDTH, TILE_WIDTH));
 						break;
 					case KITE:
-						items.add(new Kite(col * TILE_WIDTH, row * TILE_WIDTH));
+						items.add(new Kite(col * TILE_WIDTH, row * TILE_WIDTH, TILE_WIDTH));
 						break;
 					case ORB:
-						items.add(new Orb(col * TILE_WIDTH, row * TILE_WIDTH));
+						items.add(new Orb(col * TILE_WIDTH, row * TILE_WIDTH, TILE_WIDTH));
 						break;
 				}
 			}
@@ -139,10 +115,36 @@ public class Map {
 	 */
 	public Point2D.Float getPlayerLocation() {
 		for (int row = 0; row < map.length; row++)
-			for (int col = 0; col < map[row].length; col++)
+			for (int col = 0; col < map[0].length; col++)
 				if (map[row][col] == PLAYER)
 					return new Point2D.Float(col * TILE_WIDTH, row * TILE_WIDTH);
 		return null;		
+	}
+	
+	// Reads map from text file.
+	private void readFile(String fileName) {
+		
+		try {
+			FileReader in = new FileReader(fileName);
+			int row = 0, col = 0;
+			int ch = in.read();
+			while (ch != -1) {
+				if (ch == '\n') {
+					row++;
+					col = 0;
+				} else {
+					map[row][col] = (char)ch;
+					col++;
+				}
+				ch = in.read();
+			}
+			in.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("Map not found.");
+		} catch (IOException e) {
+			System.out.println("Failed to read map.");
+		}
+		
 	}
 
 }
