@@ -1,6 +1,7 @@
 package tumble.game;
 
 import java.awt.geom.Line2D;
+import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
 /**
@@ -114,19 +115,19 @@ public class MovableRectangle extends Rectangle2D.Float {
 	 * @param r  rectangle to check for collision against
 	 * @return array storing the amount of collision
 	 */
-	public float[] collidesBy(Rectangle2D.Float r) {
+	public Point2D.Float collidesBy(Rectangle2D.Float r) {
 		
-		float[] amount = new float[] {0, 0};
+		Point2D.Float amount = new Point2D.Float(0, 0);
 		
 		if (intersects(r) || collidesWith(r)) {
 			if (y + height - vy <= r.y + EPSILON)  // top of platform
-				amount[1] = y + height - r.y;
+				amount.y = y + height - r.y;
 			else if (x + width - vx <= r.x + EPSILON)  // left of platform
-				amount[0] = x + width - r.x;
+				amount.x = x + width - r.x;
 			else if (x - vx >= r.x + r.width - EPSILON)  // right of platform
-				amount[0] = x - r.x - r.width;
+				amount.x = x - r.x - r.width;
 			else if (y - vy >= r.y + r.height - EPSILON)  // bottom of platform
-				amount[1] = y - r.y - r.height;
+				amount.y = y - r.y - r.height;
 		}
 		
 		return amount;

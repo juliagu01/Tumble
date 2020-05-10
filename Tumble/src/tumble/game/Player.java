@@ -1,5 +1,6 @@
 package tumble.game;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import processing.core.PApplet;
 import tumble.items.*;
@@ -19,8 +20,8 @@ public class Player extends MovableRectangle {
 	public static final int WIDTH = 40, HEIGHT = 40;
 	private ArrayList<Item> items;
 	
-	private boolean canJump, powerUp, canGlide, canPass, 
-					hasFeather, hasLeaf, hasStick, hasStraw;
+	private boolean canJump, poweredUp, canGlide, canPass, 
+					hasLeaf, hasFeather, hasStick, hasStraw;
 	private static final int LEFT = 0, RIGHT = 1;
 	private int direction;
 	private Game game;
@@ -45,9 +46,9 @@ public class Player extends MovableRectangle {
 		direction = LEFT;
 
 		if(hasLeaf)
-			accelerate(-1.2f, 0);
+			accelerate(-2.4f, 0);
 		else
-			accelerate(-1, 0);
+			accelerate(-1.8f, 0);
 
 	}
 
@@ -58,9 +59,9 @@ public class Player extends MovableRectangle {
 		direction = RIGHT;
 
 		if(hasLeaf)
-			accelerate(1.2f, 0);
+			accelerate(2.4f, 0);
 		else
-			accelerate(1, 0);
+			accelerate(1.8f, 0);
 
 	}
 
@@ -72,7 +73,7 @@ public class Player extends MovableRectangle {
 			canJump = false;
 			
 			if(hasFeather)
-				accelerate(0,-20);
+				accelerate(0, -17.5f);
 			else
 				accelerate(0, -16);
 		}
@@ -107,49 +108,41 @@ public class Player extends MovableRectangle {
 	 * @param items     list containing items to check for collision against
 	 */
 	public void update(ArrayList<Platform> platforms, ArrayList<Item> items) {
-		
 		canJump = false;
-		accelerate(-getVelocityX() / 8, 0.8f);
-
+		accelerate(-getVelocityX() / 4, 0.8f);
 		moveByVelocity();
 
-		if (platforms != null) {
-			for (Platform p : platforms) {
-				if (!(p instanceof Vine && hasStick && canPass)) {
-					float[] amount = collidesBy(p);
-					moveBy(-amount[0], -amount[1]);
-					if (amount[1] != 0)
-						setVelocity(getVelocityX(), 0);
-					else if (amount[0] != 0)
-						setVelocity(0, getVelocityY());
-					if (amount[1] > 0) {
-						canJump = true;  // canGlide always equals !canJump
-					}
-				}
+		for (Platform p : platforms) {
+			if (!(p instanceof Vine && hasStick /*&& canPass*/)) {  // key pressed
+				Point2D.Float amount = collidesBy(p);
+				moveBy(-amount.x, -amount.y);
+				if (amount.y != 0)
+					setVelocity(getVelocityX(), 0);
+				else if (amount.x != 0)
+					setVelocity(0, getVelocityY());
+				if (amount.y > 0)
+					canJump = true;
 			}
 		}
 
-		if (items != null) {
-			powerUp = false;
-			for (Item i : items) {
-				if (this.intersects(i) && !this.items.contains(i)) {
-					this.items.add(i);
-					
-					if (i instanceof Feather)
-						hasFeather = true;
-					else if (i instanceof Leaf)
-						hasLeaf = true;
-					else if (i instanceof Kite)
-						canGlide = true;
-					else if (i instanceof Stick)
-						canPass = true;
-					else if (i instanceof Straw)
-						hasStraw = true;
-					
-					game.setMessage(i.getMessage());
-					powerUp = true;
-				}
+		poweredUp = false;
+		for (Item i : items) {
+			if (this.intersects(i) && !this.items.contains(i)) {
+				poweredUp = true;
+				if (i instanceof Feather)
+					hasFeather = true;
+				else if (i instanceof Leaf)
+					hasLeaf = true;
+				else if (i instanceof Kite)
+					canGlide = true;
+				else if (i instanceof Stick)
+					hasStick/**canPass**/ = true;
+				else if (i instanceof Straw)
+					hasStraw = true;
+				this.items.add(i);
+				game.setMessage(i.getMessage());
 			}
+			
 		}
 
 	}
@@ -170,7 +163,7 @@ public class Player extends MovableRectangle {
 	 */
 	public void draw(PApplet g) {
 		g.fill(253, 235, 0);
-		if (powerUp) {
+		if (poweredUp) {
 			// power up animation (https://processing.org/examples/animatedsprite.html)
 		} else {
 			g.ellipse(x + width / 2, y + height / 2, width, height);
