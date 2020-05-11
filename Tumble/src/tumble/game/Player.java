@@ -20,10 +20,8 @@ public class Player extends MovableRectangle {
 	public static final int WIDTH = 40, HEIGHT = 40;
 	private ArrayList<Item> items;
 	
-	private boolean canJump, poweredUp, canGlide, canPass, 
-					hasLeaf, hasFeather, hasStick, hasStraw;
-	private static final int LEFT = 0, RIGHT = 1;
-	private int direction;
+	private boolean canJump, canPass, canBoost, canGlide, poweredUp, 
+					hasLeaf, hasFeather, hasStick, hasStraw, hasKite;
 	private Game game;
 
 	/**
@@ -44,26 +42,20 @@ public class Player extends MovableRectangle {
 	 * Accelerates this player to the left.
 	 */
 	public void rollLeft() {
-		direction = LEFT;
-
-		if(hasLeaf)
+		if (hasLeaf)
 			accelerate(-2.4f, 0);
 		else
 			accelerate(-1.8f, 0);
-
 	}
 
 	/**
 	 * Accelerates this player to the right.
 	 */
 	public void rollRight() {
-		direction = RIGHT;
-
-		if(hasLeaf)
+		if (hasLeaf)
 			accelerate(2.4f, 0);
 		else
 			accelerate(1.8f, 0);
-
 	}
 
 	/**
@@ -71,22 +63,21 @@ public class Player extends MovableRectangle {
 	 */
 	public void jump() {
 		if (canJump) {
-			canJump = false;
-			
-			if(hasFeather)
-				accelerate(0, -17.5f);
+			if (hasFeather)
+				accelerate(0, -17);
 			else
-				accelerate(0, -16);
+				accelerate(0, -15.5f);
+			canJump = false;
 		}
-		
 	}
 	
 	/**
-	 * Gives this player a horizontal boost 3 times the current velocity.
+	 * Gives this player a horizontal boost 3 times the current velocity in air.
 	 */
 	public void boost() {
-		if(hasStraw) {
-			accelerate(getVelocityX() * 2, 0);
+		if (hasStraw && canBoost && !canJump) {
+			accelerate(getVelocityX() * 3, 0);
+			canBoost = false;
 		}
 	}
 	
@@ -94,10 +85,9 @@ public class Player extends MovableRectangle {
 	 * Accelerates this player upwards when jumping.
 	 */
 	public void glide() {
-		if(canGlide && !canJump) {
+		if (hasKite && canGlide) {
+			accelerate(0, -0.8f);
 			canGlide = false;
-			accelerate(0, -10);
-			
 		}
 	}
 	
@@ -109,7 +99,7 @@ public class Player extends MovableRectangle {
 	 * @param items     list containing items to check for collision against
 	 */
 	public void update(ArrayList<Platform> platforms, ArrayList<Item> items) {
-		canJump = false;
+		
 		accelerate(-getVelocityX() / 4, 0.8f);
 		moveByVelocity();
 
@@ -121,8 +111,10 @@ public class Player extends MovableRectangle {
 					setVelocity(getVelocityX(), 0);
 				else if (amount.x != 0)
 					setVelocity(0, getVelocityY());
-				if (amount.y > 0)
+				if (amount.y > 0) {
 					canJump = true;
+					canBoost = true;
+				}
 			}
 		}
 
@@ -130,16 +122,16 @@ public class Player extends MovableRectangle {
 		for (Item i : items) {
 			if (this.intersects(i) && !this.items.contains(i)) {
 				poweredUp = true;
-				if (i instanceof Feather)
-					hasFeather = true;
-				else if (i instanceof Leaf)
+				if (i instanceof Leaf)
 					hasLeaf = true;
-				else if (i instanceof Kite)
-					canGlide = true;
+				else if (i instanceof Feather)
+					hasFeather = true;
 				else if (i instanceof Stick)
-					hasStick/**canPass**/ = true;
+					hasStick = true;
 				else if (i instanceof Straw)
 					hasStraw = true;
+				else if (i instanceof Kite)
+					hasKite = true;
 				this.items.add(i);
 				game.setMessage(i.getMessage());
 			}
@@ -167,7 +159,7 @@ public class Player extends MovableRectangle {
 		if (poweredUp) {
 			// power up animation (https://processing.org/examples/animatedsprite.html)
 		} else {
-			g.ellipse(x + width / 2, y + height / 2, width, height);
+			g.ellipse(x + width/2, y + height/2, width, height);
 		}
 	}
 
