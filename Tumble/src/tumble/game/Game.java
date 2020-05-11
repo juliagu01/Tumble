@@ -33,7 +33,7 @@ public class Game {
 		platforms = map.getPlatforms();
 		items = map.getItems();
 		
-		camera = new Camera(playerLoc.x, playerLoc.y, 800f, 600f);
+		camera = new Camera(playerLoc.x + player.width/2, playerLoc.y + player.width/2, 800f, 600f);
 		
 	}
 	

@@ -14,7 +14,7 @@ import tumble.items.*;
  */
 public class Map {
 	
-	private static final char VERTICAL_PLATFORM = 'v', HORIZONTAL_PLATFORM = 'h', VERTICAL_VINE = '|', HORIZONTAL_VINE = '-', 
+	private static final char VERTICAL_PLATFORM = '|', HORIZONTAL_PLATFORM = '=', VERTICAL_VINE = 'v', HORIZONTAL_VINE = 'h', 
 			PLAYER = '$', LEAF = '1', FEATHER = '2', STICK = '3', STRAW = '4', KITE = '5', ORB = '*';
 	private static final int TILE_WIDTH = 40;
 	private char[][] map;

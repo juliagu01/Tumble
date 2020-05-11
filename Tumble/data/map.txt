@@ -1,36 +1,36 @@
-                    *                       v             v
-hh                hhhhh                     v             v
-v                                           v             v
-v                                           v             v
-v                                          3v             v
-vh                                         hv             v
-v                                           v             v
-v  hh                        5              v             v
-v                            hh            hv             v
-v                                           vh            v
-v                                           v             v
-v        hh                                 v             v
-v                                         hhv h           v
-v                         2                 vh            v
-v     h                  hhh                v             v
-v                                           v             v
-v                 h                       hhvh            v
-vh                                       h  v hh          v
-v      1                                    v             v
-v      hh                          h        v             v
-v                                          hv             v
-v                                        hh vhhh          v
-v  h         h                              v   h         v
-v    h                               hh     v             v
-v                h      $                   |          4  v
-v                      hh                   |          h  v
-vhhhhhhhhhh                   hh   hhhhhhhhhhhhhhhhhhhhhhhv
-v                                                         v
-v                                                         v
-v             h           h                               v
-v                                                         v
-v                                                         v
-v                            h                            v
-v                                                         v
-v                                                         v
-vhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhv
+|=========================================================|
+|=                                                     ===|
+|                       *                               ==|
+|  =5                   |                                =|
+|  ===                  |                                 |
+|                       |                                 |
+|=                      |                                 |
+|=======           ===========  =====            ===      |
+|      |                            |             ==      |
+|      |                            |              |      |
+|3     |=                           |              |      |
+|=     |                            |              |      |
+|      |        4                   v              |      |
+|      |       ==                   v              |      |
+|      |================= ====   ============      |      |
+|     =|                                    =     =|      |
+|      |                                           |      |
+|      |                                           |     =|
+|      |=                                   |      |      |
+|=     |                                    |             |
+|      |         2                         =|             |
+|      |      =======  =========      ========     |      |
+|      |                                           |     =|
+|     =|                                          =|      |
+|    ==|                                           |      |
+|   =====                                         1|=     |
+|                                     =           =|      |
+|                                    ===           |     =|
+|=             ==   ======  =======================|      |
+|                           |=                     |      |
+|    ===                    |                      |=     |
+|                           |                             |
+|                           |                             |
+|=                             $   =                     =|
+|==                               ==                    ==|
+|=========================================================|
