@@ -2,8 +2,8 @@ package tumble.game;
 
 import java.awt.geom.Point2D;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import tumble.items.*;
 
@@ -125,7 +125,7 @@ public class Map {
 	private void readFile(String fileName) {
 		
 		try {
-			FileReader in = new FileReader(fileName);
+			InputStream in = getClass().getResourceAsStream(fileName);
 			int row = 0, col = 0;
 			int ch = in.read();
 			while (ch != -1) {

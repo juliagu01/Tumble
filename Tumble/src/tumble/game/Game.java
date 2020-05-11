@@ -19,14 +19,13 @@ public class Game {
 	private ArrayList<Item> items;
 	private Camera camera;
 	private Message message;
-	private boolean upPressed;  // bad!
 	
 	/**
 	 * Creates a game with a player, platforms, and items. 
 	 */
 	public Game() {
 		
-		Map map = new Map("data/map.txt");
+		Map map = new Map("/tumble/game/map.txt");
 		
 		Point2D.Float playerLoc = map.getPlayerLocation();
 		player = new Player(this, playerLoc.x, playerLoc.y);
