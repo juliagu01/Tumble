@@ -85,9 +85,9 @@ public class Player extends MovableRectangle {
 	 * Accelerates this player upwards when jumping.
 	 */
 	public void glide() {
-		if (hasKite && canGlide) {
+		if (hasKite && !canJump && getVelocityY() > 0) {
+			setVelocity(getVelocityX(), 4);
 			accelerate(0, -0.8f);
-			canGlide = false;
 		}
 	}
 	
@@ -100,7 +100,7 @@ public class Player extends MovableRectangle {
 	 */
 	public void update(ArrayList<Platform> platforms, ArrayList<Item> items) {
 		
-		accelerate(-getVelocityX() / 4, 0.8f);
+		accelerate(-getVelocityX()/4, 0.8f);
 		moveByVelocity();
 
 		for (Platform p : platforms) {

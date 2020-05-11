@@ -19,6 +19,7 @@ public class Game {
 	private ArrayList<Item> items;
 	private Camera camera;
 	private Message message;
+	private boolean upPressed;  // bad!
 	
 	/**
 	 * Creates a game with a player, platforms, and items. 
@@ -48,19 +49,18 @@ public class Game {
 				player.rollLeft();
 			if (keys[KeyHandler.RIGHT])
 				player.rollRight();
-			if (keys[KeyHandler.UP]) {
-				player.glide();
-				player.jump();
-			}
-			if (keys[KeyHandler.SPACE]) {
+			if (keys[KeyHandler.SPACE])
 				player.boost();
+			if (keys[KeyHandler.UP]) {
+				player.jump();
+				player.glide();
 			}
 		} else if (keys[KeyHandler.ENTER])
 			message = null;
 
 		player.update(platforms, items);
 		
-		camera.setTargetLocation(player.x + Player.WIDTH/2, player.y + Player.WIDTH/2);
+		camera.setTargetLocation(player.x + player.width/2, player.y + player.width/2);
 		camera.slide();
 		
 	}
