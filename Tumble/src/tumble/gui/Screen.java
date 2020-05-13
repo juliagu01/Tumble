@@ -1,6 +1,7 @@
 package tumble.gui;
 
 import java.util.ArrayList;
+import processing.core.PApplet;
 
 /**
  * Represents the superclass of all screens.
@@ -48,7 +49,7 @@ public abstract class Screen {
 	 */
 	public void mouseReleased() {
 		for (Button b : buttons)
-			if (b.isPressed(surface.getTransformedCoordinateX(surface.mouseX), surface.getTransformedCoordinateY(surface.mouseY)) && b.getToScreen() != -1)
+			if (b.isHoveredOver(surface.getTransformedCoordinateX(surface.mouseX), surface.getTransformedCoordinateY(surface.mouseY)) && b.getToScreen() != -1)
 				surface.switchScreen(b.getToScreen());
 	}
 	
@@ -56,7 +57,14 @@ public abstract class Screen {
 	 * Updates this screen.
 	 * @param keys  keys that are currently pressed
 	 */
-	public void update(boolean[] keys) {}
+	public void update(boolean[] keys) {
+		for (Button b : buttons)
+			if (b.isHoveredOver(surface.getTransformedCoordinateX(surface.mouseX), surface.getTransformedCoordinateY(surface.mouseY)) && b.getToScreen() != -1) {
+				surface.cursor(PApplet.HAND);
+				return;
+			}
+		surface.cursor(PApplet.ARROW);
+	}
 	
 	/**
 	 * Draws this screen.

@@ -1,7 +1,6 @@
 package tumble.gui;
 
 import java.awt.geom.Ellipse2D;
-
 import processing.core.PApplet;
 
 /**
@@ -42,7 +41,7 @@ public class Button extends Ellipse2D.Float {
 	 * @param mouseY  mouse's y-coordinate
 	 * @return whether this button is pressed
 	 */
-	public boolean isPressed(float mouseX, float mouseY) {
+	public boolean isHoveredOver(float mouseX, float mouseY) {
 		 return Math.pow(mouseX - x - width/2, 2) + Math.pow(mouseY - y - width/2, 2) <= Math.pow(width/2, 2);  // resizing will be a problem!
 	}
 	

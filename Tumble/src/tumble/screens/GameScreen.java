@@ -56,6 +56,7 @@ public class GameScreen extends Screen {
 	 * @param keys  keys that are currently pressed
 	 */
 	public void update(boolean[] keys) {
+		super.update(keys);
 		game.update(keys);
 	}
 
