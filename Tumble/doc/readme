@@ -1,6 +1,6 @@
 Tumble (a game by VanillaChip)
 Authors: Amanda Xu, Andra Liu, Julia Gu
-Revision: May 8, 2020
+Revision: May 12, 2020
 
 Introduction: 
   Meet Tumble, a bright yellow ball determined to bring color and life to his quiet, gray world. As he bounces his way 
@@ -34,7 +34,8 @@ Features List:
     5. pause screen - simple screen that appears when player pauses the game. Provides the option to continue or exit 
        the game. 
   C. stretch:
-    1. complete post-game - a continuation of Tumble’s adventures, with all of his newfound abilities and a colored map. 
+    1. complete post-game - a continuation of Tumble’s adventures, with all of his newfound abilities and a colored 
+       map. 
     2. hidden areas - areas of the map for added exploration. Can include small puzzles or additional messages. 
     3. interactive credits - a colorful map made from the names in the game’s credits.
 
@@ -69,11 +70,12 @@ Class List:
     PauseScreen - the game's pause screen
 
 Credits:
-  Credit to Mr. Shelby's AnimationDemo and ScreenSwitching for the basic class structures of Main, DrawingSurface, 
-Player, MovableRectangle, Screen, and ScreenSwitcher.
-  Credit to an anonymous younger brother for being a phenomenal QA!
+  Processing library - graphics
+  Mr. Shelby's AnimationDemo project - relationships between Main, DrawingSurface, Player, and MovableRectangle 
+  Mr. Shelby's sample ScreenSwitching code - basic class structures of Screen and ScreenSwitcher
+  an anonymous younger brother - being a phenomenal QA!
 
 Responsibilities:
   Amanda - screens, map
   Andra - items, animations
-  Julia - physics, story design
+  Julia - physics, design

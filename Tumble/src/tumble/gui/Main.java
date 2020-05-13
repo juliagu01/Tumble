@@ -26,6 +26,7 @@ public class Main {
 		window.setSize((int)Screen.WIDTH, (int)Screen.HEIGHT);
 		window.setMinimumSize(new Dimension(100, 100));
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.setTitle("Tumble - game by VanillaChip");
 		window.setResizable(true);
 		window.setVisible(true);
 		canvas.requestFocus();
