@@ -11,7 +11,6 @@ import java.awt.geom.Rectangle2D;
  */
 public class MovableRectangle extends Rectangle2D.Float {
 	
-	public static final float EPSILON = 1e-3f;
 	private float vx, vy;
 	
 	/**
@@ -109,30 +108,6 @@ public class MovableRectangle extends Rectangle2D.Float {
 		vx += ax;
 		vy += ay;
 	}
-	
-	/**
-	 * Calculates amount of collision between this rectangle and given rectangle.
-	 * @param r  rectangle to check for collision against
-	 * @return array storing the amount of collision
-	 */
-	public Point2D.Float collidesBy(Rectangle2D.Float r) {
-		
-		Point2D.Float amount = new Point2D.Float(0, 0);
-		
-		if (intersects(r) || collidesWith(r)) {
-			if (y + height - vy <= r.y + EPSILON)  // top of platform
-				amount.y = y + height - r.y;
-			else if (x + width - vx <= r.x + EPSILON)  // left of platform
-				amount.x = x + width - r.x;
-			else if (x - vx >= r.x + r.width - EPSILON)  // right of platform
-				amount.x = x - r.x - r.width;
-			else if (y - vy >= r.y + r.height - EPSILON)  // bottom of platform
-				amount.y = y - r.y - r.height;
-		}
-		
-		return amount;
-		
-	}
 
 	/**
 	 * Checks for overlap between this rectangle and given rectangle.
@@ -144,6 +119,30 @@ public class MovableRectangle extends Rectangle2D.Float {
 	}
 	
 	/**
+	 * Calculates amount of collision between this rectangle and given rectangle.
+	 * @param r  rectangle to check for collision against
+	 * @return array storing the amount of collision
+	 */
+	public Point2D.Float collidesBy(Rectangle2D.Float r) {
+		
+		Point2D.Float amount = new Point2D.Float(0, 0);
+		
+		if (collidesWith(r)) {
+			if (y + height - vy <= r.y)				// platform's top side
+				amount.y = y + height - r.y + 1;
+			else if (x + width - vx <= r.x)			// platform's left side
+				amount.x = x + width - r.x + 1;
+			else if (x - vx >= r.x + r.width)		// platform's right side
+				amount.x = x - r.x - r.width - 1;
+			else if (y - vy >= r.y + r.height)		// platform's bottom side
+				amount.y = y - r.y - r.height - 1;
+		}
+		
+		return amount;
+		
+	}
+	
+	/**
 	 * Checks for collision between this rectangle and given rectangle.
 	 * @param r  rectangle to check for collision against
 	 * @return whether rectangles collide
@@ -151,12 +150,16 @@ public class MovableRectangle extends Rectangle2D.Float {
 	public boolean collidesWith(Rectangle2D.Float r) {
 		
 		Line2D.Float topLeft = new Line2D.Float(x - vx, y - vy, x, y);
+		Line2D.Float top = new Line2D.Float(x + width/2 - vx, y - vy, x + width/2, y);
 		Line2D.Float topRight = new Line2D.Float(x + width - vx, y - vy, x + width, y);
-		Line2D.Float bottomLeft = new Line2D.Float(x - vx, y + height - vy, x, y + height);
+		Line2D.Float right = new Line2D.Float(x + width - vx, y + height/2 - vy, x + width, y + height/2);
 		Line2D.Float bottomRight = new Line2D.Float(x + width - vx, y + height - vy, x + width, y + height);
-		Rectangle2D.Float hitBox = new Rectangle2D.Float(r.x + EPSILON, r.y + EPSILON, r.width - 2*EPSILON, r.height - 2*EPSILON);
+		Line2D.Float bottom = new Line2D.Float(x + width/2 - vx, y + height - vy, x + width/2, y + height);
+		Line2D.Float bottomLeft = new Line2D.Float(x - vx, y + height - vy, x, y + height);
+		Line2D.Float left = new Line2D.Float(x - vx, y + height/2 - vy, x, y + height/2);
 		
-		return topLeft.intersects(hitBox) || topRight.intersects(hitBox) || bottomLeft.intersects(hitBox) || bottomRight.intersects(hitBox);
+		return topLeft.intersects(r) || top.intersects(r) || topRight.intersects(r) || right.intersects(r) 
+				|| bottomRight.intersects(r) || bottom.intersects(r) || bottomLeft.intersects(r) || left.intersects(r);
 		
 	}
 	
