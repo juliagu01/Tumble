@@ -49,10 +49,10 @@ public class Game {
 			if (keys[KeyHandler.RIGHT])
 				player.rollRight();
 			if (keys[KeyHandler.SPACE])
-				player.boost();
+				player.tryBoost();
 			if (keys[KeyHandler.UP]) {
-				player.jump();
-				player.glide();
+				player.tryJump();
+				player.tryGlide();
 			}
 		} else if (keys[KeyHandler.ENTER])
 			message = null;
@@ -93,11 +93,9 @@ public class Game {
 		for (Platform p : platforms)
 			p.draw(g);
 		
-		for (Item i : items) {
-			ArrayList<Item> playerItems = player.getItems();
-			if (!playerItems.contains(i))
+		for (Item i : items)
+			if (!player.getItems().contains(i) || i.getMessage() == message)
 				i.draw(g);
-		}
 
 		player.draw(g);
 

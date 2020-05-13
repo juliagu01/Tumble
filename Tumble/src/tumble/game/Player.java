@@ -18,11 +18,10 @@ public class Player extends MovableRectangle {
 	 * Players' shared dimensions.
 	 */
 	public static final int WIDTH = 40, HEIGHT = 40;
-	private ArrayList<Item> items;
 	
-	private boolean canJump, canPass, canBoost, canGlide, poweredUp, 
-					hasLeaf, hasFeather, hasStick, hasStraw, hasKite;
 	private Game game;
+	private ArrayList<Item> items;
+	private boolean poweredUp, canJump, canBoost, hasLeaf, hasFeather, hasStick, hasStraw, hasKite;
 
 	/**
 	 * Creates an ellipse that represents a player. Player has a rectangular
@@ -43,7 +42,7 @@ public class Player extends MovableRectangle {
 	 */
 	public void rollLeft() {
 		if (hasLeaf)
-			accelerate(-2.4f, 0);
+			accelerate(-2.7f, 0);
 		else
 			accelerate(-1.8f, 0);
 	}
@@ -53,38 +52,38 @@ public class Player extends MovableRectangle {
 	 */
 	public void rollRight() {
 		if (hasLeaf)
-			accelerate(2.4f, 0);
+			accelerate(2.7f, 0);
 		else
 			accelerate(1.8f, 0);
 	}
 
 	/**
-	 * Accelerates this player upwards.
+	 * Accelerates this player upwards if grounded.
 	 */
-	public void jump() {
+	public void tryJump() {
 		if (canJump) {
 			if (hasFeather)
 				accelerate(0, -17);
 			else
-				accelerate(0, -15.5f);
+				accelerate(0, -16f);
 			canJump = false;
 		}
 	}
 	
 	/**
-	 * Gives this player a horizontal boost 3 times the current velocity in air.
+	 * Gives this player a horizontal boost 2 times the current velocity if in air.
 	 */
-	public void boost() {
+	public void tryBoost() {
 		if (hasStraw && canBoost && !canJump) {
-			accelerate(getVelocityX() * 3, 0);
+			accelerate(getVelocityX()*2, 0);
 			canBoost = false;
 		}
 	}
 	
 	/**
-	 * Accelerates this player upwards when jumping.
+	 * Accelerates this player upwards if jumping.
 	 */
-	public void glide() {
+	public void tryGlide() {
 		if (hasKite && !canJump && getVelocityY() > 0) {
 			setVelocity(getVelocityX(), 4);
 			accelerate(0, -0.8f);
@@ -101,10 +100,22 @@ public class Player extends MovableRectangle {
 	public void update(ArrayList<Platform> platforms, ArrayList<Item> items) {
 		
 		accelerate(-getVelocityX()/4, 0.8f);
+		
+		// vines only (not the best...)
+		for (Platform p : platforms) {
+			if (hasStick && p instanceof Vine && intersects(p)) {
+				accelerate(-getVelocityX()/8, 0);
+				if (getVelocityY() > 0)
+					accelerate(0, -getVelocityY()/8);
+				break;
+			}
+		}
+		
 		moveByVelocity();
 
+		canJump = false;
 		for (Platform p : platforms) {
-			if (!(p instanceof Vine && hasStick /*&& canPass*/)) {  // key pressed
+			if (!(hasStick && p instanceof Vine && intersects(p))) {  // ... considering this.
 				Point2D.Float amount = collidesBy(p);
 				moveBy(-amount.x, -amount.y);
 				if (amount.y != 0)
@@ -120,7 +131,7 @@ public class Player extends MovableRectangle {
 
 		poweredUp = false;
 		for (Item i : items) {
-			if (this.intersects(i) && !this.items.contains(i)) {
+			if (intersects(i) && !this.items.contains(i)) {
 				poweredUp = true;
 				if (i instanceof Leaf)
 					hasLeaf = true;
@@ -158,9 +169,8 @@ public class Player extends MovableRectangle {
 		g.fill(253, 235, 0);
 		if (poweredUp) {
 			// power up animation (https://processing.org/examples/animatedsprite.html)
-		} else {
+		} else
 			g.ellipse(x + width/2, y + height/2, width, height);
-		}
 	}
 
 }

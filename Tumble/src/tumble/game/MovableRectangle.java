@@ -11,6 +11,7 @@ import java.awt.geom.Rectangle2D;
  */
 public class MovableRectangle extends Rectangle2D.Float {
 	
+	private static final float EPSILON = 1e-3f;
 	private float vx, vy;
 	
 	/**
@@ -115,7 +116,7 @@ public class MovableRectangle extends Rectangle2D.Float {
 	 * @return whether rectangles overlap
 	 */
 	public boolean intersects(Rectangle2D.Float r) {
-		return x + width > r.x && x < r.x + r.width && y + height > r.y && y < r.y + r.height;
+		return x + width >= r.x && x <= r.x + r.width && y + height >= r.y && y <= r.y + r.height;
 	}
 	
 	/**
@@ -128,14 +129,14 @@ public class MovableRectangle extends Rectangle2D.Float {
 		Point2D.Float amount = new Point2D.Float(0, 0);
 		
 		if (collidesWith(r)) {
-			if (y + height - vy <= r.y)				// platform's top side
-				amount.y = y + height - r.y + 1;
-			else if (x + width - vx <= r.x)			// platform's left side
-				amount.x = x + width - r.x + 1;
-			else if (x - vx >= r.x + r.width)		// platform's right side
-				amount.x = x - r.x - r.width - 1;
-			else if (y - vy >= r.y + r.height)		// platform's bottom side
-				amount.y = y - r.y - r.height - 1;
+			if (y + height - vy < r.y)						// platform's top side
+				amount.y = y + height - r.y + EPSILON;
+			else if (x + width - vx < r.x)					// platform's left side
+				amount.x = x + width - r.x + EPSILON;
+			else if (x - vx > r.x + r.width)				// platform's right side
+				amount.x = x - r.x - r.width - EPSILON;
+			else if (y - vy > r.y + r.height)				// platform's bottom side
+				amount.y = y - r.y - r.height - EPSILON;
 		}
 		
 		return amount;
