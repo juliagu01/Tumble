@@ -7,9 +7,8 @@ import processing.core.PApplet;
  * Represents the superclass of all screens.
  * Credit to ProcessingScreenSwitching from Demos Folder
  * @author Amanda Xu, Julia Gu
- * @version Apr. 28, 2020
+ * @version May 13, 2020
  */
-
 public abstract class Screen {
 
 	/**
@@ -49,8 +48,8 @@ public abstract class Screen {
 	 */
 	public void mouseReleased() {
 		for (Button b : buttons)
-			if (b.isHoveredOver(surface.getTransformedCoordinateX(surface.mouseX), surface.getTransformedCoordinateY(surface.mouseY)) && b.getToScreen() != -1)
-				surface.switchScreen(b.getToScreen());
+			if (b.isHoveredOver(surface.getTransformedCoordinateX(surface.mouseX), surface.getTransformedCoordinateY(surface.mouseY)))
+				b.mouseReleased(surface.getTransformedCoordinateX(surface.mouseX), surface.getTransformedCoordinateY(surface.mouseY), surface);
 	}
 	
 	/**
@@ -59,11 +58,19 @@ public abstract class Screen {
 	 */
 	public void update(boolean[] keys) {
 		for (Button b : buttons)
-			if (b.isHoveredOver(surface.getTransformedCoordinateX(surface.mouseX), surface.getTransformedCoordinateY(surface.mouseY)) && b.getToScreen() != -1) {
+			if (b.isHoveredOver(surface.getTransformedCoordinateX(surface.mouseX), surface.getTransformedCoordinateY(surface.mouseY))) {
 				surface.cursor(PApplet.HAND);
 				return;
 			}
 		surface.cursor(PApplet.ARROW);
+	}
+
+	/**
+	 * Draws this screen's buttons.
+	 */
+	public void drawButtons() {
+		for (Button b : buttons)
+			b.draw(surface);
 	}
 	
 	/**

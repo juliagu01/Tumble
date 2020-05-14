@@ -129,14 +129,14 @@ public class MovableRectangle extends Rectangle2D.Float {
 		Point2D.Float amount = new Point2D.Float(0, 0);
 		
 		if (collidesWith(r)) {
-			if (y + height - vy < r.y)						// platform's top side
-				amount.y = y + height - r.y + EPSILON;
-			else if (x + width - vx < r.x)					// platform's left side
-				amount.x = x + width - r.x + EPSILON;
-			else if (x - vx > r.x + r.width)				// platform's right side
-				amount.x = x - r.x - r.width - EPSILON;
-			else if (y - vy > r.y + r.height)				// platform's bottom side
-				amount.y = y - r.y - r.height - EPSILON;
+			if (y + height - vy <= r.y + EPSILON)			// platform's top side
+				amount.y = y + height - r.y;
+			else if (x + width - vx <= r.x + EPSILON)		// platform's left side
+				amount.x = x + width - r.x;
+			else if (x - vx >= r.x + r.width - EPSILON)		// platform's right side
+				amount.x = x - r.x - r.width;
+			else if (y - vy >= r.y + r.height - EPSILON)	// platform's bottom side
+				amount.y = y - r.y - r.height;
 		}
 		
 		return amount;
@@ -158,9 +158,10 @@ public class MovableRectangle extends Rectangle2D.Float {
 		Line2D.Float bottom = new Line2D.Float(x + width/2 - vx, y + height - vy, x + width/2, y + height);
 		Line2D.Float bottomLeft = new Line2D.Float(x - vx, y + height - vy, x, y + height);
 		Line2D.Float left = new Line2D.Float(x - vx, y + height/2 - vy, x, y + height/2);
+		Rectangle2D.Float box = new Rectangle2D.Float(r.x + EPSILON, r.y + EPSILON, r.width - 2*EPSILON, r.height - 2*EPSILON);
 		
-		return topLeft.intersects(r) || top.intersects(r) || topRight.intersects(r) || right.intersects(r) 
-				|| bottomRight.intersects(r) || bottom.intersects(r) || bottomLeft.intersects(r) || left.intersects(r);
+		return topLeft.intersects(box) || top.intersects(box) || topRight.intersects(box) || right.intersects(box) 
+				|| bottomRight.intersects(box) || bottom.intersects(box) || bottomLeft.intersects(box) || left.intersects(box);
 		
 	}
 	

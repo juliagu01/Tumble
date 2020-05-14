@@ -1,5 +1,6 @@
-package tumble.screens;
+package tumble.gui.screens;
 
+import tumble.gui.buttons.PlayButton;
 import tumble.gui.*;
 
 /**
@@ -15,7 +16,7 @@ public class PauseScreen extends Screen {
 	 */
 	public PauseScreen(DrawingSurface surface) {
 		super(surface);
-		super.addButton(new Button(Screen.WIDTH/2, Screen.HEIGHT * 380/600, Screen.HEIGHT/5, DrawingSurface.GAME_SCREEN));
+		addButton(new PlayButton(Screen.WIDTH/2, Screen.HEIGHT * 380/600, Screen.HEIGHT/5));
 	}
 
 	/**
@@ -45,10 +46,7 @@ public class PauseScreen extends Screen {
 		g.text(text, 400 - textW/2, 270);
 		
 		// play button
-		g.fill(190);
-		g.ellipse(400, 380, 120, 120);
-		g.fill(240);
-		g.triangle(383, 350, 383, 410, 430, 380);
+		drawButtons();
 		
 		g.popMatrix();
 		

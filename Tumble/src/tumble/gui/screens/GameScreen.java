@@ -1,5 +1,6 @@
-package tumble.screens;
+package tumble.gui.screens;
 
+import tumble.gui.buttons.*;
 import tumble.game.Game;
 import tumble.gui.*;
 
@@ -19,7 +20,8 @@ public class GameScreen extends Screen {
 	public GameScreen(DrawingSurface surface) {
 		super(surface);
 		game = new Game();
-		super.addButton(new Button(Screen.WIDTH - Screen.HEIGHT * 50/600, Screen.HEIGHT * 60/600, Screen.HEIGHT * 50/600, DrawingSurface.PAUSE_SCREEN));
+		addButton(new PauseButton(Screen.WIDTH - Screen.HEIGHT * 50/600, Screen.HEIGHT * 60/600, Screen.HEIGHT * 50/600));
+		addButton(new MuteButton(Screen.WIDTH - Screen.HEIGHT * 50/600, Screen.HEIGHT * 130/600, Screen.HEIGHT * 50/600));
 	}
 	
 	/**
@@ -28,7 +30,7 @@ public class GameScreen extends Screen {
 	public void draw() {
 		
 		DrawingSurface g = getSurface();
-		g.background(212);
+		g.background(212, 210, 214);
 		
 		// game
 		game.draw(g);
@@ -41,11 +43,7 @@ public class GameScreen extends Screen {
 			game.getMessage().draw(g);
 		
 		// pause button
-		g.fill(190);
-		g.ellipse(750, 60, 50, 50);
-		g.fill(240);
-		g.rect(741, 48, 5, 24);
-		g.rect(754, 48, 5, 24);
+		drawButtons();
 		
 		g.popMatrix();
 		

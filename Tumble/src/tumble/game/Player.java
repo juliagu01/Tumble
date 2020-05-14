@@ -2,8 +2,8 @@ package tumble.game;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import tumble.game.items.*;
 import processing.core.PApplet;
-import tumble.items.*;
 
 /**
  * Represents a movable ellipse with basic physics and rectangular collision
@@ -75,7 +75,7 @@ public class Player extends MovableRectangle {
 	 */
 	public void tryBoost() {
 		if (hasStraw && canBoost && !canJump) {
-			accelerate(getVelocityX()*2, 0);
+			accelerate(getVelocityX()*10, getVelocityY()*-0.999f);
 			canBoost = false;
 		}
 	}

@@ -1,8 +1,8 @@
 package tumble.gui;
 
 import java.awt.event.KeyEvent;
+import tumble.gui.screens.*;
 import processing.core.PApplet;
-import tumble.screens.*;
 
 /**
  * Represents a canvas onto which a game is drawn. 

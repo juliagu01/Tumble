@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import tumble.items.*;
+import tumble.game.items.*;
 
 /**
  * Represents the map that the player can explore. 

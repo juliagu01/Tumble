@@ -8,9 +8,12 @@ import processing.core.PApplet;
  * @author Julia Gu
  * @version Apr. 28, 2020
  */
-public class Button extends Ellipse2D.Float {
+public abstract class Button extends Ellipse2D.Float {
 
-	private int toScreen;
+	/**
+	 * Buttons' shared color constants.
+	 */
+	public static final int BASE_COLOR = 190, SYMBOL_COLOR = 240;
 	
 	/**
 	 * Creates a solid circle that represents a button.
@@ -20,19 +23,6 @@ public class Button extends Ellipse2D.Float {
 	 */
 	public Button(float x, float y, float w) {
 		super(x - w/2, y - w/2, w, w);
-		toScreen = -1;
-	}
-	
-	/**
-	 * Creates a solid circle that represents a button. Button can lead to other screens.
-	 * @param x  x-coordinate of button's center
-	 * @param y  y-coordinate of button's center
-	 * @param w  button's width
-	 * @param toScreen  screen that button leads to
-	 */
-	public Button(float x, float y, float w, int toScreen) {
-		super(x - w/2, y - w/2, w, w);
-		this.toScreen = toScreen;
 	}
 	
 	/**
@@ -42,7 +32,7 @@ public class Button extends Ellipse2D.Float {
 	 * @return whether this button is pressed
 	 */
 	public boolean isHoveredOver(float mouseX, float mouseY) {
-		 return Math.pow(mouseX - x - width/2, 2) + Math.pow(mouseY - y - width/2, 2) <= Math.pow(width/2, 2);  // resizing will be a problem!
+		 return Math.pow(mouseX - x - width/2, 2) + Math.pow(mouseY - y - width/2, 2) <= Math.pow(width/2, 2);
 	}
 	
 	/**
@@ -54,11 +44,11 @@ public class Button extends Ellipse2D.Float {
 	}
 	
 	/**
-	 * Returns the screen that this button leads to.
-	 * @return screen that this button leads to on click
+	 * Responds to mouse release.
+	 * @param mouseX  mouse's current x-coordinate
+	 * @param mouseY  mouse's current y-coordinate
+	 * @param surface  surface to be changed
 	 */
-	public int getToScreen() {
-		return toScreen;
-	}
+	public abstract void mouseReleased(float mouseX, float mouseY, DrawingSurface surface);
 	
 }

@@ -1,5 +1,6 @@
-package tumble.screens;
+package tumble.gui.screens;
 
+import tumble.gui.buttons.PlayButton;
 import tumble.gui.*;
 
 /**
@@ -15,7 +16,7 @@ public class StartScreen extends Screen {
 	 */
 	public StartScreen(DrawingSurface surface) {
 		super(surface);
-		super.addButton(new Button(Screen.WIDTH/2, Screen.HEIGHT * 2/3, Screen.HEIGHT/5, DrawingSurface.GAME_SCREEN));
+		super.addButton(new PlayButton(Screen.WIDTH/2, Screen.HEIGHT * 2/3, Screen.HEIGHT/5));
 	}
 
 	/**
@@ -51,10 +52,7 @@ public class StartScreen extends Screen {
 		g.text("game by VanillaChip", 400 - subtitleW/2, 300);
 		
 		// play button
-		g.fill(190);
-		g.ellipse(400, 400, 120, 120);
-		g.fill(240);
-		g.triangle(383, 370, 383, 430, 430, 400);
+		drawButtons();
 		
 		g.popMatrix();
 		
