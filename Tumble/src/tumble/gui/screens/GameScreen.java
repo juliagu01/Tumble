@@ -30,7 +30,7 @@ public class GameScreen extends Screen {
 	public void draw() {
 		
 		DrawingSurface g = getSurface();
-		g.background(212, 210, 214);
+		g.background(212, 211, 214);
 		
 		// game
 		game.draw(g);

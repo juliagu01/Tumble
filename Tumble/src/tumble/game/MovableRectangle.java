@@ -11,7 +11,7 @@ import java.awt.geom.Rectangle2D;
  */
 public class MovableRectangle extends Rectangle2D.Float {
 	
-	private static final float EPSILON = 1e-3f;
+	private static final float EPSILON = 5e-4f;
 	private float vx, vy;
 	
 	/**

@@ -71,11 +71,11 @@ public class Player extends MovableRectangle {
 	}
 	
 	/**
-	 * Gives this player a horizontal boost 2 times the current velocity if in air.
+	 * Gives this player a horizontal boost 3 times the current velocity if in air.
 	 */
 	public void tryBoost() {
 		if (hasStraw && canBoost && !canJump) {
-			accelerate(getVelocityX()*10, getVelocityY()*-0.999f);
+			accelerate(getVelocityX() * 3, 0);
 			canBoost = false;
 		}
 	}
@@ -104,9 +104,7 @@ public class Player extends MovableRectangle {
 		// vines only (not the best...)
 		for (Platform p : platforms) {
 			if (hasStick && p instanceof Vine && intersects(p)) {
-				accelerate(-getVelocityX()/8, 0);
-				if (getVelocityY() > 0)
-					accelerate(0, -getVelocityY()/8);
+				accelerate(-getVelocityX()/8,  -getVelocityY()/32);
 				break;
 			}
 		}
