@@ -44,7 +44,7 @@ public class Player extends MovableRectangle {
 		if (hasLeaf)
 			accelerate(-2.7f, 0);
 		else
-			accelerate(-1.8f, 0);
+			accelerate(-1.9f, 0);
 	}
 
 	/**
@@ -54,7 +54,7 @@ public class Player extends MovableRectangle {
 		if (hasLeaf)
 			accelerate(2.7f, 0);
 		else
-			accelerate(1.8f, 0);
+			accelerate(1.9f, 0);
 	}
 
 	/**

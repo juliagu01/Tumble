@@ -150,6 +150,13 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher, KeyHandle
 	}
 	
 	/**
+	 * Resets game screen.
+	 */
+	public void resetGameScreen() {
+		screens[GAME_SCREEN] = new GameScreen(this);
+	}
+	
+	/**
 	 * Responds to mouse release.
 	 */
 	public void mouseReleased() {

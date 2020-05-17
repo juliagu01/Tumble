@@ -13,7 +13,7 @@ public abstract class Button extends Ellipse2D.Float {
 	/**
 	 * Buttons' shared color constants.
 	 */
-	public static final int BASE_COLOR = 190, SYMBOL_COLOR = 240;
+	public static final int BASE_COLOR = -4476227, SYMBOL_COLOR = 240;
 	
 	/**
 	 * Creates a solid circle that represents a button.

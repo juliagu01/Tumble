@@ -1,6 +1,6 @@
 package tumble.gui.screens;
 
-import tumble.gui.buttons.PlayButton;
+import tumble.gui.buttons.*;
 import tumble.gui.*;
 
 /**
@@ -17,6 +17,8 @@ public class PauseScreen extends Screen {
 	public PauseScreen(DrawingSurface surface) {
 		super(surface);
 		addButton(new PlayButton(Screen.WIDTH/2, Screen.HEIGHT * 380/600, Screen.HEIGHT/5));
+//		addButton(new MuteButton(Screen.WIDTH * 290/800, Screen.HEIGHT * 410/600, Screen.HEIGHT * 50/600));
+		addButton(new RestartButton(Screen.WIDTH * 510/800, Screen.HEIGHT * 410/600, Screen.HEIGHT * 50/600));
 	}
 
 	/**
@@ -39,7 +41,7 @@ public class PauseScreen extends Screen {
 		g.ellipse(100, 300, 500, 500);
 		
 		// text
-		g.fill(50);
+		g.fill(80);
 		g.textSize(72);
 		String text = "PAUSED";
 		float textW = g.textWidth(text);

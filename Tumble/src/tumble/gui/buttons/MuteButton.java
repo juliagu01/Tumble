@@ -3,7 +3,6 @@ package tumble.gui.buttons;
 import processing.core.PApplet;
 import tumble.gui.Button;
 import tumble.gui.DrawingSurface;
-import tumble.gui.ScreenSwitcher;
 
 /**
  * Represents a button that toggles the game's sound. 

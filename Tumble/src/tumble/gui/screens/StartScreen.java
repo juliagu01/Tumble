@@ -39,7 +39,7 @@ public class StartScreen extends Screen {
 		g.ellipse(100, 300, 500, 500);
 		
 		// title
-		g.fill(50);
+		g.fill(80);
 		g.textSize(90);
 		String title = "TUMBLE";
 		float titleW = g.textWidth(title);
