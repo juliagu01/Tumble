@@ -26,10 +26,8 @@ public class Platform extends Rectangle2D.Float {
 	 * @param g  the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
-		g.fill(160, 158, 162);
-		g.stroke(160, 158, 162);
-//		g.fill(140, 138, 142);
-//		g.stroke(140, 138, 142);
+		g.fill(160, 146, 162);
+		g.stroke(160, 146, 162);
 		g.strokeWeight(1);
 		g.rect(x, y, width, height);
 		g.noStroke();

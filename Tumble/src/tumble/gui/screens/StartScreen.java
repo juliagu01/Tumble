@@ -25,13 +25,13 @@ public class StartScreen extends Screen {
 	public void draw() {
 		
 		DrawingSurface g = getSurface();
-		g.background(212);
+		g.background(222, 220, 224);
 		
 		g.pushMatrix();
 		g.scale(g.width/800f, g.height/600f);
 		
 		// platform
-		g.fill(140);
+		g.fill(152, 146, 154);
 		g.rect(0, 550, 800, 50);
 		
 		// player

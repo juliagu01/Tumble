@@ -37,7 +37,7 @@ public class Game {
 		
 		camera = new Camera(playerLoc.x + player.width/2, playerLoc.y + player.width/2, 800f, 600f);
 		
-		targetOpacity = opacity = 0.3f;
+		targetOpacity = opacity = 0.4f;
 		
 	}
 	
@@ -59,7 +59,7 @@ public class Game {
 				player.tryGlide();
 			}
 		} else if (keys[KeyHandler.ENTER]) {
-			if (opacity > 0.3f)
+			if (opacity > 0.4f)
 				targetOpacity = 0;
 			message = null;
 		}
@@ -106,7 +106,7 @@ public class Game {
 		for (Platform p : platforms)
 			p.draw(g);
 		
-		// saturation
+		// opacity
 		g.fill(255, 255 * opacity);
 		g.rect(camera.x, camera.y, camera.width, camera.height);
 		
