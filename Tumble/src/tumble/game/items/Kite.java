@@ -20,7 +20,7 @@ public class Kite extends Item {
 	public Kite(float x, float y, float w) {
 		super(x, y - w/8, w, w * 5/4);
 		setMessage(new Message("You notice something sitting alone on the bench. It's a kite. You sit next to it. It tells you that it misses seeing color in the world. You do too. "
-				+ "The kite tells you that it wants to help you finish your quest. It offers to help you glide in air. You accept.  [To use, press up arrow in air.]", -2060800));
+				+ "The kite tells you that it wants to help you finish your quest. It offers to help you glide in air. You accept.  [To use, hold up arrow in air.]", -2060800));
 	}
 
 	/**

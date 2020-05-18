@@ -58,7 +58,7 @@ public class Game {
 				player.tryJump();
 				player.tryGlide();
 			}
-		} else if (keys[KeyHandler.ENTER]) {
+		} else if (keys[KeyHandler.SHIFT]) {
 			if (opacity > 0.4f)
 				targetOpacity = 0;
 			message = null;
