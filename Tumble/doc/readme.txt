@@ -9,7 +9,8 @@ places.
 
 Instructions:
   Click the play button on the start screen to begin a new game. Use the left and right arrows to move and the up arrow 
-to jump. All other controls will be revealed during gameplay. 
+to jump. All other controls will be revealed during gameplay. A pause button will be provided, along with the option to 
+restart if need be. 
 
 Features List:
   A. must-have:
@@ -58,10 +59,10 @@ Class List:
     Camera - the area of the map shown to players at a given moment
   gui
     buttons
-      MuteButton - a button that toggles the game's volume (unused)
-      PauseButton - a button that directs players to the pause screen
       PlayButton - a button that directs players to the game screen
+      PauseButton - a button that directs players to the pause screen
       RestartButton - a button that directs players to a restarted game
+      MuteButton - a button that toggles the game's volume (unused)
     screens
       StartScreen - the game's cover page
       GameScreen - the game's main screen
