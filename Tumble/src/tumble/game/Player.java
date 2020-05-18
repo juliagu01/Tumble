@@ -3,6 +3,7 @@ package tumble.game;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import tumble.game.items.*;
+import tumble.gui.Animation;
 import processing.core.PApplet;
 
 /**
@@ -165,8 +166,11 @@ public class Player extends MovableRectangle {
 	 */
 	public void draw(PApplet g) {
 		g.fill(253, 235, 0);
+		
+		
 		if (poweredUp) {
-			// power up animation (https://processing.org/examples/animatedsprite.html)
+			Animation a = new Animation();
+			a.draw();
 		} else
 			g.ellipse(x + width/2, y + height/2, width, height);
 	}
