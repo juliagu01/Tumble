@@ -26,6 +26,7 @@ public class Game {
 	private Fade fade;
 	private boolean hasColor;
 	private final Sound clink = new Sound("audio/powerup.wav");
+	private final Sound toot = new Sound("audio/orb.wav");
 	
 	/**
 	 * Creates a game with a player, platforms, and items. 
@@ -91,8 +92,11 @@ public class Game {
 	 */
 	public void setMessage(Message message) {
 		for (Item i : items)
-			if (i instanceof Orb && i.getMessage() == message)
+			if (i instanceof Orb && i.getMessage() == message) {
 				fade.fadeTo(1);
+				if (DrawingSurface.hasSound())
+					toot.play();
+			}
 		this.message = message;
 	}
 	
