@@ -1,6 +1,6 @@
 Tumble (a game by VanillaChip)
 Authors: Amanda Xu, Andra Liu, Julia Gu
-Revision: May 17, 2020
+Revision: May 21, 2020
 
 Introduction: 
   Meet Tumble, a bright yellow ball determined to bring color and life to his quiet, gray world. As he bounces his way 
@@ -15,16 +15,17 @@ restart if need be.
 Features List:
   A. must-have:
     1. start screen (done) - cover page with simple and intuitive design. Offers the option to start the game.
-    2. detailed map (done) - one large, muted map that guides players through the game. Often leaves players with limited 
-       directions of exploration to guide them towards the abilities and knowledge necessary to complete the game.
-    3. working physics and collisions (done) - traditional platformer-style physics and collisions. No detracting bugs or 
-       glitches.
-    4. power-ups (done) - each grants the player a previously unknown ability. The player cannot make meaningful progress 
-       without gaining these colorful items in an order laid out by the map.
+    2. detailed map (done) - one large, muted map that guides players through the game. Often leaves players with 
+       limited directions of exploration to guide them towards the abilities and knowledge necessary to complete the 
+       game.
+    3. working physics and collisions (done) - traditional platformer-style physics and collisions. No detracting bugs 
+       or glitches.
+    4. power-ups (done) - each grants the player a previously unknown ability. The player cannot make meaningful 
+       progress without gaining these colorful items in an order laid out by the map.
     5. messages (done) - moves the story forward. Used sparingly. Displayed when players find new power-ups. 
   B. want-to-have:
-    1. sound - sets a quiet mood, with bright sound effects as contrast. Sound effects play when the player jumps, uses 
-       an ability, or finds a power-up. Provides a mute option on the start screen and during gameplay.
+    1. sound (done) - sets a quiet mood, with bright sound effects as contrast. Sound effects play when the player 
+       jumps, uses an ability, or finds a power-up. Provides a mute option on the start screen and during gameplay.
     2. save slots - saves the current state of the game at checkpoints to be reloaded at a later time. Allows for up to 
        three separate slots. Colorful flags act as checkpoints during gameplay. 
     3. sprite animation - change to Tumble's shape during gameplay. Can include breathing animation when player is at 
@@ -32,8 +33,8 @@ Features List:
        power-ups as they are being used.
     4. parallax background - background that shifts as players move to different areas of the map. Adds a sense of 
        perspective. 
-    5. pause screen (done) - simple screen that appears when player pauses the game. Provides the option to continue or exit 
-       the game. 
+    5. pause screen (done) - simple screen that appears when player pauses the game. Provides the option to continue or 
+       exit the game. 
   C. stretch:
     1. complete post-game - a continuation of Tumble's adventures, with all of his newfound abilities and a colored 
        map. 
@@ -62,7 +63,7 @@ Class List:
       PlayButton - a button that directs players to the game screen
       PauseButton - a button that directs players to the pause screen
       RestartButton - a button that directs players to a restarted game
-      MuteButton - a button that toggles the game's volume (unused)
+      MuteButton - a button that toggles the game's volume
     screens
       StartScreen - the game's cover page
       GameScreen - the game's main screen
@@ -73,15 +74,19 @@ Class List:
     ScreenSwitcher (interface) - helps switch screens
     Screen (abstract) - the blueprint for all screens in the game
     Button (abstract) - a circular button that can lead to other screens
+    Fade - the layer over the game's screens that can change opacity
     Message - a colored banner that helps move the story forward
+    Sound - a short sound effect
 
 Credits:
   Processing library - graphics
+  soundfile.com and themushroomkingdom.net/media/smw/wav - sound clips
   Mr. Shelby's AnimationDemo project - relationships between Main, DrawingSurface, Player, and MovableRectangle
   Mr. Shelby's ScreenSwitching code - basic class structures of Screen and ScreenSwitcher
+  Mr. Shelby's EasySound code - code for Sound
   an anonymous younger brother - being a phenomenal QA!
 
 Responsibilities:
-  Amanda - screens, map
+  Amanda - screens, sound
   Andra - items, animations
   Julia - physics, design
