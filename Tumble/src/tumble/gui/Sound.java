@@ -7,14 +7,23 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
-
-public class EasySound2 implements Runnable
+/**
+ * This class represents short sound clips.
+ * @author Amanda Xu
+ * @version 5/21/20
+ * Credit to SpriteAndSound demo from demos folder
+ */
+public class Sound implements Runnable
 {
   private SourceDataLine line = null;
   private byte[] audioBytes;
   private int numBytes;
 
-  public EasySound2(String fileName)
+  /**
+   * Creates an EasySound2 object that consists of a short audio clip
+   * @param fileName name of wav sound file line to read
+   */
+  public Sound(String fileName)
   {
     File  soundFile = new File(fileName);
     AudioInputStream audioInputStream = null;
@@ -57,10 +66,16 @@ public class EasySound2 implements Runnable
     }
   }
 
+  /**
+   * Writes the line of sound
+   */
   public void run() {
 	  line.write(audioBytes, 0, numBytes);
   }
 
+  /**
+   * Plays the short audio clip
+   */
   public void play()
   {
 	  line.flush();
