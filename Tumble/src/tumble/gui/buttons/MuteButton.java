@@ -36,21 +36,18 @@ public class MuteButton extends Button {
 				x + width * 28/50, y + width * 10/50, 
 				x + width * 28/50, y + width * 40/50);
 		
-		if (!DrawingSurface.hasSound()) {
-			g.stroke(SYMBOL_COLOR);
-			g.strokeWeight(3);
-			g.noFill();
+		g.stroke(SYMBOL_COLOR);
+		g.strokeCap(PApplet.SQUARE);
+		g.strokeWeight(3);
+		g.noFill();
+		if (DrawingSurface.hasSound()) {
 			g.arc(x + width * 28/50, y + width * 25/50, width * 20/50, width * 20/50, -PApplet.PI/4, PApplet.PI/4);
 			g.arc(x + width * 28/50, y + width * 25/50, width * 10/50, width * 10/50, -PApplet.PI/4, PApplet.PI/4);
-			g.noStroke();
 		} else {
-			g.stroke(SYMBOL_COLOR);
-			g.strokeWeight(3);
-			g.noFill();
 			g.line(x + width * 32/50, y + width * 21/50, x + width * 40/50, y + width * 29/50);
 			g.line(x + width * 32/50, y + width * 29/50, x + width * 40/50, y + width * 21/50);
-			g.noStroke();
 		}
+		g.noStroke();
 		
 	}
 
