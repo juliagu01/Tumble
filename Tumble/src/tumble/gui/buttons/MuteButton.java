@@ -36,7 +36,7 @@ public class MuteButton extends Button {
 				x + width * 28/50, y + width * 10/50, 
 				x + width * 28/50, y + width * 40/50);
 		
-		if (!DrawingSurface.hasSound()) {
+		if (DrawingSurface.hasSound()) {
 			g.stroke(SYMBOL_COLOR);
 			g.strokeWeight(3);
 			g.noFill();
