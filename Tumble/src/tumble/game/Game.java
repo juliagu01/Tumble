@@ -7,6 +7,7 @@ import tumble.game.items.Orb;
 import tumble.gui.Fade;
 import tumble.gui.KeyHandler;
 import tumble.gui.Message;
+import tumble.gui.Sound;
 
 /**
  * Represents a Tumble game.
@@ -23,6 +24,7 @@ public class Game {
 	private Message message;
 	private Fade fade;
 	private boolean hasColor;
+	private final Sound clink = new Sound("audio/powerup.wav");
 	
 	/**
 	 * Creates a game with a player, platforms, and items. 
@@ -69,6 +71,7 @@ public class Game {
 					p.addColor();
 			}
 			message = null;
+			clink.play();
 		}
 
 		player.update(platforms, items);

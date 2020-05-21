@@ -6,7 +6,7 @@ import javax.sound.sampled.*;
 
 /**
  * This class represents short sound clips.
- * Credit to SpriteAndSound demo from demos folder
+ * Credit to SpriteAndSound demo from demos folder.
  * @author Amanda Xu
  * @version 5/21/20
  */

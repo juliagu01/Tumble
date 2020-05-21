@@ -26,8 +26,7 @@ public class Player extends MovableRectangle {
 	private Game game;
 	private ArrayList<Item> items;
 	private boolean poweredUp, canJump, canBoost, hasLeaf, hasFeather, hasStick, hasStraw, hasKite;
-	private final Sound powerup = new Sound("audio/powerup.wav");
-	private final Sound jump = new Sound("audio/jump.wav");
+	private final Sound boing = new Sound("audio/jump.wav");
 	private final Sound swoosh = new Sound("audio/swoosh.wav");
 	
 	/**
@@ -69,7 +68,7 @@ public class Player extends MovableRectangle {
 	 */
 	public void tryJump() {
 		if (canJump) {
-			jump.play();
+			boing.play();
 			if (hasFeather)
 				accelerate(0, -17);
 			else
@@ -110,7 +109,7 @@ public class Player extends MovableRectangle {
 		
 		accelerate(-getVelocityX()/4, 0.8f);
 		
-		// vines only (not the best...)
+		// vines only
 		for (Platform p : platforms) {
 			if (hasStick && p instanceof Vine && intersects(p)) {
 				accelerate(-getVelocityX()/8,  -getVelocityY()/32);
@@ -122,7 +121,7 @@ public class Player extends MovableRectangle {
 
 		canJump = false;
 		for (Platform p : platforms) {
-			if (!(hasStick && p instanceof Vine && intersects(p))) {  // ... considering this.
+			if (!(hasStick && p instanceof Vine && intersects(p))) {
 				Point2D.Float amount = collidesBy(p);
 				moveBy(-amount.x, -amount.y);
 				if (amount.y != 0)
@@ -140,7 +139,6 @@ public class Player extends MovableRectangle {
 		for (Item i : items) {
 			if (intersects(i) && !this.items.contains(i)) {
 				poweredUp = true;
-				powerup.play();
 				if (i instanceof Leaf)
 					hasLeaf = true;
 				else if (i instanceof Feather)
@@ -175,8 +173,6 @@ public class Player extends MovableRectangle {
 	 */
 	public void draw(PApplet g) {
 		g.fill(253, 235, 0);
-		
-		
 		if (poweredUp) {
 //			Animation a = new Animation();
 //			a.draw();
