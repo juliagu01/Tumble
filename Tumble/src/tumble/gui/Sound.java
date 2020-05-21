@@ -1,20 +1,27 @@
 package tumble.gui;
+
 import java.io.File;
 import java.io.IOException;
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.SourceDataLine;
+import javax.sound.sampled.*;
 
-public class EasySound2 implements Runnable
+/**
+ * This class represents short sound clips.
+ * Credit to SpriteAndSound demo from demos folder and soundfile.com
+ * for sound bits. 
+ * @author Amanda Xu
+ * @version 5/21/20
+ */
+public class Sound implements Runnable
 {
   private SourceDataLine line = null;
   private byte[] audioBytes;
   private int numBytes;
 
-  public EasySound2(String fileName)
+  /**
+   * Creates a Sound object that consists of a short audio clip
+   * @param fileName name of wav sound file line to read
+   */
+  public Sound(String fileName)
   {
     File  soundFile = new File(fileName);
     AudioInputStream audioInputStream = null;
@@ -57,13 +64,20 @@ public class EasySound2 implements Runnable
     }
   }
 
-  public void run() {
-	  line.write(audioBytes, 0, numBytes);
+  /**
+   * Writes the line of sound
+   */
+  public void run() 
+  {
+	line.write(audioBytes, 0, numBytes);
   }
 
+  /**
+   * Plays the short audio clip
+   */
   public void play()
   {
-	  line.flush();
-      new Thread(this).start();
+	line.flush();
+	new Thread(this).start();
   }
 }

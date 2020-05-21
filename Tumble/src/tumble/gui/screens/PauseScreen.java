@@ -33,7 +33,7 @@ public class PauseScreen extends Screen {
 		g.scale(g.width/800f, g.height/600f);
 		
 		// platform
-		g.fill(160, 144, 162);
+		g.fill(152, 144, 154);
 		g.rect(0, 550, 800, 50);
 		
 		// player

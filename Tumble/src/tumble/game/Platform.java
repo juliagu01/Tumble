@@ -10,6 +10,8 @@ import processing.core.PApplet;
  */
 public class Platform extends Rectangle2D.Float {
 	
+	private boolean hasColor;
+	
 	/**
 	 * Creates a rectangle that represents a platform. 
 	 * @param x  x-coordinate of platform's upper-left corner
@@ -19,6 +21,14 @@ public class Platform extends Rectangle2D.Float {
 	 */
 	public Platform(float x, float y, float w, float h) {
 		super(x, y, w, h);
+		hasColor = false;
+	}
+	
+	/**
+	 * Adds color to this platform.
+	 */
+	public void addColor() {
+		hasColor = true;
 	}
 	
 	/**
@@ -26,11 +36,27 @@ public class Platform extends Rectangle2D.Float {
 	 * @param g  the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
-		g.fill(160, 142, 162);
-		g.stroke(160, 142, 162);
-		g.strokeWeight(1);
+		
+		if (!hasColor) {
+			g.fill(160, 148, 162);
+			g.stroke(160, 148, 162);
+		} else {
+			g.fill(154, 224, 103);
+			g.stroke(154, 224, 103);
+		}
+		
+		g.strokeWeight(0.5f);
 		g.rect(x, y, width, height);
 		g.noStroke();
+		
+	}
+	
+	/**
+	 * Returns this platform's color state.
+	 * @return whether platform has color
+	 */
+	protected boolean hasColor() {
+		return hasColor;
 	}
 
 }

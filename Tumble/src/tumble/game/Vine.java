@@ -25,11 +25,19 @@ public class Vine extends Platform {
 	 * @param g  the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
-		g.fill(120, 100, 130);
-		g.stroke(120, 100, 130);
-		g.strokeWeight(1);
+		
+		if (!hasColor()) {
+			g.fill(120, 100, 130);
+			g.stroke(120, 100, 130);
+		} else {
+			g.fill(193, 150, 214);
+			g.stroke(193, 150, 214);
+		}
+		
+		g.strokeWeight(0.5f);
 		g.rect(x, y, width, height);
 		g.noStroke();
+		
 	}
 
 }

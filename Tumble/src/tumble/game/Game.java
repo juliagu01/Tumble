@@ -22,6 +22,7 @@ public class Game {
 	private Camera camera;
 	private Message message;
 	private Fade fade;
+	private boolean hasColor;
 	
 	/**
 	 * Creates a game with a player, platforms, and items. 
@@ -39,6 +40,7 @@ public class Game {
 		camera = new Camera(playerLoc.x + player.width/2, playerLoc.y + player.width/2, 800f, 600f);
 		
 		fade = new Fade(0.4f, 0.05f);
+		hasColor = false;
 		
 	}
 	
@@ -60,8 +62,12 @@ public class Game {
 				player.tryGlide();
 			}
 		} else if (keys[KeyHandler.SHIFT]) {
-			if (fade.getOpacity() > 0.4f)
+			if (fade.getOpacity() > 0.4f) {
 				fade.fadeTo(0);
+				hasColor = true;
+				for (Platform p : platforms)
+					p.addColor();
+			}
 			message = null;
 		}
 
@@ -102,12 +108,18 @@ public class Game {
 		g.pushMatrix();
 		g.scale(g.width/camera.width, g.height/camera.height);
 		g.translate(-camera.x, -camera.y);
+
+		// background
+		if (!hasColor)
+			g.background(212, 208, 214);
+		else 
+			g.background(210, 245, 255);
 		
 		// platforms
 		for (Platform p : platforms)
 			p.draw(g);
 		
-		// opacity
+		// fade
 		fade.draw(g, camera.x, camera.y, camera.width, camera.height);
 		
 		// items
