@@ -12,10 +12,10 @@ import processing.core.PApplet;
  * Represents a movable ellipse with basic physics and rectangular collision
  * detection.
  * Credit to soundfile.com and https://themushroomkingdom.net/media/smw/wav
- * for sound files
+ * for sound files.
  * 
  * @author Amanda Xu, Andra Liu, Julia Gu
- * @version May 10, 2020
+ * @version May 21, 2020
  */
 public class Player extends MovableRectangle {
 
@@ -84,7 +84,7 @@ public class Player extends MovableRectangle {
 	 */
 	public void tryBoost() {
 		if (hasStraw && canBoost && !canJump) {
-			if (DrawingSurface.hasSound())
+			if (DrawingSurface.hasSound() && (getVelocityX() < -0.01 || getVelocityX() > 0.01))
 				swoosh.play();
 			accelerate(getVelocityX() * 3, 0);
 			canBoost = false;
