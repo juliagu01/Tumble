@@ -17,7 +17,7 @@ public class PauseScreen extends Screen {
 	public PauseScreen(DrawingSurface surface) {
 		super(surface);
 		addButton(new PlayButton(Screen.WIDTH/2, Screen.HEIGHT * 380/600, Screen.HEIGHT/5));
-//		addButton(new MuteButton(Screen.WIDTH * 290/800, Screen.HEIGHT * 410/600, Screen.HEIGHT * 50/600));
+		addButton(new MuteButton(Screen.WIDTH * 290/800, Screen.HEIGHT * 410/600, Screen.HEIGHT * 50/600));
 		addButton(new RestartButton(Screen.WIDTH * 510/800, Screen.HEIGHT * 410/600, Screen.HEIGHT * 50/600));
 	}
 

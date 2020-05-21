@@ -1,7 +1,6 @@
 package tumble.gui;
 
 import java.awt.event.KeyEvent;
-
 import tumble.gui.screens.*;
 import processing.core.PApplet;
 
@@ -16,6 +15,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher, KeyHandle
 	private Screen[] screens;
 	private Screen activeScreen, toScreen;
 	private boolean[] keys;
+	private static boolean HAS_SOUND = true;
 	
 	/**
 	 * Creates a canvas that displays a game. 
@@ -23,7 +23,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher, KeyHandle
 	public DrawingSurface() {
 		
 		super();
-		keys = new boolean[6];
+		keys = new boolean[5];
 		
 		screens = new Screen[] {new StartScreen(this), new GameScreen(this), new PauseScreen(this)};
 		activeScreen = screens[0];
@@ -93,6 +93,21 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher, KeyHandle
 	}
 	
 	/**
+	 * Toggles sound.
+	 */
+	public static void toggleSound() {
+		HAS_SOUND = !HAS_SOUND;
+	}
+	
+	/**
+	 * Returns sound state.
+	 * @return whether has sound
+	 */
+	public static boolean hasSound() {
+		return HAS_SOUND;
+	}
+	
+	/**
 	 * Responds to mouse release.
 	 */
 	public void mouseReleased() {
@@ -106,9 +121,6 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher, KeyHandle
 		switch (keyCode) {
 			case KeyEvent.VK_UP:
 				keys[KeyHandler.UP] = true;
-				break;
-			case KeyEvent.VK_DOWN:
-				keys[KeyHandler.DOWN] = true;
 				break;
 			case KeyEvent.VK_LEFT:
 				keys[KeyHandler.LEFT] = true;
@@ -132,9 +144,6 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher, KeyHandle
 		switch (keyCode) {
 			case KeyEvent.VK_UP:
 				keys[KeyHandler.UP] = false;
-				break;
-			case KeyEvent.VK_DOWN:
-				keys[KeyHandler.DOWN] = false;
 				break;
 			case KeyEvent.VK_LEFT:
 				keys[KeyHandler.LEFT] = false;

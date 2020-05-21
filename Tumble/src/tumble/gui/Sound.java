@@ -22,7 +22,7 @@ public class Sound implements Runnable
    */
   public Sound(String fileName)
   {
-    File  soundFile = new File(fileName);
+    File soundFile = new File(fileName);
     AudioInputStream audioInputStream = null;
     try
     {

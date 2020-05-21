@@ -1,5 +1,6 @@
 package tumble.gui.screens;
 
+import tumble.gui.buttons.MuteButton;
 import tumble.gui.buttons.PlayButton;
 import tumble.gui.*;
 
@@ -17,6 +18,7 @@ public class StartScreen extends Screen {
 	public StartScreen(DrawingSurface surface) {
 		super(surface);
 		super.addButton(new PlayButton(Screen.WIDTH/2, Screen.HEIGHT * 2/3, Screen.HEIGHT/5));
+		addButton(new MuteButton(Screen.WIDTH * 510/800, Screen.HEIGHT * 430/600, Screen.HEIGHT * 50/600));
 	}
 
 	/**

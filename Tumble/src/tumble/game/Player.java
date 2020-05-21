@@ -4,17 +4,18 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import tumble.game.items.*;
 import tumble.gui.Animation;
+import tumble.gui.DrawingSurface;
 import tumble.gui.Sound;
 import processing.core.PApplet;
 
 /**
  * Represents a movable ellipse with basic physics and rectangular collision
  * detection.
+ * Credit to soundfile.com and https://themushroomkingdom.net/media/smw/wav
+ * for sound files
  * 
  * @author Amanda Xu, Andra Liu, Julia Gu
  * @version May 10, 2020
- * Credit to soundfile.com and https://themushroomkingdom.net/media/smw/wav
- * for sound files
  */
 public class Player extends MovableRectangle {
 
@@ -27,7 +28,7 @@ public class Player extends MovableRectangle {
 	private ArrayList<Item> items;
 	private boolean poweredUp, canJump, canBoost, hasLeaf, hasFeather, hasStick, hasStraw, hasKite;
 	private final Sound boing = new Sound("audio/jump.wav");
-	private final Sound swoosh = new Sound("audio/swoosh.wav");
+	private final Sound swoosh = new Sound("audio/boost.wav");
 	
 	/**
 	 * Creates an ellipse that represents a player. Player has a rectangular
@@ -68,7 +69,8 @@ public class Player extends MovableRectangle {
 	 */
 	public void tryJump() {
 		if (canJump) {
-			boing.play();
+			if (DrawingSurface.hasSound())
+				boing.play();
 			if (hasFeather)
 				accelerate(0, -17);
 			else
@@ -82,7 +84,8 @@ public class Player extends MovableRectangle {
 	 */
 	public void tryBoost() {
 		if (hasStraw && canBoost && !canJump) {
-			swoosh.play();
+			if (DrawingSurface.hasSound())
+				swoosh.play();
 			accelerate(getVelocityX() * 3, 0);
 			canBoost = false;
 		}

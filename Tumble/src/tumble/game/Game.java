@@ -4,6 +4,7 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import processing.core.PApplet;
 import tumble.game.items.Orb;
+import tumble.gui.DrawingSurface;
 import tumble.gui.Fade;
 import tumble.gui.KeyHandler;
 import tumble.gui.Message;
@@ -71,7 +72,8 @@ public class Game {
 					p.addColor();
 			}
 			message = null;
-			clink.play();
+			if (DrawingSurface.hasSound())
+				clink.play();
 		}
 
 		player.update(platforms, items);
@@ -89,7 +91,7 @@ public class Game {
 	 */
 	public void setMessage(Message message) {
 		for (Item i : items)
-			if (i instanceof Orb && i.getMessage() == message)  // not the best...
+			if (i instanceof Orb && i.getMessage() == message)
 				fade.fadeTo(1);
 		this.message = message;
 	}
