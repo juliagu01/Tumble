@@ -26,17 +26,12 @@ public class Vine extends Platform {
 	 */
 	public void draw(PApplet g) {
 		
-		if (!hasColor()) {
-			g.fill(120, 100, 130);
-			g.stroke(120, 100, 130);
-		} else {
-			g.fill(193, 150, 214);
-			g.stroke(193, 150, 214);
-		}
-		
-		g.strokeWeight(0.5f);
-		g.rect(x, y, width, height);
-		g.noStroke();
+		if (!hasColor())
+			g.fill(100, 80, 110);
+		else
+			g.fill(190, 130, 224);
+
+		g.rect(x - 0.5f, y - 0.5f, width + 1, height + 1);
 		
 	}
 

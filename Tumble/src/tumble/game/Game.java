@@ -111,9 +111,9 @@ public class Game {
 
 		// background
 		if (!hasColor)
-			g.background(212, 208, 214);
+			g.background(192, 185, 194);
 		else 
-			g.background(210, 245, 255);
+			g.background(183, 225, 237);
 		
 		// platforms
 		for (Platform p : platforms)
