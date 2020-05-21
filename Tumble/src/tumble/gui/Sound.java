@@ -31,7 +31,7 @@ public class Sound implements Runnable
     }
     catch (Exception ex)
     {
-      System.out.println("*** Cannot find " + fileName + " ***");
+      System.out.println(fileName + " cannot be found");
       System.exit(1);
     }
 
@@ -45,7 +45,7 @@ public class Sound implements Runnable
     }
     catch (LineUnavailableException ex)
     {
-      System.out.println("*** Audio line unavailable ***");
+      System.out.println("Audio line unavailable");
       System.exit(1);
     }
 
@@ -59,7 +59,7 @@ public class Sound implements Runnable
     }
     catch (IOException ex)
     {
-      System.out.println("*** Cannot read " + fileName + " ***");
+      System.out.println(fileName + " cannot be read");
       System.exit(1);
     }
   }
