@@ -45,6 +45,9 @@ public class GameScreen extends Screen {
 		// pause button
 		drawButtons();
 		
+		// fade
+		super.draw();
+		
 		g.popMatrix();
 		
 	}

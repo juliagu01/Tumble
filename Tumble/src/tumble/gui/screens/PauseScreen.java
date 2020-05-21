@@ -50,6 +50,9 @@ public class PauseScreen extends Screen {
 		// play button
 		drawButtons();
 		
+		// fade
+		super.draw();
+		
 		g.popMatrix();
 		
 	}
