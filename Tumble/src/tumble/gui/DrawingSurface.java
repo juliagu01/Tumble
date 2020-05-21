@@ -1,6 +1,7 @@
 package tumble.gui;
 
 import java.awt.event.KeyEvent;
+
 import tumble.gui.screens.*;
 import processing.core.PApplet;
 
@@ -15,6 +16,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher, KeyHandle
 	private Screen[] screens;
 	private Screen activeScreen;
 	private boolean[] keys;
+	private final EasySound2 sound = new EasySound2("Jump.wav");
 	
 	/**
 	 * Creates a canvas that displays a game. 
@@ -103,6 +105,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher, KeyHandle
 		switch (keyCode) {
 			case KeyEvent.VK_UP:
 				keys[KeyHandler.UP] = true;
+				sound.play();
 				break;
 			case KeyEvent.VK_DOWN:
 				keys[KeyHandler.DOWN] = true;
