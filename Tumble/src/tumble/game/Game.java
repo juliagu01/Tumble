@@ -58,13 +58,13 @@ public class Game {
 				player.rollLeft();
 			if (keys[KeyHandler.RIGHT])
 				player.rollRight();
-			if (keys[KeyHandler.SPACE])
+			if (keys[KeyHandler.SHIFT])
 				player.tryBoost();
 			if (keys[KeyHandler.UP]) {
 				player.tryJump();
 				player.tryGlide();
 			}
-		} else if (keys[KeyHandler.SHIFT]) {
+		} else if (keys[KeyHandler.SPACE]) {
 			if (fade.getOpacity() > 0.4f) {
 				fade.fadeTo(0);
 				hasColor = true;

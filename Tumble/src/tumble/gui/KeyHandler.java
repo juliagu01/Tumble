@@ -11,7 +11,7 @@ public interface KeyHandler {
 	/**
 	 * Key constants.
 	 */
-	public static final int UP = 0, LEFT = 1, RIGHT = 2, SPACE = 3, SHIFT = 4;
+	public static final int UP = 0, LEFT = 1, RIGHT = 2, SHIFT = 3, SPACE = 4;
 
 	/**
 	 * Reacts to this key press.

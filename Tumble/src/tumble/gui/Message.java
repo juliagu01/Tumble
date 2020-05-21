@@ -33,7 +33,7 @@ public class Message {
 		g.textSize(16);
 		g.text(text, 100, 450, 600, 100);
 		g.textSize(10);
-		String instruction = "[shift to continue]";
+		String instruction = "[space to continue]";
 		g.text(instruction, 700 - g.textWidth(instruction), 570);
 	}
 	

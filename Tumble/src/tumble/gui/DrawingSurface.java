@@ -128,11 +128,11 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher, KeyHandle
 			case KeyEvent.VK_RIGHT:
 				keys[KeyHandler.RIGHT] = true;
 				break;
-			case KeyEvent.VK_SPACE:
-				keys[KeyHandler.SPACE] = true;
-				break;
 			case KeyEvent.VK_SHIFT:
 				keys[KeyHandler.SHIFT] = true;
+				break;
+			case KeyEvent.VK_SPACE:
+				keys[KeyHandler.SPACE] = true;
 				break;
 		}
 	}
@@ -151,11 +151,11 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher, KeyHandle
 			case KeyEvent.VK_RIGHT:
 				keys[KeyHandler.RIGHT] = false;
 				break;
-			case KeyEvent.VK_SPACE:
-				keys[KeyHandler.SPACE] = false;
-				break;
 			case KeyEvent.VK_SHIFT:
 				keys[KeyHandler.SHIFT] = false;
+				break;
+			case KeyEvent.VK_SPACE:
+				keys[KeyHandler.SPACE] = false;
 				break;
 		}
 
