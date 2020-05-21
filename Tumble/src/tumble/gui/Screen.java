@@ -17,6 +17,7 @@ public abstract class Screen {
 	public static final float WIDTH = 800, HEIGHT = 600;
 	private ArrayList<Button> buttons;
 	private DrawingSurface surface;
+	private Fade fade;
 	
 	/**
 	 * Creates a general screen.
@@ -25,6 +26,7 @@ public abstract class Screen {
 	public Screen(DrawingSurface surface) {
 		buttons = new ArrayList<Button>();
 		this.surface = surface;
+		fade = new Fade(1, 0.2f);
 	}
 
 	/**
@@ -33,14 +35,6 @@ public abstract class Screen {
 	 */
 	public void addButton(Button b) {
 		buttons.add(b);
-	}
-
-	/**
-	 * Returns the drawing surface onto which this screen is drawn.
-	 * @return this screen's drawing surface
-	 */
-	public DrawingSurface getSurface() {
-		return surface;
 	}
 	
 	/**
@@ -57,12 +51,16 @@ public abstract class Screen {
 	 * @param keys  keys that are currently pressed
 	 */
 	public void update(boolean[] keys) {
+		
+		fade.update();
+		
 		for (Button b : buttons)
 			if (b.isHoveredOver(surface.getTransformedCoordinateX(surface.mouseX), surface.getTransformedCoordinateY(surface.mouseY))) {
 				surface.cursor(PApplet.HAND);
 				return;
 			}
 		surface.cursor(PApplet.ARROW);
+		
 	}
 
 	/**
@@ -72,10 +70,42 @@ public abstract class Screen {
 		for (Button b : buttons)
 			b.draw(surface);
 	}
+
+	/**
+	 * Fades this screen in.
+	 */
+	public void fadeIn() {
+		fade.fadeTo(0);
+	}
+
+	/**
+	 * Fades this screen out to white.
+	 */
+	public void fadeOut() {
+		fade.fadeTo(1);
+	}
+
+	/**
+	 * Determines whether this screen has completely faded out.
+	 * @return whether screen has completely faded out
+	 */
+	public boolean isFadedOut() {
+		return fade.getOpacity() > 0.95;
+	}
+
+	/**
+	 * Returns the drawing surface onto which this screen is drawn.
+	 * @return this screen's drawing surface
+	 */
+	protected DrawingSurface getSurface() {
+		return surface;
+	}
 	
 	/**
 	 * Draws this screen.
 	 */
-	public abstract void draw();
+	public void draw() {
+		fade.draw(surface, 0, 0, WIDTH, HEIGHT);
+	}
 	
 }

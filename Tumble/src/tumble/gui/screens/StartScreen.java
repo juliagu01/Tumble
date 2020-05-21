@@ -54,6 +54,9 @@ public class StartScreen extends Screen {
 		// play button
 		drawButtons();
 		
+		// fade
+		super.draw();
+		
 		g.popMatrix();
 		
 	}

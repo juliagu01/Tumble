@@ -4,6 +4,7 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import processing.core.PApplet;
 import tumble.game.items.Orb;
+import tumble.gui.Fade;
 import tumble.gui.KeyHandler;
 import tumble.gui.Message;
 
@@ -20,7 +21,7 @@ public class Game {
 	private ArrayList<Item> items;
 	private Camera camera;
 	private Message message;
-	private float opacity, targetOpacity;
+	private Fade fade;
 	
 	/**
 	 * Creates a game with a player, platforms, and items. 
@@ -37,7 +38,7 @@ public class Game {
 		
 		camera = new Camera(playerLoc.x + player.width/2, playerLoc.y + player.width/2, 800f, 600f);
 		
-		targetOpacity = opacity = 0.4f;
+		fade = new Fade(0.4f, 0.05f);
 		
 	}
 	
@@ -59,8 +60,8 @@ public class Game {
 				player.tryGlide();
 			}
 		} else if (keys[KeyHandler.SHIFT]) {
-			if (opacity > 0.4f)
-				targetOpacity = 0;
+			if (fade.getOpacity() > 0.4f)
+				fade.fadeTo(0);
 			message = null;
 		}
 
@@ -69,7 +70,7 @@ public class Game {
 		camera.setTargetLocation(player.x + player.width/2, player.y + player.width/2);
 		camera.slide();
 		
-		opacity += (targetOpacity-opacity) / 20;
+		fade.update();
 		
 	}
 	
@@ -80,7 +81,7 @@ public class Game {
 	public void setMessage(Message message) {
 		for (Item i : items)
 			if (i instanceof Orb && i.getMessage() == message)  // not the best...
-				targetOpacity = 1;
+				fade.fadeTo(1);
 		this.message = message;
 	}
 	
@@ -107,8 +108,7 @@ public class Game {
 			p.draw(g);
 		
 		// opacity
-		g.fill(255, 255 * opacity);
-		g.rect(camera.x, camera.y, camera.width, camera.height);
+		fade.draw(g, camera.x, camera.y, camera.width, camera.height);
 		
 		// items
 		for (Item i : items)

@@ -169,8 +169,8 @@ public class Player extends MovableRectangle {
 		
 		
 		if (poweredUp) {
-			Animation a = new Animation();
-			a.draw();
+//			Animation a = new Animation();
+//			a.draw();
 		} else
 			g.ellipse(x + width/2, y + height/2, width, height);
 	}

@@ -13,7 +13,7 @@ import processing.core.PApplet;
 public class DrawingSurface extends PApplet implements ScreenSwitcher, KeyHandler {
 	
 	private Screen[] screens;
-	private Screen activeScreen;
+	private Screen activeScreen, toScreen;
 	private boolean[] keys;
 	
 	/**
@@ -22,7 +22,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher, KeyHandle
 	public DrawingSurface() {
 		
 		super();
-		keys = new boolean[7];  //
+		keys = new boolean[6];
 		
 		screens = new Screen[] {new StartScreen(this), new GameScreen(this), new PauseScreen(this)};
 		activeScreen = screens[0];
@@ -50,25 +50,12 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher, KeyHandle
 	public void draw() {
 		activeScreen.update(keys);
 		activeScreen.draw();
+		if (activeScreen != toScreen && activeScreen.isFadedOut()) {
+			if (toScreen != null)
+				activeScreen = toScreen;
+			activeScreen.fadeIn();
+		}
 	}
-	
-//	/**
-//	 * Returns the actual x-coordinate that corresponds to the transformed x-coordinate.
-//	 * @param assumedX  x-coordinate in transformed coordinates
-//	 * @return the x-coordinate in actual coordinates
-//	 */
-//	public float getActualCoordinateX(float assumedX) {
-//		return assumedX * width/Screen.WIDTH;
-//	}
-//	
-//	/**
-//	 * Returns the actual y-coordinate that corresponds to the transformed y-coordinate.
-//	 * @param assumedY  y-coordinate in transformed coordinates
-//	 * @return the y-coordinate in actual coordinates
-//	 */
-//	public float getActualCoordinateY(float assumedY) {
-//		return assumedY * height/Screen.HEIGHT;
-//	}
 	
 	/**
 	 * Returns the transformed x-coordinate that corresponds to the actual x-coordinate.
@@ -93,7 +80,22 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher, KeyHandle
 	 * @param screen  screen to be switched to
 	 */
 	public void switchScreen(int screen) {
-		activeScreen = screens[screen];
+		activeScreen.fadeOut();
+		toScreen = screens[screen];
+	}
+	
+	/**
+	 * Resets game screen.
+	 */
+	public void resetGameScreen() {
+		screens[GAME_SCREEN] = new GameScreen(this);
+	}
+	
+	/**
+	 * Responds to mouse release.
+	 */
+	public void mouseReleased() {
+		activeScreen.mouseReleased();
 	}
 
 	/**
@@ -147,20 +149,6 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher, KeyHandle
 				break;
 		}
 
-	}
-	
-	/**
-	 * Resets game screen.
-	 */
-	public void resetGameScreen() {
-		screens[GAME_SCREEN] = new GameScreen(this);
-	}
-	
-	/**
-	 * Responds to mouse release.
-	 */
-	public void mouseReleased() {
-		activeScreen.mouseReleased();
 	}
 	
 }
