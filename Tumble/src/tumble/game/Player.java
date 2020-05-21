@@ -4,6 +4,7 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import tumble.game.items.*;
 import tumble.gui.Animation;
+import tumble.gui.Sound;
 import processing.core.PApplet;
 
 /**
@@ -23,7 +24,8 @@ public class Player extends MovableRectangle {
 	private Game game;
 	private ArrayList<Item> items;
 	private boolean poweredUp, canJump, canBoost, hasLeaf, hasFeather, hasStick, hasStraw, hasKite;
-
+	private final Sound powerup = new Sound("powerup.wav");
+	
 	/**
 	 * Creates an ellipse that represents a player. Player has a rectangular
 	 * hit-box.
@@ -132,6 +134,7 @@ public class Player extends MovableRectangle {
 		for (Item i : items) {
 			if (intersects(i) && !this.items.contains(i)) {
 				poweredUp = true;
+				powerup.play();
 				if (i instanceof Leaf)
 					hasLeaf = true;
 				else if (i instanceof Feather)

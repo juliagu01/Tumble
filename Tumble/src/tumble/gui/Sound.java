@@ -11,7 +11,8 @@ import javax.sound.sampled.SourceDataLine;
  * This class represents short sound clips.
  * @author Amanda Xu
  * @version 5/21/20
- * Credit to SpriteAndSound demo from demos folder
+ * Credit to SpriteAndSound demo from demos folder and soundfile.com
+ * for sound bits
  */
 public class Sound implements Runnable
 {

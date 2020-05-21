@@ -16,7 +16,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher, KeyHandle
 	private Screen[] screens;
 	private Screen activeScreen, toScreen;
 	private boolean[] keys;
-	private final Sound sound = new Sound("Jump.wav");
+	private final Sound sound = new Sound("jump.wav");
 	
 	/**
 	 * Creates a canvas that displays a game. 
