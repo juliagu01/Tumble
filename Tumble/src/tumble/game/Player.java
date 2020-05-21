@@ -13,6 +13,8 @@ import processing.core.PApplet;
  * 
  * @author Amanda Xu, Andra Liu, Julia Gu
  * @version May 10, 2020
+ * Credit to soundfile.com and https://themushroomkingdom.net/media/smw/wav
+ * for sound files
  */
 public class Player extends MovableRectangle {
 
@@ -24,7 +26,9 @@ public class Player extends MovableRectangle {
 	private Game game;
 	private ArrayList<Item> items;
 	private boolean poweredUp, canJump, canBoost, hasLeaf, hasFeather, hasStick, hasStraw, hasKite;
-	private final Sound powerup = new Sound("powerup.wav");
+	private final Sound powerup = new Sound("audio/powerup.wav");
+	private final Sound jump = new Sound("audio/jump.wav");
+	private final Sound swoosh = new Sound("audio/swoosh.wav");
 	
 	/**
 	 * Creates an ellipse that represents a player. Player has a rectangular
@@ -65,6 +69,7 @@ public class Player extends MovableRectangle {
 	 */
 	public void tryJump() {
 		if (canJump) {
+			jump.play();
 			if (hasFeather)
 				accelerate(0, -17);
 			else
@@ -78,6 +83,7 @@ public class Player extends MovableRectangle {
 	 */
 	public void tryBoost() {
 		if (hasStraw && canBoost && !canJump) {
+			swoosh.play();
 			accelerate(getVelocityX() * 3, 0);
 			canBoost = false;
 		}
