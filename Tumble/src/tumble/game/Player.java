@@ -3,7 +3,6 @@ package tumble.game;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import tumble.game.items.*;
-import tumble.gui.Animation;
 import tumble.gui.DrawingSurface;
 import tumble.gui.Sound;
 import processing.core.PApplet;
@@ -26,9 +25,11 @@ public class Player extends MovableRectangle {
 	
 	private Game game;
 	private ArrayList<Item> items;
-	private boolean poweredUp, canJump, canBoost, hasLeaf, hasFeather, hasStick, hasStraw, hasKite;
+	private boolean canJump, canBoost, hasLeaf, hasFeather, hasStick, hasStraw, hasKite;
+	public static boolean poweredUp;
 	private final Sound boing = new Sound("audio/jump.wav");
 	private final Sound swoosh = new Sound("audio/boost.wav");
+	private int counter;
 	
 	/**
 	 * Creates an ellipse that represents a player. Player has a rectangular
@@ -110,6 +111,13 @@ public class Player extends MovableRectangle {
 	 */
 	public void update(ArrayList<Platform> platforms, ArrayList<Item> items) {
 		
+		if (poweredUp && counter < 200) {
+			counter++;
+		} else {
+			poweredUp = false;
+			counter = 0;
+		}
+		
 		accelerate(-getVelocityX()/4, 0.8f);
 		
 		// vines only
@@ -138,7 +146,6 @@ public class Player extends MovableRectangle {
 			}
 		}
 
-		poweredUp = false;
 		for (Item i : items) {
 			if (intersects(i) && !this.items.contains(i)) {
 				poweredUp = true;
@@ -172,15 +179,12 @@ public class Player extends MovableRectangle {
 	/**
 	 * Draws this player.
 	 * 
-	 * @param g		surface to be drawn on
+	 * @param g	PApplet surface to be drawn on
 	 */
 	public void draw(PApplet g) {
 		g.fill(253, 235, 0);
-		if (poweredUp) {
-//			Animation a = new Animation();
-//			a.draw();
-		} else
-			g.ellipse(x + width/2, y + height/2, width, height);
+		g.ellipse(x + width/2, y + height/2, width, height);
 	}
+
 
 }

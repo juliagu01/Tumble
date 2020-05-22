@@ -1,8 +1,11 @@
 package tumble.gui;
 
 import java.awt.event.KeyEvent;
+
+import tumble.game.Player;
 import tumble.gui.screens.*;
 import processing.core.PApplet;
+import processing.core.PImage;
 
 /**
  * Represents a canvas onto which a game is drawn. 
@@ -16,6 +19,9 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher, KeyHandle
 	private Screen activeScreen, toScreen;
 	private boolean[] keys;
 	private static boolean HAS_SOUND = true;
+	private PImage p;
+	//private PImage[] p = new PImage[4];
+	public boolean poweredUp;
 	
 	/**
 	 * Creates a canvas that displays a game. 
@@ -43,6 +49,13 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher, KeyHandle
 	public void setup() {
 		noStroke();
 		surface.setResizable(true);
+		
+		p = loadImage("lightning.gif");
+		
+//		p[0] = loadImage("1.jpg");
+//		p[1] = loadImage("2.jpg");
+//		p[2] = loadImage("3.jpg");
+//		p[3] = loadImage("4.jpg");
 	}
 
 	/**
@@ -55,6 +68,11 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher, KeyHandle
 			if (toScreen != null)
 				activeScreen = toScreen;
 			activeScreen.fadeIn();
+		}
+		
+		if(Player.poweredUp) {
+			//image(p[frameCount%4], Screen.WIDTH/4, Screen.HEIGHT/4);
+			image(p, Screen.WIDTH/4, Screen.HEIGHT/4);
 		}
 	}
 	
