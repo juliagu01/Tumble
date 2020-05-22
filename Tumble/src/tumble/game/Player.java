@@ -111,7 +111,7 @@ public class Player extends MovableRectangle {
 	 */
 	public void update(ArrayList<Platform> platforms, ArrayList<Item> items) {
 		
-		if (poweredUp && counter < 200) {
+		if (poweredUp && counter < 50) {
 			counter++;
 		} else {
 			poweredUp = false;

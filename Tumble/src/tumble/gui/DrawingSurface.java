@@ -19,8 +19,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher, KeyHandle
 	private Screen activeScreen, toScreen;
 	private boolean[] keys;
 	private static boolean HAS_SOUND = true;
-	private PImage p;
-	//private PImage[] p = new PImage[4];
+	private PImage[] p = new PImage[4];
 	public boolean poweredUp;
 	
 	/**
@@ -50,12 +49,10 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher, KeyHandle
 		noStroke();
 		surface.setResizable(true);
 		
-		p = loadImage("lightning.gif");
-		
-//		p[0] = loadImage("1.jpg");
-//		p[1] = loadImage("2.jpg");
-//		p[2] = loadImage("3.jpg");
-//		p[3] = loadImage("4.jpg");
+		p[0] = loadImage("images/frame_0.png");
+		p[1] = loadImage("images/frame_1.png");
+		p[2] = loadImage("images/frame_2.png");
+		p[3] = loadImage("images/frame_3.png");
 	}
 
 	/**
@@ -71,8 +68,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher, KeyHandle
 		}
 		
 		if(Player.poweredUp) {
-			//image(p[frameCount%4], Screen.WIDTH/4, Screen.HEIGHT/4);
-			image(p, Screen.WIDTH/4, Screen.HEIGHT/4);
+			image(p[frameCount%4], Screen.WIDTH/4, Screen.HEIGHT/4);
 		}
 	}
 	
