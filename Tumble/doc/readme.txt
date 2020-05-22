@@ -3,14 +3,13 @@ Authors: Amanda Xu, Andra Liu, Julia Gu
 Revision: May 21, 2020
 
 Introduction: 
-  Meet Tumble, a bright yellow ball determined to bring color and life to his quiet, gray world. As he bounces his way 
-through this heartwarming metroidvania in search of the White Orb of Color, he finds friends in the most unexpected of 
-places. 
+  Meet Tumble, a bright yellow ball determined to bring color to his quiet, gray world. As he bounces his way through 
+this metroidvania platformer in search of the White Orb of Color, he finds friends in the most unexpected of places. 
 
 Instructions:
   Click the play button on the start screen to begin a new game. Use the left and right arrows to move and the up arrow 
 to jump. All other controls will be revealed during gameplay. A pause button will be provided, along with the option to 
-restart if need be. 
+mute or restart if need be. 
 
 Features List:
   A. must-have:
@@ -28,9 +27,9 @@ Features List:
        jumps, uses an ability, or finds a power-up. Provides a mute option on the start screen and during gameplay.
     2. save slots - saves the current state of the game at checkpoints to be reloaded at a later time. Allows for up to 
        three separate slots. Colorful flags act as checkpoints during gameplay. 
-    3. sprite animation - change to Tumble's shape during gameplay. Can include breathing animation when player is at 
-       rest, bounce animations and particle systems during platform collisions, and a visual representation of 
-       power-ups as they are being used.
+    3. sprite animation (started) - change to Tumble's shape during gameplay. Can include breathing animation when 
+       player is at rest, bounce animations and particle systems during platform collisions, and a visual 
+       representation of power-ups as they are being used.
     4. parallax background - background that shifts as players move to different areas of the map. Adds a sense of 
        perspective. 
     5. pause screen (done) - simple screen that appears when player pauses the game. Provides the option to continue or 
@@ -80,7 +79,7 @@ Class List:
 
 Credits:
   Processing library - graphics
-  soundfile.com and themushroomkingdom.net/media/smw/wav - sound clips
+  soundbible.com and themushroomkingdom.net/media/smw/wav - sound clips
   Mr. Shelby's AnimationDemo project - relationships between Main, DrawingSurface, Player, and MovableRectangle
   Mr. Shelby's ScreenSwitching code - basic class structures of Screen and ScreenSwitcher
   Mr. Shelby's EasySound code - code for Sound
