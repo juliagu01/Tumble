@@ -17,7 +17,7 @@ public class Sound implements Runnable
   private int numBytes;
 
   /**
-   * Creates a Sound object that consists of a short audio clip
+   * Creates a Sound object that consists of a short audio clip.
    * @param fileName name of wav sound file line to read
    */
   public Sound(String fileName)
@@ -64,7 +64,7 @@ public class Sound implements Runnable
   }
 
   /**
-   * Writes the line of sound
+   * Writes the line of sound.
    */
   public void run() 
   {
@@ -72,7 +72,7 @@ public class Sound implements Runnable
   }
 
   /**
-   * Plays the short audio clip
+   * Plays the short audio clip.
    */
   public void play()
   {

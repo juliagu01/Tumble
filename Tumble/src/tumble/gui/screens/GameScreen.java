@@ -21,7 +21,6 @@ public class GameScreen extends Screen {
 		super(surface);
 		game = new Game();
 		addButton(new PauseButton(Screen.WIDTH - Screen.HEIGHT * 50/600, Screen.HEIGHT * 60/600, Screen.HEIGHT * 50/600));
-//		addButton(new MuteButton(Screen.WIDTH - Screen.HEIGHT * 50/600, Screen.HEIGHT * 130/600, Screen.HEIGHT * 50/600));
 	}
 	
 	/**
