@@ -1,5 +1,6 @@
 package tumble.game;
 
+import java.awt.geom.Rectangle2D;
 import processing.core.PApplet;
 import tumble.gui.Message;
 
@@ -8,7 +9,7 @@ import tumble.gui.Message;
  * @author Julia Gu
  * @version May 5, 2020
  */
-public abstract class Item extends MovableRectangle {
+public abstract class Item extends Rectangle2D.Float {
 	
 	private Message message;
 	
