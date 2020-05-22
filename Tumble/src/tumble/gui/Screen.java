@@ -67,8 +67,11 @@ public abstract class Screen {
 	 * Draws this screen's buttons.
 	 */
 	public void drawButtons() {
+		surface.pushMatrix();
+		surface.scale(800/Screen.WIDTH, 600/Screen.HEIGHT);
 		for (Button b : buttons)
 			b.draw(surface);
+		surface.popMatrix();
 	}
 
 	/**
@@ -105,7 +108,7 @@ public abstract class Screen {
 	 * Draws this screen.
 	 */
 	public void draw() {
-		fade.draw(surface, 0, 0, WIDTH, HEIGHT);
+		fade.draw(surface, 0, 0, 800, 600);
 	}
 	
 }
