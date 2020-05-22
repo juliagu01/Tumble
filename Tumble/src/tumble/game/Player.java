@@ -11,7 +11,7 @@ import processing.core.PApplet;
 /**
  * Represents a movable ellipse with basic physics and rectangular collision
  * detection.
- * Credit to soundfile.com and themushroomkingdom.net/media/smw/wav for sound 
+ * Credit to soundbible.com and themushroomkingdom.net/media/smw/wav for sound 
  * files.
  * 
  * @author Amanda Xu, Andra Liu, Julia Gu
