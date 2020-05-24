@@ -1,15 +1,7 @@
 package tumble.game;
 
 import java.awt.geom.Point2D;
-import java.io.File;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
 import processing.core.PApplet;
 import tumble.game.items.Orb;
 import tumble.gui.DrawingSurface;
@@ -33,16 +25,13 @@ public class Game {
 	private Message message;
 	private Fade fade;
 	private boolean hasColor;
-	private final Sound clink = new Sound("res/audio/powerup.wav");
-	private final Sound toot = new Sound("res/audio/orb.wav");
+	private final Sound clink = new Sound("audio/powerup.wav");
+	private final Sound toot = new Sound("audio/orb.wav");
 	
 	/**
 	 * Creates a game with a player, platforms, and items. 
 	 */
 	public Game() {
-
-		JFrame hi = new JFrame();
-		JOptionPane.showMessageDialog(hi, "game");
 		
 		Map map = new Map("/tumble/game/map.txt");
 		
@@ -56,33 +45,6 @@ public class Game {
 		
 		fade = new Fade(0.4f, 0.05f);
 		hasColor = false;
-		
-//		URL res = getClass().getResource("/tumble/gui/audio/powerup.wav");
-//		File file = null;
-//			try {
-//		JOptionPane.showMessageDialog(hi, "going to get powerup file at " + res);
-//				file = Paths.get(res.toURI()).toFile();
-//				JOptionPane.showMessageDialog(hi, "got powerup file: " + file.getName());
-//			} catch (URISyntaxException e) {
-//				JOptionPane.showMessageDialog(hi, e + " for powerup file");
-//	
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//					clink = new Sound(file.getAbsolutePath());
-//			System.out.println(file.getAbsolutePath());
-
-//		res = getClass().getResource("/tumble/gui/audio/orb.wav");
-//		try {
-//			file = Paths.get(res.toURI()).toFile();
-//		} catch (URISyntaxException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		JOptionPane.showMessageDialog(hi, "orb: "+file.getAbsolutePath());
-//			toot = new Sound(file.getAbsolutePath());
-//			System.out.println(file.getAbsolutePath());
-
 		
 	}
 	

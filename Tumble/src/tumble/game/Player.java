@@ -27,8 +27,8 @@ public class Player extends MovableRectangle {
 	private ArrayList<Item> items;
 	private boolean canJump, canBoost, hasLeaf, hasFeather, hasStick, hasStraw, hasKite;
 	public static boolean poweredUp;
-//	private final Sound boing = new Sound("src/tumble/gui/audio/jump.wav");
-//	private final Sound swoosh = new Sound("src/tumble/gui/audio/boost.wav");
+	private final Sound boing = new Sound("audio/jump.wav");
+	private final Sound swoosh = new Sound("audio/boost.wav");
 	private int counter;
 	
 	/**
@@ -70,8 +70,8 @@ public class Player extends MovableRectangle {
 	 */
 	public void tryJump() {
 		if (canJump) {
-//			if (DrawingSurface.hasSound())
-//				boing.play();
+			if (DrawingSurface.hasSound())
+				boing.play();
 			if (hasFeather)
 				accelerate(0, -17);
 			else
@@ -84,9 +84,9 @@ public class Player extends MovableRectangle {
 	 * Gives this player a horizontal boost 3 times the current velocity if in air.
 	 */
 	public void tryBoost() {
-		if (hasStraw && canBoost && !canJump && (getVelocityX() < -0.1 || getVelocityX() > 0.1)) {
-//			if (DrawingSurface.hasSound())
-//				swoosh.play();
+		if (hasStraw && canBoost && !canJump) {
+			if (DrawingSurface.hasSound() && (getVelocityX() < -0.01 || getVelocityX() > 0.01))
+				swoosh.play();
 			accelerate(getVelocityX() * 3, 0);
 			canBoost = false;
 		}
