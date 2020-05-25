@@ -1,6 +1,7 @@
 package tumble.game;
 
 import java.awt.geom.Point2D;
+import java.io.BufferedInputStream;
 import java.util.ArrayList;
 import processing.core.PApplet;
 import tumble.game.items.Orb;
@@ -25,8 +26,7 @@ public class Game {
 	private Message message;
 	private Fade fade;
 	private boolean hasColor;
-	private final Sound clink = new Sound("audio/powerup.wav");
-	private final Sound toot = new Sound("audio/orb.wav");
+	private final Sound clink, toot;
 	
 	/**
 	 * Creates a game with a player, platforms, and items. 
@@ -45,6 +45,9 @@ public class Game {
 		
 		fade = new Fade(0.4f, 0.05f);
 		hasColor = false;
+		
+		clink = new Sound("/tumble/game/audio/powerup.wav");
+		toot = new Sound("/tumble/game/audio/orb.wav");
 		
 	}
 	
