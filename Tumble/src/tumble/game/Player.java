@@ -1,7 +1,6 @@
 package tumble.game;
 
 import java.awt.geom.Point2D;
-import java.io.BufferedInputStream;
 import java.util.ArrayList;
 import tumble.game.items.*;
 import tumble.gui.DrawingSurface;

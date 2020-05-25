@@ -82,7 +82,7 @@ Credits:
   soundbible.com and themushroomkingdom.net/media/smw/wav - sound clips
   Mr. Shelby's AnimationDemo project - relationships between Main, DrawingSurface, Player, and MovableRectangle
   Mr. Shelby's ScreenSwitching code - basic class structures of Screen and ScreenSwitcher
-  Mr. Shelby's EasySound code - code for Sound
+  Mr. Shelby's EasySound code and java2s.com/Tutorial/Java/0180__File/GetbytesfromInputStream.htm - code for Sound
   an anonymous younger brother - being a phenomenal QA!
 
 Responsibilities:

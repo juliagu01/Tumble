@@ -1,15 +1,10 @@
 package tumble.game;
 
 import java.awt.geom.Point2D;
-import java.io.BufferedInputStream;
 import java.util.ArrayList;
 import processing.core.PApplet;
 import tumble.game.items.Orb;
-import tumble.gui.DrawingSurface;
-import tumble.gui.Fade;
-import tumble.gui.KeyHandler;
-import tumble.gui.Message;
-import tumble.gui.Sound;
+import tumble.gui.*;
 
 /**
  * Represents a Tumble game.
