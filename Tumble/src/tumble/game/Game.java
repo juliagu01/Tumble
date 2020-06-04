@@ -28,7 +28,7 @@ public class Game {
 	 */
 	public Game() {
 		
-		Map map = new Map("/tumble/game/map.txt");
+		Map map = new Map("/data/map.txt");
 		
 		Point2D.Float playerLoc = map.getPlayerLocation();
 		player = new Player(this, playerLoc.x, playerLoc.y);
@@ -41,8 +41,8 @@ public class Game {
 		fade = new Fade(0.4f, 0.05f);
 		hasColor = false;
 		
-		clink = new Sound("/tumble/game/audio/powerup.wav");
-		toot = new Sound("/tumble/game/audio/orb.wav");
+		clink = new Sound("/media/audio/powerup.wav");
+		toot = new Sound("/media/audio/orb.wav");
 		
 	}
 	

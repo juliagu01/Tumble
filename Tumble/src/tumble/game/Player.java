@@ -42,8 +42,8 @@ public class Player extends MovableRectangle {
 		super(x, y, WIDTH, HEIGHT);
 		this.game = game;
 		items = new ArrayList<Item>();
-		boing = new Sound("/tumble/game/audio/jump.wav");
-		swoosh = new Sound("/tumble/game/audio/boost.wav");
+		boing = new Sound("/media/audio/jump.wav");
+		swoosh = new Sound("/media/audio/boost.wav");
 	}
 
 	/**

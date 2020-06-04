@@ -48,10 +48,10 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher, KeyHandle
 		noStroke();
 		surface.setResizable(true);
 		
-		p[0] = loadImage("tumble/gui/images/frame_0.png");
-		p[1] = loadImage("tumble/gui/images/frame_1.png");
-		p[2] = loadImage("tumble/gui/images/frame_2.png");
-		p[3] = loadImage("tumble/gui/images/frame_3.png");
+		p[0] = loadImage("media/images/frame_0.png");
+		p[1] = loadImage("media/images/frame_1.png");
+		p[2] = loadImage("media/images/frame_2.png");
+		p[3] = loadImage("media/images/frame_3.png");
 	}
 
 	/**
