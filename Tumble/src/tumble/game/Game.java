@@ -2,8 +2,6 @@ package tumble.game;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
-import processing.core.PApplet;
-import tumble.game.items.Orb;
 import tumble.gui.*;
 
 /**
@@ -16,12 +14,11 @@ public class Game {
 	
 	private Player player;
 	private ArrayList<Platform> platforms;
-	private ArrayList<Item> items;
+	private Item[] items;
 	private Camera camera;
 	private Message message;
 	private Fade fade;
 	private boolean hasColor;
-	private final Sound clink, toot;
 	
 	/**
 	 * Creates a game with a player, platforms, and items. 
@@ -41,18 +38,16 @@ public class Game {
 		fade = new Fade(0.4f, 0.05f);
 		hasColor = false;
 		
-		clink = new Sound("/media/audio/powerup.wav");
-		toot = new Sound("/media/audio/orb.wav");
-		
 	}
 	
 	/**
-	 * Updates the player's velocity.
-	 * @param keys  the current keys being pressed
+	 * Updates the game.
+	 * @param keys  current keys being pressed
 	 */
 	public void update(boolean[] keys) {
 		
 		if (message == null) {
+			
 			if (keys[KeyHandler.LEFT])
 				player.rollLeft();
 			if (keys[KeyHandler.RIGHT])
@@ -63,16 +58,24 @@ public class Game {
 				player.tryJump();
 				player.tryGlide();
 			}
+			
 		} else if (keys[KeyHandler.SPACE]) {
+			
 			if (fade.getOpacity() > 0.4f) {
 				fade.fadeTo(0);
 				hasColor = true;
 				for (Platform p : platforms)
 					p.addColor();
 			}
+			
+			if (items[Item.ORB].getMessage() == message)
+				SoundPlayer.playSound(SoundPlayer.TOOT);
+			else
+				SoundPlayer.playSound(SoundPlayer.CLINK);
+			
 			message = null;
-			if (DrawingSurface.hasSound())
-				clink.play();
+//			surface.endAnimation();
+			
 		}
 
 		player.update(platforms, items);
@@ -89,12 +92,8 @@ public class Game {
 	 * @param message  message to be switched to
 	 */
 	public void setMessage(Message message) {
-		for (Item i : items)
-			if (i instanceof Orb && i.getMessage() == message) {
-				fade.fadeTo(1);
-				if (DrawingSurface.hasSound())
-					toot.play();
-			}
+		if (items[Item.ORB].getMessage() == message)
+			fade.fadeTo(1);
 		this.message = message;
 	}
 	
@@ -108,9 +107,9 @@ public class Game {
 
 	/**
 	 * Draws this game.
-	 * @param g  the surface to be drawn on
+	 * @param g  surface to be drawn on
 	 */
-	public void draw(PApplet g) {
+	public void draw(DrawingSurface g) {
 		
 		g.pushMatrix();
 		g.scale(g.width/camera.width, g.height/camera.height);

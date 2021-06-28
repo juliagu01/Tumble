@@ -70,12 +70,13 @@ Class List:
     Main - creates a window with an instance of the game
     DrawingSurface - the area in the window where the game is drawn
     KeyHandler (interface) - helps handle key-events
-    ScreenSwitcher (interface) - helps switch screens
+    SoundPlayer - helps play audio
+    Sound - a short sound effect
+    ScreenManager - helps switch screens
     Screen (abstract) - the blueprint for all screens in the game
     Button (abstract) - a circular button that can lead to other screens
     Fade - the layer over the game's screens that can change opacity
     Message - a colored banner that helps move the story forward
-    Sound - a short sound effect
 
 Credits:
   Processing library - graphics

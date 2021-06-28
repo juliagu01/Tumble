@@ -27,7 +27,7 @@ public class Message {
 	 * @param g  surface to be drawn on
 	 */
 	public void draw(PApplet g) {
-		g.fill(color);
+		g.fill(color, 200);
 		g.rect(0, 400, 800, 200);
 		g.fill(255);
 		g.textSize(16);

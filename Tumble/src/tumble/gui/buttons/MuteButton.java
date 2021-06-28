@@ -3,6 +3,7 @@ package tumble.gui.buttons;
 import processing.core.PApplet;
 import tumble.gui.Button;
 import tumble.gui.DrawingSurface;
+import tumble.gui.SoundPlayer;
 
 /**
  * Represents a button that toggles the game's sound. 
@@ -40,12 +41,12 @@ public class MuteButton extends Button {
 		g.strokeCap(PApplet.SQUARE);
 		g.strokeWeight(3);
 		g.noFill();
-		if (DrawingSurface.hasSound()) {
+		if (SoundPlayer.hasSound()) {
 			g.arc(x + width * 28/50, y + width * 25/50, width * 20/50, width * 20/50, -PApplet.PI/4, PApplet.PI/4);
 			g.arc(x + width * 28/50, y + width * 25/50, width * 10/50, width * 10/50, -PApplet.PI/4, PApplet.PI/4);
 		} else {
-			g.line(x + width * 32/50, y + width * 21/50, x + width * 40/50, y + width * 29/50);
-			g.line(x + width * 32/50, y + width * 29/50, x + width * 40/50, y + width * 21/50);
+			g.line(x + width * 31/50, y + width * 21/50, x + width * 39/50, y + width * 29/50);
+			g.line(x + width * 31/50, y + width * 29/50, x + width * 39/50, y + width * 21/50);
 		}
 		g.noStroke();
 		
@@ -58,7 +59,7 @@ public class MuteButton extends Button {
 	 * @param surface  surface to be changed
 	 */
 	public void mouseReleased(float mouseX, float mouseY, DrawingSurface surface) {
-		DrawingSurface.toggleSound();
+		SoundPlayer.toggleSound();
 	}
 
 }

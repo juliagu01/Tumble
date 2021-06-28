@@ -3,7 +3,7 @@ package tumble.gui.buttons;
 import processing.core.PApplet;
 import tumble.gui.Button;
 import tumble.gui.DrawingSurface;
-import tumble.gui.ScreenSwitcher;
+import tumble.gui.ScreenManager;
 
 /**
  * Represents a pause button that leads to the game's pause screen. 
@@ -44,7 +44,7 @@ public class PauseButton extends Button {
 	 * @param surface  surface to be changed
 	 */
 	public void mouseReleased(float mouseX, float mouseY, DrawingSurface surface) {
-		surface.switchScreen(ScreenSwitcher.PAUSE_SCREEN);
+		surface.switchScreen(ScreenManager.PAUSE_SCREEN);
 	}
 
 }

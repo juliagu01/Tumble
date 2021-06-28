@@ -36,7 +36,8 @@ public class Camera extends MovableRectangle {
 	 * Moves this camera smoothly to target location.
 	 */
 	public void slide() {
-		setVelocity((tx - x) / 20, (ty - y) / 20);
+		setVelocityX((tx-x)/20);
+		setVelocityY((ty-y)/20);
 		moveByVelocity();
 	}
 

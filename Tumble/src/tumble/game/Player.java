@@ -2,17 +2,11 @@ package tumble.game;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
-import tumble.game.items.*;
 import tumble.gui.DrawingSurface;
-import tumble.gui.Sound;
-import processing.core.PApplet;
+import tumble.gui.SoundPlayer;
 
 /**
- * Represents a movable ellipse with basic physics and rectangular collision
- * detection.
- * Credit to soundbible.com and themushroomkingdom.net/media/smw/wav for sound 
- * files.
- * 
+ * Represents a movable ellipse with basic physics and rectangular collision detection.
  * @author Amanda Xu, Andra Liu, Julia Gu
  * @version May 21, 2020
  */
@@ -25,32 +19,27 @@ public class Player extends MovableRectangle {
 	
 	private Game game;
 	private ArrayList<Item> items;
-	private boolean canJump, canBoost, hasLeaf, hasFeather, hasStick, hasStraw, hasKite;
-	public static boolean poweredUp;
-	private final Sound boing, swoosh;
-	private int counter;
+	private boolean canJump, canBoost;
+	private boolean[] hasItem;
 	
 	/**
-	 * Creates an ellipse that represents a player. Player has a rectangular
-	 * hit-box.
-	 * 
-	 * @param game	game that player belongs to
-	 * @param x		x-coordinate of player's upper-left corner
-	 * @param y		y-coordinate of player's upper-left corner
+	 * Creates an ellipse that represents a player. Player has a rectangular hit-box.
+	 * @param game  game that player belongs to
+	 * @param x  x-coordinate of player's upper-left corner
+	 * @param y  y-coordinate of player's upper-left corner
 	 */
 	public Player(Game game, float x, float y) {
 		super(x, y, WIDTH, HEIGHT);
 		this.game = game;
 		items = new ArrayList<Item>();
-		boing = new Sound("/media/audio/jump.wav");
-		swoosh = new Sound("/media/audio/boost.wav");
+		hasItem = new boolean[Item.ORB+1];
 	}
 
 	/**
 	 * Accelerates this player to the left.
 	 */
 	public void rollLeft() {
-		if (hasLeaf)
+		if (hasItem[Item.LEAF])
 			accelerate(-2.7f, 0);
 		else
 			accelerate(-1.9f, 0);
@@ -60,7 +49,7 @@ public class Player extends MovableRectangle {
 	 * Accelerates this player to the right.
 	 */
 	public void rollRight() {
-		if (hasLeaf)
+		if (hasItem[Item.LEAF])
 			accelerate(2.7f, 0);
 		else
 			accelerate(1.9f, 0);
@@ -71,13 +60,12 @@ public class Player extends MovableRectangle {
 	 */
 	public void tryJump() {
 		if (canJump) {
-			if (DrawingSurface.hasSound())
-				boing.play();
-			if (hasFeather)
+			if (hasItem[Item.FEATHER])
 				accelerate(0, -17);
 			else
 				accelerate(0, -16f);
 			canJump = false;
+			SoundPlayer.playSound(SoundPlayer.BOING);
 		}
 	}
 	
@@ -85,11 +73,10 @@ public class Player extends MovableRectangle {
 	 * Gives this player a horizontal boost 3 times the current velocity if in air.
 	 */
 	public void tryBoost() {
-		if (hasStraw && canBoost && !canJump && (getVelocityX() < -0.01 || getVelocityX() > 0.01)) {
-			if (DrawingSurface.hasSound())
-				swoosh.play();
+		if (hasItem[Item.STRAW] && canBoost && !canJump && Math.abs(getVelocityX()) > 0.01) {
 			accelerate(getVelocityX() * 3, 0);
 			canBoost = false;
+			SoundPlayer.playSound(SoundPlayer.SWOOSH);
 		}
 	}
 	
@@ -97,8 +84,8 @@ public class Player extends MovableRectangle {
 	 * Accelerates this player upwards if jumping.
 	 */
 	public void tryGlide() {
-		if (hasKite && !canJump && getVelocityY() > 0) {
-			setVelocity(getVelocityX(), 4);
+		if (hasItem[Item.KITE] && !canJump && getVelocityY() > 0) {
+			setVelocityY(4);
 			accelerate(0, -0.8f);
 		}
 	}
@@ -106,25 +93,18 @@ public class Player extends MovableRectangle {
 
 	/**
 	 * Updates this player's location according to its velocity.
-	 * 
-	 * @param platforms list containing rectangles to check for collision against
-	 * @param items     list containing items to check for collision against
+	 * @param platforms  list containing rectangles to check for collision against
+	 * @param items  list containing items to check for collision against
 	 */
-	public void update(ArrayList<Platform> platforms, ArrayList<Item> items) {
+	public void update(ArrayList<Platform> platforms, Item[] items) {
 		
-		if (poweredUp && counter < 50) {
-			counter++;
-		} else {
-			poweredUp = false;
-			counter = 0;
-		}
-		
+		// gravity and resistance
 		accelerate(-getVelocityX()/4, 0.8f);
 		
 		// vines only
 		for (Platform p : platforms) {
-			if (hasStick && p instanceof Vine && intersects(p)) {
-				accelerate(-getVelocityX()/8,  -getVelocityY()/32);
+			if (hasItem[Item.STICK] && p instanceof Vine && intersects(p)) {
+				accelerate(-getVelocityX()/8, -getVelocityY()/32);
 				break;
 			}
 		}
@@ -133,44 +113,33 @@ public class Player extends MovableRectangle {
 
 		canJump = false;
 		for (Platform p : platforms) {
-			if (!(hasStick && p instanceof Vine && intersects(p))) {
+			if (!(hasItem[Item.STICK] && p instanceof Vine && intersects(p))) {
 				Point2D.Float amount = collidesBy(p);
-				moveBy(-amount.x, -amount.y);
 				if (amount.y != 0)
-					setVelocity(getVelocityX(), 0);
+					setVelocityY(0);
 				else if (amount.x != 0)
-					setVelocity(0, getVelocityY());
+					setVelocityX(0);
 				if (amount.y > 0) {
 					canJump = true;
 					canBoost = true;
 				}
+				moveBy(-amount.x, -amount.y);
 			}
 		}
 
-		for (Item i : items) {
-			if (intersects(i) && !this.items.contains(i)) {
-				poweredUp = true;
-				if (i instanceof Leaf)
-					hasLeaf = true;
-				else if (i instanceof Feather)
-					hasFeather = true;
-				else if (i instanceof Stick)
-					hasStick = true;
-				else if (i instanceof Straw)
-					hasStraw = true;
-				else if (i instanceof Kite)
-					hasKite = true;
-				this.items.add(i);
-				game.setMessage(i.getMessage());
+		for (int i = 0; i < items.length; i++) {
+			if (intersects(items[i]) && !this.items.contains(items[i])) {
+				hasItem[i] = true;
+//				surface.startAnimation();
+				this.items.add(items[i]);
+				game.setMessage(items[i].getMessage());
 			}
-			
 		}
 
 	}
 
 	/**
 	 * Returns this player's collected items.
-	 * 
 	 * @return array containing this player's collected items
 	 */
 	public ArrayList<Item> getItems() {
@@ -179,10 +148,9 @@ public class Player extends MovableRectangle {
 
 	/**
 	 * Draws this player.
-	 * 
 	 * @param g	PApplet surface to be drawn on
 	 */
-	public void draw(PApplet g) {
+	public void draw(DrawingSurface g) {
 		g.fill(253, 235, 0);
 		g.ellipse(x + width/2, y + height/2, width, height);
 	}

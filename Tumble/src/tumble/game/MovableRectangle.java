@@ -12,7 +12,7 @@ import java.awt.geom.Rectangle2D;
 public class MovableRectangle extends Rectangle2D.Float {
 	
 	private float vx, vy;
-	private Line2D.Float topLeft, top, topRight, right, bottomRight, bottom, bottomLeft, left;
+	private Line2D.Float topLeft, topRight, bottomRight, bottomLeft;
 	private static final float EPSILON = 5e-4f;
 	
 	/**
@@ -28,14 +28,10 @@ public class MovableRectangle extends Rectangle2D.Float {
 		super(x, y, w, h);
 		this.vx = vx;
 		this.vy = vy;
-		topLeft = new Line2D.Float(x - vx, y - vy, x, y);
-		top = new Line2D.Float(x + width/2 - vx, y - vy, x + width/2, y);
-		topRight = new Line2D.Float(x + width - vx, y - vy, x + width, y);
-		right = new Line2D.Float(x + width - vx, y + height/2 - vy, x + width, y + height/2);
-		bottomRight = new Line2D.Float(x + width - vx, y + height - vy, x + width, y + height);
-		bottom = new Line2D.Float(x + width/2 - vx, y + height - vy, x + width/2, y + height);
-		bottomLeft = new Line2D.Float(x - vx, y + height - vy, x, y + height);
-		left = new Line2D.Float(x - vx, y + height/2 - vy, x, y + height/2);
+		topLeft     = new Line2D.Float(x     - vx + EPSILON, y     - vy + EPSILON, x     + EPSILON, y     + EPSILON);
+		topRight    = new Line2D.Float(x + w - vx - EPSILON, y     - vy + EPSILON, x + w - EPSILON, y     + EPSILON);
+		bottomRight = new Line2D.Float(x + w - vx - EPSILON, y + h - vy - EPSILON, x + w - EPSILON, y + h - EPSILON);
+		bottomLeft  = new Line2D.Float(x     - vx + EPSILON, y + h - vy - EPSILON, x     + EPSILON, y + h - EPSILON);
 	}
 	
 	/**
@@ -84,12 +80,18 @@ public class MovableRectangle extends Rectangle2D.Float {
 	}
 	
 	/**
-	 * Assigns this rectangle the given velocity.
+	 * Assigns this rectangle the given horizontal velocity.
 	 * @param vx  new x-component of rectangle's velocity
+	 */
+	public void setVelocityX(float vx) {
+		this.vx = vx;
+	}
+	
+	/**
+	 * Assigns this rectangle the given vertical velocity.
 	 * @param vy  new y-component of rectangle's velocity
 	 */
-	public void setVelocity(float vx, float vy) {
-		this.vx = vx;
+	public void setVelocityY(float vy) {
 		this.vy = vy;
 	}
 	
@@ -137,16 +139,15 @@ public class MovableRectangle extends Rectangle2D.Float {
 		
 		Point2D.Float amount = new Point2D.Float(0, 0);
 		
-		if (collidesWith(r)) {
-			if (y + height - vy <= r.y + EPSILON)			// platform's top side
+		if (collidesWith(r))
+			if (y + height - vy - EPSILON <= r.y)			// platform's top side
 				amount.y = y + height - r.y;
-			else if (x + width - vx <= r.x + EPSILON)		// platform's left side
+			else if (x + width - vx - EPSILON <= r.x)		// platform's left side
 				amount.x = x + width - r.x;
-			else if (x - vx >= r.x + r.width - EPSILON)		// platform's right side
+			else if (x - vx + EPSILON >= r.x + r.width)		// platform's right side
 				amount.x = x - r.x - r.width;
-			else if (y - vy >= r.y + r.height - EPSILON)	// platform's bottom side
+			else if (y - vy + EPSILON >= r.y + r.height)	// platform's bottom side
 				amount.y = y - r.y - r.height;
-		}
 		
 		return amount;
 		
@@ -158,19 +159,13 @@ public class MovableRectangle extends Rectangle2D.Float {
 	 * @return whether rectangles collide
 	 */
 	public boolean collidesWith(Rectangle2D.Float r) {
+
+		topLeft    .setLine(x         - vx + EPSILON, y          - vy + EPSILON, x         + EPSILON, y          + EPSILON);
+		topRight   .setLine(x + width - vx - EPSILON, y          - vy + EPSILON, x + width - EPSILON, y          + EPSILON);
+		bottomRight.setLine(x + width - vx - EPSILON, y + height - vy - EPSILON, x + width - EPSILON, y + height - EPSILON);
+		bottomLeft .setLine(x         - vx + EPSILON, y + height - vy - EPSILON, x         + EPSILON, y + height - EPSILON);
 		
-		topLeft.setLine(x - vx, y - vy, x, y);
-		top.setLine(x + width/2 - vx, y - vy, x + width/2, y);
-		topRight.setLine(x + width - vx, y - vy, x + width, y);
-		right.setLine(x + width - vx, y + height/2 - vy, x + width, y + height/2);
-		bottomRight.setLine(x + width - vx, y + height - vy, x + width, y + height);
-		bottom.setLine(x + width/2 - vx, y + height - vy, x + width/2, y + height);
-		bottomLeft.setLine(x - vx, y + height - vy, x, y + height);
-		left.setLine(x - vx, y + height/2 - vy, x, y + height/2);
-		Rectangle2D.Float box = new Rectangle2D.Float(r.x + EPSILON, r.y + EPSILON, r.width - 2*EPSILON, r.height - 2*EPSILON);
-		
-		return topLeft.intersects(box) || top.intersects(box) || topRight.intersects(box) || right.intersects(box) 
-				|| bottomRight.intersects(box) || bottom.intersects(box) || bottomLeft.intersects(box) || left.intersects(box);
+		return topLeft.intersects(r) || topRight.intersects(r) || bottomRight.intersects(r) || bottomLeft.intersects(r);
 		
 	}
 	

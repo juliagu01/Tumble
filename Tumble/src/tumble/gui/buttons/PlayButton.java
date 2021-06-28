@@ -3,7 +3,7 @@ package tumble.gui.buttons;
 import processing.core.PApplet;
 import tumble.gui.Button;
 import tumble.gui.DrawingSurface;
-import tumble.gui.ScreenSwitcher;
+import tumble.gui.ScreenManager;
 
 /**
  * Represents a play button that leads to the game's game screen. 
@@ -45,7 +45,7 @@ public class PlayButton extends Button {
 	 * @param surface  surface to be changed
 	 */
 	public void mouseReleased(float mouseX, float mouseY, DrawingSurface surface) {
-		surface.switchScreen(ScreenSwitcher.GAME_SCREEN);
+		surface.switchScreen(ScreenManager.GAME_SCREEN);
 	}
 
 }

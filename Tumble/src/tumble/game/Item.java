@@ -11,6 +11,11 @@ import tumble.gui.Message;
  */
 public abstract class Item extends Rectangle2D.Float {
 	
+	/**
+	 * Item constants.
+	 */
+	public static final int LEAF = 0, FEATHER = 1, STICK = 2, STRAW = 3, KITE = 4, ORB = 5;
+	
 	private Message message;
 	
 	/**
