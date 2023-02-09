@@ -29,7 +29,8 @@ public class Sound implements Runnable {
 		}
 		catch (Exception ex) {
 			System.out.println("Audio file cannot be found");
-			System.exit(1);
+			SoundPlayer.disable();
+			return;
 		}
 		
 		AudioFormat audioFormat = audioInputStream.getFormat();
@@ -40,7 +41,13 @@ public class Sound implements Runnable {
 		}
 		catch (LineUnavailableException ex) {
 			System.out.println("Audio line unavailable");
-			System.exit(1);
+			SoundPlayer.disable();
+			return;
+		}
+		catch (IllegalArgumentException ex) {
+			System.out.println("Audio line not supported");
+			SoundPlayer.disable();
+			return;
 		}
 		
 		line.start();
@@ -56,7 +63,8 @@ public class Sound implements Runnable {
 		}
 		catch (IOException ex) {
 			System.out.println("Audio file cannot be read");
-			System.exit(1);
+			SoundPlayer.disable();
+			return;
 		}
 		
 	}
@@ -75,4 +83,5 @@ public class Sound implements Runnable {
 		line.flush();
 		new Thread(this).start();
 	}
+	
 }

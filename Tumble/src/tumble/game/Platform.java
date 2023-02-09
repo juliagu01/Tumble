@@ -38,9 +38,9 @@ public class Platform extends Rectangle2D.Float {
 	public void draw(PApplet g) {
 		
 		if (!hasColor)
-			g.fill(130, 115, 132);
+			g.fill(130, 115, 130);
 		else
-			g.fill(124, 204, 104);
+			g.fill(110, 230, 90);
 
 		g.rect(x - 0.5f, y - 0.5f, width + 1, height + 1);
 		

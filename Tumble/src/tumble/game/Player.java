@@ -11,11 +11,6 @@ import tumble.gui.SoundPlayer;
  * @version May 21, 2020
  */
 public class Player extends MovableRectangle {
-
-	/**
-	 * Players' shared dimensions.
-	 */
-	public static final int WIDTH = 40, HEIGHT = 40;
 	
 	private Game game;
 	private ArrayList<Item> items;
@@ -29,7 +24,7 @@ public class Player extends MovableRectangle {
 	 * @param y  y-coordinate of player's upper-left corner
 	 */
 	public Player(Game game, float x, float y) {
-		super(x, y, WIDTH, HEIGHT);
+		super(x, y, 40, 40);
 		this.game = game;
 		items = new ArrayList<Item>();
 		hasItem = new boolean[Item.ORB+1];
@@ -64,17 +59,16 @@ public class Player extends MovableRectangle {
 				accelerate(0, -17);
 			else
 				accelerate(0, -16f);
-			canJump = false;
 			SoundPlayer.playSound(SoundPlayer.BOING);
 		}
 	}
 	
 	/**
-	 * Gives this player a horizontal boost 3 times the current velocity if in air.
+	 * Gives this player a horizontal boost if in air.
 	 */
 	public void tryBoost() {
 		if (hasItem[Item.STRAW] && canBoost && !canJump && Math.abs(getVelocityX()) > 0.01) {
-			accelerate(getVelocityX() * 3, 0);
+			accelerate(getVelocityX() * 3.5f, 0);
 			canBoost = false;
 			SoundPlayer.playSound(SoundPlayer.SWOOSH);
 		}
@@ -85,65 +79,61 @@ public class Player extends MovableRectangle {
 	 */
 	public void tryGlide() {
 		if (hasItem[Item.KITE] && !canJump && getVelocityY() > 0) {
-			setVelocityY(4);
+			setVelocityY(3.5f);
 			accelerate(0, -0.8f);
 		}
 	}
-	
 
 	/**
 	 * Updates this player's location according to its velocity.
 	 * @param platforms  list containing rectangles to check for collision against
-	 * @param items  list containing items to check for collision against
+	 * @param items  array containing items to check for collision against
 	 */
 	public void update(ArrayList<Platform> platforms, Item[] items) {
 		
 		// gravity and resistance
 		accelerate(-getVelocityX()/4, 0.8f);
-		
-		// vines only
-		for (Platform p : platforms) {
-			if (hasItem[Item.STICK] && p instanceof Vine && intersects(p)) {
-				accelerate(-getVelocityX()/8, -getVelocityY()/32);
-				break;
-			}
-		}
+		if (hasItem[Item.STICK])
+			for (Platform p : platforms)
+				if (p instanceof Vine && intersects(p)) {
+					accelerate(-getVelocityX()/8, -getVelocityY()/32);
+					break;
+				}
 		
 		moveByVelocity();
 
+		// platforms
 		canJump = false;
-		for (Platform p : platforms) {
+		for (Platform p : platforms)
 			if (!(hasItem[Item.STICK] && p instanceof Vine && intersects(p))) {
 				Point2D.Float amount = collidesBy(p);
 				if (amount.y != 0)
 					setVelocityY(0);
 				else if (amount.x != 0)
 					setVelocityX(0);
-				if (amount.y > 0) {
-					canJump = true;
-					canBoost = true;
-				}
+				if (amount.y > 0)
+					canJump = canBoost = true;
 				moveBy(-amount.x, -amount.y);
 			}
-		}
 
-		for (int i = 0; i < items.length; i++) {
-			if (intersects(items[i]) && !this.items.contains(items[i])) {
-				hasItem[i] = true;
-//				surface.startAnimation();
-				this.items.add(items[i]);
-				game.setMessage(items[i].getMessage());
-			}
-		}
+		// items
+		if (this.items.size() < items.length)
+			for (int i = this.items.size(); i < items.length; i++)
+				if (intersects(items[i])) {
+					hasItem[i] = true;
+//					surface.startAnimation();
+					this.items.add(items[i]);
+					game.showMessageOf(items[i]);
+				}
 
 	}
 
 	/**
-	 * Returns this player's collected items.
-	 * @return array containing this player's collected items
+	 * Checks if this player has collected the given item.
+	 * @return whether item is among this player's collected items
 	 */
-	public ArrayList<Item> getItems() {
-		return items;
+	public boolean hasItem(Item item) {
+		return items.contains(item);
 	}
 
 	/**
@@ -151,9 +141,8 @@ public class Player extends MovableRectangle {
 	 * @param g	PApplet surface to be drawn on
 	 */
 	public void draw(DrawingSurface g) {
-		g.fill(253, 235, 0);
+		g.fill(250, 235, 0);
 		g.ellipse(x + width/2, y + height/2, width, height);
 	}
-
 
 }

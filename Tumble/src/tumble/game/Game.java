@@ -27,13 +27,13 @@ public class Game {
 		
 		Map map = new Map("/data/map.txt");
 		
-		Point2D.Float playerLoc = map.getPlayerLocation();
-		player = new Player(this, playerLoc.x, playerLoc.y);
+		Point2D.Float playerLocation = map.getPlayerLocation();
+		player = new Player(this, playerLocation.x, playerLocation.y);
 		
 		platforms = map.getPlatforms();
 		items = map.getItems();
 		
-		camera = new Camera(playerLoc.x + player.width/2, playerLoc.y + player.width/2, 800f, 600f);
+		camera = new Camera(player.x + player.width/2, player.y + player.width/2, Screen.WIDTH, Screen.HEIGHT);
 		
 		fade = new Fade(0.4f, 0.05f);
 		hasColor = false;
@@ -68,7 +68,7 @@ public class Game {
 					p.addColor();
 			}
 			
-			if (items[Item.ORB].getMessage() == message)
+			if (message == items[Item.ORB].getMessage())
 				SoundPlayer.playSound(SoundPlayer.TOOT);
 			else
 				SoundPlayer.playSound(SoundPlayer.CLINK);
@@ -88,13 +88,13 @@ public class Game {
 	}
 	
 	/**
-	 * Switches this game's message. 
-	 * @param message  message to be switched to
+	 * Changes this game's message to match that of the given item.
+	 * @param item  item whose message is to be shown
 	 */
-	public void setMessage(Message message) {
-		if (items[Item.ORB].getMessage() == message)
+	public void showMessageOf(Item item) {
+		if (item == items[Item.ORB])
 			fade.fadeTo(1);
-		this.message = message;
+		this.message = item.getMessage();
 	}
 	
 	/**
@@ -117,9 +117,9 @@ public class Game {
 
 		// background
 		if (!hasColor)
-			g.background(192, 185, 194);
-		else 
-			g.background(183, 225, 237);
+			g.background(190, 185, 195);
+		else
+			g.background(170, 225, 240);
 		
 		// platforms
 		for (Platform p : platforms)
@@ -130,7 +130,7 @@ public class Game {
 		
 		// items
 		for (Item i : items)
-			if (!player.getItems().contains(i) || i.getMessage() == message)
+			if (!player.hasItem(i) || message == i.getMessage())
 				i.draw(g);
 
 		// player

@@ -28,7 +28,7 @@ public class Leaf extends Item {
 	 * @param g  the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
-		g.fill(117, 218, 105);
+		g.fill(80, 225, 10);
 		g.ellipse(x + width/2, y + width/2, width, width);
 		g.rect(x, y + width/2, width/2, width/2);
 		g.rect(x + width/2, y, width/2, width/2);

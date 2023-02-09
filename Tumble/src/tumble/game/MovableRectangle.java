@@ -120,15 +120,6 @@ public class MovableRectangle extends Rectangle2D.Float {
 		vx += ax;
 		vy += ay;
 	}
-
-	/**
-	 * Checks for overlap between this rectangle and given rectangle.
-	 * @param r  rectangle to check for overlap against
-	 * @return whether rectangles overlap
-	 */
-	public boolean intersects(Rectangle2D.Float r) {
-		return x + width >= r.x && x <= r.x + r.width && y + height >= r.y && y <= r.y + r.height;
-	}
 	
 	/**
 	 * Calculates amount of collision between this rectangle and given rectangle.

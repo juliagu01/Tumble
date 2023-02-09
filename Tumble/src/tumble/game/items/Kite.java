@@ -28,7 +28,7 @@ public class Kite extends Item {
 	 * @param g  the surface to be drawn on
 	 */
 	public void draw(PApplet g) {
-		g.fill(250, 174, 42);
+		g.fill(255, 175, 0);
 		g.quad(x, y + height/2, x + width/2, y, x + width, y + height/2, x + width/2, y + height);
 	}
 	

@@ -14,8 +14,8 @@ import tumble.game.items.*;
  */
 public class Map {
 	
-	private static final char VERTICAL_PLATFORM = '|', HORIZONTAL_PLATFORM = '=', VERTICAL_VINE = 'v', HORIZONTAL_VINE = 'h', 
-			PLAYER = '$', LEAF = '1', FEATHER = '2', STICK = '3', STRAW = '4', KITE = '5', ORB = '*';
+	private static final char VERTICAL_PLATFORM = '|', HORIZONTAL_PLATFORM = '-', VERTICAL_VINE = 'v', HORIZONTAL_VINE = 'h', 
+			PLAYER = '$', LEAF = '0', FEATHER = '1', STICK = '2', STRAW = '3', KITE = '4', ORB = '*';
 	private static final int TILE_WIDTH = 40;
 	private char[][] map;
 
@@ -24,7 +24,7 @@ public class Map {
 	 * @param fileName  name of text file from which map is read
 	 */
 	public Map(String fileName) {
-		map = new char[36][60];  // dimensions should automatically adjust to text file instead!
+		map = new char[36][60];
 		readFile(fileName);
 	}
 
@@ -39,16 +39,15 @@ public class Map {
 		for (int row = 0; row < map.length; row++)
 			for (int col = 0; col < map[0].length; col++) {
 				int len = 1;
-				// joining process (to reduce # of platform objects)
 				if (map[row][col] == HORIZONTAL_PLATFORM) {
 					while (col+len < map[row].length && map[row][col+len] == HORIZONTAL_PLATFORM)
 						len++;
 					platforms.add(new Platform(col * TILE_WIDTH, row * TILE_WIDTH, len * TILE_WIDTH, TILE_WIDTH));
-					col += len-1;  // to prevent overcounting
+					col += len-1;
 				}
 				else if (map[row][col] == VERTICAL_PLATFORM) {
 					while (row+len < map.length && map[row+len][col] == VERTICAL_PLATFORM) {
-						map[row+len][col] = 'p';  // to prevent overcounting
+						map[row+len][col] = 'p';
 						len++;
 					}
 					platforms.add(new Platform(col * TILE_WIDTH, row * TILE_WIDTH, TILE_WIDTH, len * TILE_WIDTH));

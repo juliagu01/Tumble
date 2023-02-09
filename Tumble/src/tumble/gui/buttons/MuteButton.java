@@ -59,7 +59,7 @@ public class MuteButton extends Button {
 	 * @param surface  surface to be changed
 	 */
 	public void mouseReleased(float mouseX, float mouseY, DrawingSurface surface) {
-		SoundPlayer.toggleSound();
+		SoundPlayer.toggleMute();
 	}
 
 }

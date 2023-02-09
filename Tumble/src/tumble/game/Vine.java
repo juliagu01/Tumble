@@ -29,7 +29,7 @@ public class Vine extends Platform {
 		if (!hasColor())
 			g.fill(100, 80, 110);
 		else
-			g.fill(154, 128, 191);
+			g.fill(150, 120, 200);
 
 		g.rect(x - 0.5f, y - 0.5f, width + 1, height + 1);
 		
